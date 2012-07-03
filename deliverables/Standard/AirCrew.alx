@@ -1,0 +1,21 @@
+<loader version="1.0">
+	<application id="AirCrew">
+		<name >
+			
+		</name>
+		<description >
+			
+		</description>
+		<version >
+			1.0.0
+		</version>
+		<vendor >
+			BlackBerry Developer
+		</vendor>
+		<copyright >
+			Copyright (c) 2012 BlackBerry Developer
+		</copyright>
+
+	</application>
+
+</loader>

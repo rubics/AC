@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+RIM-COD-Module-Name: AirCrew
+RIM-COD-Module-Dependencies: net_rim_cldc
+MIDlet-Jar-Size: 2146
+MIDlet-1: ,,
+RIM-COD-Creation-Time: 1332695234
+MIDlet-Jar-URL: AirCrew.jar
+RIM-COD-URL: AirCrew.cod
+RIM-COD-SHA1: 6b e0 9d 2c 50 3e 7f 5f fe df c2 f9 cd 01 f9 0e 72 a5 46 e3
+RIM-COD-Size: 1048
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.0.0
+MIDlet-Name: AirCrew
+MIDlet-Vendor: BlackBerry Developer
+MicroEdition-Profile: MIDP-2.0
+RIM-MIDlet-Flags-1: 0
