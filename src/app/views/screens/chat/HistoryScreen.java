@@ -5,7 +5,7 @@ import rubyx.tabbedUI.TabbedButton;
 import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.decor.BackgroundFactory;
-import app.AirCrew;
+import app.AirCrewApp;
 import app.models.Images;
 
 public class HistoryScreen extends MainScreen{
@@ -20,7 +20,7 @@ public class HistoryScreen extends MainScreen{
 		
 		backButton = new TabbedButton("Back", 6, 100, 36);
 		backButton.setRVAlue(10);
-		backButton.setChangeListener(AirCrew.backButtonListener);
+		backButton.setChangeListener(AirCrewApp.backButtonListener);
 		homeButton = new TabbedButton("Home", 6, 100, 36);
 		homeButton.setRVAlue(10);
 		

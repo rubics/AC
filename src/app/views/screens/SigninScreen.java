@@ -18,6 +18,7 @@ import rubyx.custom_fields.CompositeFieldManager;
 import rubyx.custom_fields.CompositePasswordBox;
 import rubyx.custom_fields.CompositeTextBox;
 import rubyx.custom_fields.SpaceField;
+import app.AirCrewApp;
 
 
 public class SigninScreen extends MainScreen{
@@ -45,8 +46,8 @@ public class SigninScreen extends MainScreen{
 //		mainManager.add(new BitmapField(login_title_bar));
 
 		this_screen = this;
-		usernameField = new CompositeTextBox("Email", "user@domain.com", true, composite_field_width);
-		passwordField = new CompositePasswordBox("Password", "password", true, composite_field_width);
+		usernameField = new CompositeTextBox("Email", "pratuat@gmail.com", true, composite_field_width);
+		passwordField = new CompositePasswordBox("Password", "letmein", true, composite_field_width);
 		usernameField.setColorScheme(0x606060, Color.WHITE);
 		passwordField.setColorScheme(0x606060, Color.WHITE);
 		
@@ -79,8 +80,9 @@ public class SigninScreen extends MainScreen{
 		login.setChangeListener(new FieldChangeListener() {
 			
 			public void fieldChanged(Field field, int context) {
-				UiApplication.getUiApplication().popScreen(this_screen);
-				UiApplication.getUiApplication().pushScreen(DashboardScreen.createDashboardScreenInstance());
+				AirCrewApp.app.userController.signinRequest.sign_in(usernameField.getText(), passwordField.getText());
+//				UiApplication.getUiApplication().popScreen(this_screen);
+//				UiApplication.getUiApplication().pushScreen(DashboardScreen.createDashboardScreenInstance());
 			}
 		});
 		

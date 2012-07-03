@@ -20,7 +20,7 @@ import rubyx.custom_fields.RoundedBackgroundManager;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
-import app.AirCrew;
+import app.AirCrewApp;
 import app.models.Images;
 import app.views.managers.profile.ProfileInfoScreenManager;
 
@@ -46,7 +46,7 @@ public class MyRosterScreen extends MainScreen{
 		
 		backButton = new TabbedButton("Back", 6, 100, 36);
 		backButton.setRVAlue(10);
-		backButton.setChangeListener(AirCrew.backButtonListener);
+		backButton.setChangeListener(AirCrewApp.backButtonListener);
 		homeButton = new TabbedButton("Home", 6, 100, 36);
 		homeButton.setRVAlue(10);
 		

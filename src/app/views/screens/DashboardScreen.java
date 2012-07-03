@@ -15,7 +15,7 @@ import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.SpaceField;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
-import app.AirCrew;
+import app.AirCrewApp;
 import app.models.Images;
 import app.views.fields.DashboardItem;
 import app.views.fields.ScreenTitle;
@@ -29,7 +29,7 @@ public class DashboardScreen extends MainScreen{
 	
 	private static DashboardScreen dashboardScreen;
 	
-	AirCrew airCrew = (AirCrew)(UiApplication.getUiApplication());
+	AirCrewApp airCrew = (AirCrewApp)(UiApplication.getUiApplication());
 	
 	public static Bitmap[] icons = {Bitmap.getBitmapResource("images/dashboard/deals.png"),
 				Bitmap.getBitmapResource("images/dashboard/chat.png"),

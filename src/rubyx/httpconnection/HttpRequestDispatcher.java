@@ -114,8 +114,8 @@ public class HttpRequestDispatcher extends Thread{
 		}
 		
 		catch(Exception ie){
+			System.out.println(">> Exception @ " + ie.getClass().getName());
 			ie.printStackTrace();
-
 		}
 	}
 	

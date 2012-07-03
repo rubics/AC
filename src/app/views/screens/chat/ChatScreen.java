@@ -12,7 +12,7 @@ import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.CustomEditField;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.tabbedUI.TabbedButton;
-import app.AirCrew;
+import app.AirCrewApp;
 import app.models.Images;
 import app.views.fields.chat.ChatMessageField;
 
@@ -43,7 +43,7 @@ public class ChatScreen  extends MainScreen{
 		
 		backButton = new TabbedButton("Back", 6, 100, 36);
 		backButton.setRVAlue(10);
-		backButton.setChangeListener(AirCrew.backButtonListener);
+		backButton.setChangeListener(AirCrewApp.backButtonListener);
 		homeButton = new TabbedButton("Home", 6, 100, 36);
 		homeButton.setRVAlue(10);
 		

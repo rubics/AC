@@ -11,7 +11,7 @@ import rubyx.custom_fields.ScreenBannar;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
-import app.AirCrew;
+import app.AirCrewApp;
 import app.models.Images;
 
 public class FilterScreen extends MainScreen{
@@ -28,7 +28,7 @@ public class FilterScreen extends MainScreen{
 		
 		backButton = new TabbedButton("Back", 6, 100, 36);
 		backButton.setRVAlue(10);
-		backButton.setChangeListener(AirCrew.backButtonListener);
+		backButton.setChangeListener(AirCrewApp.backButtonListener);
 		homeButton = new TabbedButton("Home", 6, 100, 36);
 		homeButton.setRVAlue(10);
 		
