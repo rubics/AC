@@ -89,14 +89,7 @@ public class DashboardScreen extends MainScreen{
 		}
 	};
 	
-	public static DashboardScreen createDashboardScreenInstance(){
-		if(dashboardScreen == null)
-			return new DashboardScreen();
-		else
-			return dashboardScreen;
-	}
-	
-	private DashboardScreen(){
+	public DashboardScreen(){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));

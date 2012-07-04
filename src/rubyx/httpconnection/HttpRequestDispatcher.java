@@ -17,6 +17,9 @@ import net.rim.device.api.ui.component.CheckboxField;
 
 public class HttpRequestDispatcher extends Thread{
 	
+	public static final String METHOD_POST = "POST";
+	public static final String METHOD_GET = "GET";
+	
 	private String url;
 	private String method;
 	private HttpRequestListener requestListener;
@@ -38,82 +41,46 @@ public class HttpRequestDispatcher extends Thread{
 		
 		try {
 			
-	        String connectionParameters = "";
+	        String connectionParameters = ";deviceside=true";
+	        String hit_url = (method.equalsIgnoreCase(METHOD_POST)) ? url : (url + "?" + new String(post));
+	        HttpConnection connection = (HttpConnection)Connector.open(hit_url + connectionParameters);
+	        connection.setRequestMethod(method);
+		
+	        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	        connection.setRequestProperty("User-Agent", "Profile/MIDP_2.0 Configuration/CLDC-1.0");
 	        
-	        if (WLANInfo.getWLANState() == WLANInfo.WLAN_STATE_CONNECTED) { 
-	            // Connected to a WiFi access point 
-	            connectionParameters = ";interface=wifi";
-	            //System.out.println("#### https wifi ####");
-	        } else { 
-	           int coverageStatus = CoverageInfo.getCoverageStatus(); 
-	           ServiceRecord record = getWAP2ServiceRecord(); 
-	           if (record != null 
-	                  && (coverageStatus & CoverageInfo.COVERAGE_DIRECT) ==  
-	                  CoverageInfo.COVERAGE_DIRECT) { 
-	              // Have network coverage and a WAP 2.0 service book record 
-	              connectionParameters = ";deviceside=true;ConnectionUID="+ record.getUid();
-	              //System.out.println("#### https wap2 ####");
-	        } else if ((coverageStatus & CoverageInfo.COVERAGE_MDS) ==  
-	              CoverageInfo.COVERAGE_MDS) { 
-	           // Have an MDS service book and network coverage 
-	           connectionParameters = ";deviceside=false";
-	           //System.out.println("#### https MDS ####");
-	        } else if ((coverageStatus & CoverageInfo.COVERAGE_DIRECT) ==  
-	              CoverageInfo.COVERAGE_DIRECT) { 
-	           // Have network coverage but no WAP 2.0 service book record 
-	           connectionParameters = ";deviceside=true";
-	           //System.out.println("#### https direct ####");
+	        if (method.equalsIgnoreCase(METHOD_POST)){
+	        	connection.setRequestProperty(HttpProtocolConstants.HEADER_CONTENT_LENGTH, String.valueOf(post.length));
+				OutputStream postStream = connection.openOutputStream();
+				postStream.write(post,0,post.length);
+				postStream.close();
 	        }
-	     }
 
-		HttpConnection connection = (HttpConnection)Connector.open(url + connectionParameters);
-		connection.setRequestMethod(method);
+	        String contenttype = connection.getHeaderField("Content-type");			// this method sends the get request (i guess)
 		
-		connection.setRequestProperty(HttpProtocolConstants.HEADER_CONTENT_LENGTH, String.valueOf(post.length));
-		connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-		connection.setRequestProperty("User-Agent", "Profile/MIDP_2.0 Configuration/CLDC-1.0");
+	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		
-		if(method.equalsIgnoreCase("PUT")){           
-                //connection.setRequestProperty("X-HTTP-Method-Override", "PUT");
-			connection.setRequestProperty("RequestType", "PUT");
-		}
+	        InputStream responsedata = connection.openInputStream();
 		
+	        byte[] bytearray= new byte[2000];
+		
+	        int bytenum = responsedata.read(bytearray);
 
+	        while(bytenum>0){
+	        	baos.write(bytearray, 0, bytenum);
+	        	bytenum = responsedata.read(bytearray);	
+	        }
 		
-		OutputStream postStream = connection.openOutputStream();
-
+	        String json_response = new String(baos.toByteArray());
+	        System.out.println(" >> URL " + url + "?" + new String(post)+ connectionParameters);
+	        System.out.println(" >> POST STRING " + new String(post));
+	        System.out.println("************  HTTP RESPONSE " + json_response);
+	        System.out.println("******** CHECKPOINT : " + ((requestListener == null) ? " NULL " : " NOT NULL "));
+	        responsedata.close();
+	        connection.close();
 		
-		postStream.write(post,0,post.length);
-		postStream.close();
-	
-		
-		String contenttype = connection.getHeaderField("Content-type");			// this method sends the get request (i guess)
-		
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		
-		InputStream responsedata = connection.openInputStream();
-		
-		byte[] bytearray= new byte[2000];
-		
-		int bytenum = responsedata.read(bytearray);
-
-		while(bytenum>0){
-			baos.write(bytearray, 0, bytenum);
-			bytenum = responsedata.read(bytearray);
-			
-		}
-		
-		String json_response = new String(baos.toByteArray());
-		System.out.println("************  HTTP RESPONSE " + json_response);
-		System.out.println("******** CHECKPOINT : " + ((requestListener == null) ? " NULL " : " NOT NULL "));
-		responsedata.close();
-		connection.close();
-		
-		requestListener.httpsuccess(baos.toByteArray(), contenttype);	
-	       
-		}
-		
-		catch(Exception ie){
+	        requestListener.httpsuccess(baos.toByteArray(), contenttype);	
+		} catch(Exception ie){
 			System.out.println(">> Exception @ " + ie.getClass().getName());
 			ie.printStackTrace();
 		}

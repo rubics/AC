@@ -17,11 +17,15 @@ public class UserController {
 
 		public void httpsuccess(byte[] array, String str){
 			String json_response = new String(array);
-			System.out.println(">> Json response: " + json_response);
-			System.out.println();
-
-			UiApplication.getUiApplication().popScreen(signinScreen);
-			UiApplication.getUiApplication().pushScreen(DashboardScreen.createDashboardScreenInstance());
+			
+//			AirCrewApp.app.invokeLater(new Runnable() {
+//				
+//				public void run() {
+//					UiApplication.getUiApplication().pushScreen(new DashboardScreen());
+////					UiApplication.getUiApplication().popScreen(signinScreen);
+//				}
+//			});
+			
 //			try {
 //				JSONObject json = new JSONObject(json_response);
 //
