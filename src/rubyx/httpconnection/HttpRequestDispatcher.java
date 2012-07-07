@@ -43,6 +43,7 @@ public class HttpRequestDispatcher extends Thread{
 			
 	        String connectionParameters = ";deviceside=true";
 	        String hit_url = (method.equalsIgnoreCase(METHOD_POST)) ? url : (url + "?" + new String(post));
+	        System.out.println("--> " + hit_url + " <--");
 	        HttpConnection connection = (HttpConnection)Connector.open(hit_url + connectionParameters);
 	        connection.setRequestMethod(method);
 		
@@ -71,11 +72,6 @@ public class HttpRequestDispatcher extends Thread{
 	        	bytenum = responsedata.read(bytearray);	
 	        }
 		
-	        String json_response = new String(baos.toByteArray());
-	        System.out.println(" >> URL " + url + "?" + new String(post)+ connectionParameters);
-	        System.out.println(" >> POST STRING " + new String(post));
-	        System.out.println("************  HTTP RESPONSE " + json_response);
-	        System.out.println("******** CHECKPOINT : " + ((requestListener == null) ? " NULL " : " NOT NULL "));
 	        responsedata.close();
 	        connection.close();
 		

@@ -15,6 +15,16 @@
 		<copyright >
 			Copyright (c) 2012 BlackBerry Developer
 		</copyright>
+		<fileset Java="1.49" _blackberryVersion="[5.0.0)">
+			<directory >
+				5.0.0
+			</directory>
+			<files >
+				AirCrew.cod
+
+			</files>
+
+		</fileset>
 
 	</application>
 
