@@ -25,17 +25,12 @@ public class SigninScreen extends MainScreen{
 	
 	private CompositeTextBox usernameField;
 	private CompositePasswordBox passwordField;
-	
 	private CheckboxField rememberMe;
-	
 	private ButtonField login;
 	private ButtonField register;	
-	
 	private int composite_field_width = Display.getWidth()-40;
-	
 	Bitmap login_background = Bitmap.getBitmapResource("images/login_background.png");
 	Bitmap aircrew_logo = Bitmap.getBitmapResource("images/aircrew_logo.png");
-	
 	final MainScreen this_screen;
 	
 	public SigninScreen(){
@@ -77,27 +72,29 @@ public class SigninScreen extends MainScreen{
 		loginControls.add(register);
 		add(loginControls);
 		
-		login.setChangeListener(new FieldChangeListener() {
-			
-			public void fieldChanged(Field field, int context) {
-				AirCrewApp.app.userController.signinRequest.sign_in(usernameField.getText(), passwordField.getText());
-//				UiApplication.getUiApplication().popScreen(this_screen);
-//				UiApplication.getUiApplication().pushScreen(DashboardScreen.createDashboardScreenInstance());
-			}
-		});
-		
-		register.setChangeListener(new FieldChangeListener() {
-			
-			public void fieldChanged(Field field, int context) {
-//				UiApplication.getUiApplication().popScreen(this_screen);
-				UiApplication.getUiApplication().pushScreen(new SignupScreen(0));
-			}
-		});
+		login.setChangeListener(loginListener);
+		register.setChangeListener(registerListener);
 	}
 	
 	public boolean isDirty() {
 	    return false;
 	}
+	
+	//---------------------------------------------------------------------
+	
+	private FieldChangeListener loginListener = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			AirCrewApp.app.userController.signinRequest.sign_in(usernameField.getText(), passwordField.getText());
+		}
+	};
+	
+	private FieldChangeListener registerListener = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			AirCrewApp.app.userController.pushSignupScreen();
+		}
+	};
 }
 
 class LoginControls extends Manager{

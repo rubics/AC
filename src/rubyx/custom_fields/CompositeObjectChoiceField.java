@@ -90,4 +90,8 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 		color_foreground = _color_foreground;
 		color_font = _color_font;
 	}
+	
+	public int getSelectedIndex(){
+		return objectChoiceField.getSelectedIndex();
+	}
 }
