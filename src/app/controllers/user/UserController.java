@@ -1,5 +1,7 @@
 package app.controllers.user;
 
+import helpers.org.json.me.JSONException;
+import helpers.org.json.me.JSONObject;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.Dialog;
 import app.AirCrewApp;
@@ -18,34 +20,46 @@ public class UserController {
 
 		public void httpsuccess(byte[] array, String str){
 
-			String json_response = new String(array);
+			final String json_response = new String(array);
 			
-			UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-				
-				public void run() {
-					UiApplication.getUiApplication().pushScreen(new DashboardScreen());
-					UiApplication.getUiApplication().popScreen(signinScreen);		
+			try{
+				JSONObject json = new JSONObject(json_response);
+
+				if(json.has("response") & !json.isNull("response")) {
+
+					JSONObject response = json.getJSONObject("response");
+					String user_name = response.getString("username");
+					String user_id = response.getString("userId");
+					String session_id = response.getString("sessionId");
+					String message = response.getString("message");
+					
+					user = new User(user_name, user_id, session_id);
+					
+					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+						
+						public void run() {
+							UiApplication.getUiApplication().pushScreen(new DashboardScreen());
+							UiApplication.getUiApplication().popScreen(signinScreen);
+						}		
+					});
+
+				} else if (json.has("error") & !json.isNull("error")){
+					JSONObject response = json.getJSONObject("error");
+					final String code = response.getString("code");
+					final String message = response.getString("message");
+					
+					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+						
+						public void run() {
+							Dialog.alert(message);
+						}		
+					});
 				}
-			});
-			
-//			try {
-//				JSONObject json = new JSONObject(json_response);
-//
-//				if(json.has("response") & !json.isNull("response")) {
-//
-//					JSONObject response = json.getJSONObject("response");
-//					String message = response.getString("message");
-//
-//					System.out.println("Message: " + message);			
-//					System.out.println();
-//
-//					UiApplication.getUiApplication().popScreen(signinScreen);
-//					UiApplication.getUiApplication().pushScreen(DashboardScreen.createDashboardScreenInstance());
-//
-//				} else {}
-//			} catch (JSONException e) {
-//				e.printStackTrace();
-//			}
+				
+			}catch(Exception e){
+				System.out.println(">> Exception @ " + e.getClass().getName());
+				e.printStackTrace();
+			}
 		}
 		public void httpfailure(String errmsg) {}
 	};

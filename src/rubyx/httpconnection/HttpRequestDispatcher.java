@@ -43,7 +43,6 @@ public class HttpRequestDispatcher extends Thread{
 			
 	        String connectionParameters = ";deviceside=true";
 	        String hit_url = (method.equalsIgnoreCase(METHOD_POST)) ? url : (url + "?" + new String(post));
-	        System.out.println("--> " + hit_url + " <--");
 	        HttpConnection connection = (HttpConnection)Connector.open(hit_url + connectionParameters);
 	        connection.setRequestMethod(method);
 		
