@@ -38,7 +38,6 @@ public class SigninScreen extends MainScreen{
 		super(Manager.USE_ALL_HEIGHT);
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(login_background));
-//		mainManager.add(new BitmapField(login_title_bar));
 
 		this_screen = this;
 		usernameField = new CompositeTextBox("Email", "pratuat@gmail.com", true, composite_field_width);

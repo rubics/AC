@@ -5,6 +5,7 @@ import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.Dialog;
 import app.AirCrewApp;
 import app.models.SigninRequest;
+import app.models.SignoutRequest;
 import app.models.SignupRequest;
 import app.models.User;
 import app.views.screens.DashboardScreen;
@@ -113,6 +114,8 @@ public class UserController {
 					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 						
 						public void run() {
+							UiApplication.getUiApplication().popScreen(UiApplication.getUiApplication().getActiveScreen());
+							pushSignInScreen();
 							Dialog.alert(message);
 						}		
 					});
@@ -124,9 +127,51 @@ public class UserController {
 			}
 		}
 		
-		public void httpfailure(String errmsg) {
-			// TODO Auto-generated method stub
+		public void httpfailure(String errmsg) {}
+	};
+	
+	public SignoutRequest signoutRequest = new SignoutRequest() {
+		
+		public void httpsuccess(byte[] array, String str) {
 			
+			final String json_response = new String(array);
+			
+			try{
+				JSONObject json = new JSONObject(json_response);
+
+				if(json.has("response") & !json.isNull("response")) {
+
+					JSONObject response = json.getJSONObject("response");
+					final String message = response.getString("message");
+					
+					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+						
+						public void run() {
+							UiApplication.getUiApplication().popScreen(UiApplication.getUiApplication().getActiveScreen());
+							pushSignInScreen();
+							Dialog.inform(message);
+						}
+					});
+
+				} else if (json.has("error") & !json.isNull("error")){
+					JSONObject response = json.getJSONObject("error");
+					final String code = response.getString("code");
+					final String message = response.getString("message");
+					
+					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+						
+						public void run() {
+							Dialog.alert(message);
+						}		
+					});
+				}
+				
+			}catch(Exception e){
+				System.out.println(">> Exception @ " + e.getClass().getName());
+				e.printStackTrace();
+			}
 		}
+		
+		public void httpfailure(String errmsg) {}
 	};
 }

@@ -22,12 +22,11 @@ import app.views.fields.ScreenTitle;
 import app.views.managers.chat.ChatScreenManager;
 import app.views.managers.deals.DealsScreenManager;
 import app.views.managers.profile.ProfileInfoScreenManager;
-import app.views.screens.chat.ChatScreen;
 import app.views.screens.favorites.FavoritesScreen;
 
 public class DashboardScreen extends MainScreen{
 	
-	private static DashboardScreen dashboardScreen;
+	private DashboardScreen dashboardScreen;
 	
 	AirCrewApp airCrew = (AirCrewApp)(UiApplication.getUiApplication());
 	
@@ -55,6 +54,43 @@ public class DashboardScreen extends MainScreen{
 	final int[] column_styles = {TableLayoutManager.FIXED_WIDTH,TableLayoutManager.FIXED_WIDTH,TableLayoutManager.FIXED_WIDTH}; 
 	final int[] column_widths = {Display.getWidth()/3,Display.getWidth()/3,Display.getWidth()/3};
 	final int horizontal_padding = 1;
+	
+	public DashboardScreen(){
+		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
+		Manager mainManager = getMainManager();
+		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
+		setTitle(new ScreenTitle("Dashboard"));
+		VerticalFieldManager mvrm = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Manager.VERTICAL_SCROLLBAR);
+		TableLayoutManager layoutManager = new TableLayoutManager(column_styles, column_widths, horizontal_padding, 0) ;
+		
+		for(int i=0; i<9; i++){
+			System.out.println(">> " + i);
+			Field dashboardItem = new DashboardItem(icons[i], titles[i], i+1);
+			dashboardItem.setChangeListener(dashboardItemListener);
+			layoutManager.add(dashboardItem);
+		}
+		
+		mvrm.add(layoutManager);
+		mvrm.add(new SpaceField(5));
+		Field logoutButton = new TabbedButton("Log Out", 7, Display.getWidth()-10, 46);
+		logoutButton.setChangeListener(logoutButtonListener);
+		mvrm.add(logoutButton);
+		mvrm.add(new SpaceField(10));
+		add(mvrm);
+	}
+	
+	public boolean isDirty() {
+	    return false;
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	private FieldChangeListener logoutButtonListener = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			AirCrewApp.app.userController.signoutRequest.sign_out();
+		}
+	};
 	
 	FieldChangeListener dashboardItemListener = new FieldChangeListener() {
 		
@@ -88,38 +124,4 @@ public class DashboardScreen extends MainScreen{
 			}
 		}
 	};
-	
-	public DashboardScreen(){
-		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
-		Manager mainManager = getMainManager();
-		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
-		setTitle(new ScreenTitle("Dashboard"));
-		VerticalFieldManager mvrm = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Manager.VERTICAL_SCROLLBAR);
-		TableLayoutManager layoutManager = new TableLayoutManager(column_styles, column_widths, horizontal_padding, 0) ;
-		
-		for(int i=0; i<9; i++){
-			System.out.println(">> " + i);
-			Field dashboardItem = new DashboardItem(icons[i], titles[i], i+1);
-			dashboardItem.setChangeListener(dashboardItemListener);
-			layoutManager.add(dashboardItem);
-		}
-		
-		mvrm.add(layoutManager);
-		mvrm.add(new SpaceField(5));
-		Field logoutButton = new TabbedButton("Log Out", 7, Display.getWidth()-10, 46);
-		logoutButton.setChangeListener(new FieldChangeListener() {
-			
-			public void fieldChanged(Field field, int context) {
-				UiApplication.getUiApplication().popScreen(UiApplication.getUiApplication().getActiveScreen());
-				UiApplication.getUiApplication().pushScreen(new SigninScreen());
-			}
-		});
-		mvrm.add(logoutButton);
-		mvrm.add(new SpaceField(5));
-		add(mvrm);
-	}
-	
-	public boolean isDirty() {
-	    return false;
-	}
 }
