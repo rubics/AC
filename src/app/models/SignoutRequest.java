@@ -11,7 +11,7 @@ public abstract class SignoutRequest implements HttpRequestListener{
 	public SignoutRequest(){}
 
 	public void sign_out(){
-		dispatcher = new HttpRequestDispatcher(AirCrew.url + AirCrew.signout, method, requestListener, "");
+		dispatcher = new HttpRequestDispatcher(AirCrew.signout, method, requestListener, "");
 		dispatcher.start();
 	}
 

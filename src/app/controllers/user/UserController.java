@@ -18,8 +18,11 @@ public class UserController {
 	
 	private SigninScreen signinScreen;
 	private SignupScreen signupScreen;
+	private DashboardScreen dashboardScreen;
 
-	public UserController(){}
+	public UserController(){
+		dashboardScreen = new DashboardScreen();
+	}
 
 	public void pushSignInScreen(){
 		signinScreen = new SigninScreen();
@@ -29,6 +32,10 @@ public class UserController {
 	public void pushSignupScreen(){
 		signupScreen = new SignupScreen();
 		AirCrewApp.app.pushScreen(signupScreen);		
+	}
+	
+	public User getUser(){
+		return user;
 	}
 	
 	//------------------------------------------------------------------------------//
@@ -55,7 +62,7 @@ public class UserController {
 					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 						
 						public void run() {
-							UiApplication.getUiApplication().pushScreen(new DashboardScreen());
+							UiApplication.getUiApplication().pushScreen(dashboardScreen);
 							UiApplication.getUiApplication().popScreen(signinScreen);
 						}		
 					});

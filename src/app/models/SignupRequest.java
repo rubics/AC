@@ -48,9 +48,7 @@ public abstract class SignupRequest implements HttpRequestListener{
 		postString.append(_confirm_email);
 		
 		
-		dispatcher = new HttpRequestDispatcher(AirCrew.url + AirCrew.signup, method, requestListener, postString.toString());
-		System.out.println(">> Post URL: " + AirCrew.url + AirCrew.signup);
-		System.out.println(">> Post Data: " + postString);
+		dispatcher = new HttpRequestDispatcher(AirCrew.signup, method, requestListener, postString.toString());
 		dispatcher.start();
 	}
 	public abstract void httpfailure(String errmsg);

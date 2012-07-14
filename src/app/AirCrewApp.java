@@ -3,14 +3,15 @@ package app;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
+import app.controllers.user.DealsController;
 import app.controllers.user.UserController;
-import app.views.screens.SigninScreen;
 import app.views.screens.SplashScreen;
 
 public class AirCrewApp extends UiApplication {
 	
 	public static AirCrewApp app;
 	public UserController userController;
+	public DealsController dealsController;
 	
 	private AirCrewApp(){
 		

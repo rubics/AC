@@ -1,8 +1,5 @@
 package app.views.screens;
 
-
-
-
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
