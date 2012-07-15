@@ -1,6 +1,6 @@
 package rubyx.tabbedUI;
 
-import app.models.Deal;
+import app.models.Business;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Manager;

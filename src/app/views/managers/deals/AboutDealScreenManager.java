@@ -6,7 +6,7 @@ import net.rim.device.api.ui.container.MainScreen;
 import rubyx.tabbedUI.TabbedPaneButton;
 import rubyx.tabbedUI.TabbedPaneManager;
 import rubyx.tabbedUI.TabbedScreenManager;
-import app.models.Deal;
+import app.models.Business;
 import app.views.screens.deals.BookmarkScreen;
 import app.views.screens.deals.EmailScreen;
 import app.views.screens.deals.LocationScreen;
@@ -14,7 +14,7 @@ import app.views.screens.deals.VideoScreen;
 
 public class AboutDealScreenManager {
 	
-	public Deal deal;
+	public Business deal;
 	
 	private TabbedScreenManager tabbedScreenManager;	
 	private MainScreen[] tabbedScreens = new MainScreen[4];	
@@ -24,7 +24,7 @@ public class AboutDealScreenManager {
 	private Field locationButton = new TabbedPaneButton("Location");
 	private Field bookmarkButton = new TabbedPaneButton("Bookmark");
 		
-	public AboutDealScreenManager(Deal _deal) {
+	public AboutDealScreenManager(Business _deal) {
 		deal = _deal;
 		tabbedScreens[0] = new EmailScreen(this);
 		tabbedScreens[1] = new VideoScreen(this);

@@ -9,7 +9,6 @@ import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.Ui;
-import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.ButtonField;
 import net.rim.device.api.ui.component.CheckboxField;
 import net.rim.device.api.ui.container.MainScreen;
@@ -19,10 +18,12 @@ import rubyx.custom_fields.CompositePasswordBox;
 import rubyx.custom_fields.CompositeTextBox;
 import rubyx.custom_fields.SpaceField;
 import app.AirCrewApp;
+import app.controllers.user.UserController;
 
 
 public class SigninScreen extends MainScreen{
 	
+	private UserController userController;
 	private CompositeTextBox usernameField;
 	private CompositePasswordBox passwordField;
 	private CheckboxField rememberMe;
@@ -33,13 +34,14 @@ public class SigninScreen extends MainScreen{
 	Bitmap aircrew_logo = Bitmap.getBitmapResource("images/aircrew_logo.png");
 	final MainScreen this_screen;
 	
-	public SigninScreen(){
+	public SigninScreen(UserController _userController){
 		
 		super(Manager.USE_ALL_HEIGHT);
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(login_background));
 
 		this_screen = this;
+		userController = _userController;
 		usernameField = new CompositeTextBox("Email", "pratuat@gmail.com", true, composite_field_width);
 		passwordField = new CompositePasswordBox("Password", "letmein", true, composite_field_width);
 		usernameField.setColorScheme(0x606060, Color.WHITE);
@@ -84,14 +86,14 @@ public class SigninScreen extends MainScreen{
 	private FieldChangeListener loginListener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
-			AirCrewApp.app.userController.signinRequest.sign_in(usernameField.getText(), passwordField.getText());
+			userController.signinRequest.sign_in(usernameField.getText(), passwordField.getText());
 		}
 	};
 	
 	private FieldChangeListener registerListener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
-			AirCrewApp.app.userController.pushSignupScreen();
+			userController.pushSignupScreen();
 		}
 	};
 }

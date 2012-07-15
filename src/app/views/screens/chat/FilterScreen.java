@@ -12,17 +12,20 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
 import app.AirCrewApp;
+import app.controllers.user.DealController;
 import app.models.Images;
 
 public class FilterScreen extends MainScreen{
 	
+	private DealController dealController;
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
 	
 	private VerticalFieldManager vrManager;
 	
-	public FilterScreen(){
+	public FilterScreen(DealController _dealController){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
+		dealController = _dealController;
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
 		

@@ -24,7 +24,7 @@ public class ChatScreenManager {
 	public ChatScreenManager(){
 		
 		tabbedScreens[0]= new ChatRoomScreen();
-		tabbedScreens[1] = new FilterScreen();
+		tabbedScreens[1] = new FilterScreen(null);
 		tabbedScreens[2] = new NearMeScreen();
 		tabbedScreens[3] = new HistoryScreen();
 		

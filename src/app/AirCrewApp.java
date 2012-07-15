@@ -3,15 +3,15 @@ package app;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
-import app.controllers.user.DealsController;
+import app.controllers.user.DashboardController;
 import app.controllers.user.UserController;
 import app.views.screens.SplashScreen;
 
 public class AirCrewApp extends UiApplication {
 	
 	public static AirCrewApp app;
-	public UserController userController;
-	public DealsController dealsController;
+	private UserController userController;
+	public DashboardController dashboardController;
 	
 	private AirCrewApp(){
 		
@@ -34,4 +34,9 @@ public class AirCrewApp extends UiApplication {
 			UiApplication.getUiApplication().popScreen(field.getScreen());
 		}
 	};
+	
+	public UserController getUserController(){
+		return userController;
+	}
+	
 }

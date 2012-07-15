@@ -1,7 +1,7 @@
 package rubyx.custom_fields;
 
 
-import app.models.Deal;
+import app.models.Business;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
@@ -25,11 +25,11 @@ public class ListItem extends Field{
 	static Bitmap focus_background = Bitmap.getBitmapResource("images/listItem_background.png");
 	static Font name_font;
 	static Font category_font;
-	public Deal deal;
+	public Business deal;
 	Bitmap profilePicture;
 	boolean focusable;
 	
-	public ListItem( Deal _deal, boolean _focusable){
+	public ListItem( Business _deal, boolean _focusable){
 		super();
 		profilePicture = new Bitmap( bitmap_dimension, bitmap_dimension);
 		deal = _deal;

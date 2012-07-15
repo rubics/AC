@@ -10,7 +10,7 @@ import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
-import app.models.Deal;
+import app.models.Business;
 import app.models.Images;
 import app.views.fields.listings.ListingField;
 import app.views.managers.deals.AboutDealScreenManager;
@@ -25,7 +25,7 @@ public class BookmarksScreen extends MainScreen{
 	private FieldChangeListener listItemListener = new FieldChangeListener() {		
 		public void fieldChanged(Field field, int context) {
 			int in = (field.getIndex()) % 3;
-			AboutDealScreenManager aboutDeals = new AboutDealScreenManager(new Deal(SearchResultScreen.names[in], SearchResultScreen.category[in], SearchResultScreen.description[in], SearchResultScreen.profile_pics[in]));
+			AboutDealScreenManager aboutDeals = new AboutDealScreenManager(new Business(SearchResultScreen.names[in], SearchResultScreen.category[in], SearchResultScreen.description[in], SearchResultScreen.profile_pics[in]));
 			aboutDeals.pushScreen();			
 		}
 	};

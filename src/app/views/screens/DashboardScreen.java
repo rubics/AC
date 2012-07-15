@@ -13,19 +13,19 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.controllers.user.DashboardController;
 import app.models.Images;
 import app.views.fields.DashboardItem;
 import app.views.fields.ScreenTitle;
 import app.views.managers.chat.ChatScreenManager;
-import app.views.managers.deals.DealsScreenManager;
+import app.views.managers.deals.DealScreenManager;
 import app.views.managers.profile.ProfileInfoScreenManager;
 import app.views.screens.favorites.FavoritesScreen;
 
 public class DashboardScreen extends MainScreen{
 	
-	private DashboardScreen dashboardScreen;
-	
-	AirCrewApp airCrew = (AirCrewApp)(UiApplication.getUiApplication());
+	private AirCrewApp app = (AirCrewApp)(UiApplication.getUiApplication());
+	private DashboardController dashboardController;
 	
 	public static Bitmap[] icons = {Bitmap.getBitmapResource("images/dashboard/deals.png"),
 				Bitmap.getBitmapResource("images/dashboard/chat.png"),
@@ -52,8 +52,10 @@ public class DashboardScreen extends MainScreen{
 	final int[] column_widths = {Display.getWidth()/3,Display.getWidth()/3,Display.getWidth()/3};
 	final int horizontal_padding = 1;
 	
-	public DashboardScreen(){
+	public DashboardScreen(DashboardController _dashboardController){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
+		dashboardController = _dashboardController;
+		
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
 		setTitle(new ScreenTitle("Dashboard"));
@@ -85,7 +87,7 @@ public class DashboardScreen extends MainScreen{
 	private FieldChangeListener logoutButtonListener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
-			AirCrewApp.app.userController.signoutRequest.sign_out();
+			app.getUserController().signoutRequest.sign_out();
 		}
 	};
 	
@@ -96,25 +98,24 @@ public class DashboardScreen extends MainScreen{
 			
 			switch (index){
 			case 1:
-				DealsScreenManager dealsScreenManger = new DealsScreenManager();
-				dealsScreenManger.pushScreen();
+				dashboardController.getDealController();
 				break;
 			case 2:
 				ChatScreenManager chatScreenManager = new ChatScreenManager();
 				chatScreenManager.pushScreen();
 				break;
 			case 3:
-				airCrew.pushScreen(new BookmarksScreen());
+				app.pushScreen(new BookmarksScreen());
 				break;
 			case 4:
-				airCrew.pushScreen(new FavoritesScreen());
+				app.pushScreen(new FavoritesScreen());
 				break;
 			case 5:
 				ProfileInfoScreenManager profileInfo = new ProfileInfoScreenManager();
 				profileInfo.pushScreen();
 				break;			
 			case 7:
-				airCrew.pushScreen(new ToolboxScreen());
+				app.pushScreen(new ToolboxScreen());
 				break;
 			default:
 				break;

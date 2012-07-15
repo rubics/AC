@@ -2,7 +2,6 @@ package app.views.screens.deals;
 
 import net.rim.device.api.lbs.MapField;
 import net.rim.device.api.system.Bitmap;
-import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Manager;
@@ -15,6 +14,8 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
 import app.AirCrewApp;
+import app.controllers.user.DealController;
+import app.models.Business;
 import app.models.Deal;
 import app.models.Images;
 import app.views.fields.listings.ListingField;
@@ -22,13 +23,11 @@ import app.views.managers.deals.AboutDealScreenManager;
 
 public class SearchResultScreen extends MainScreen{
 	
+	private DealController dealController;
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
-
 	private int manager_index;
 	private final MainScreen current_screen;
-	
-	
 	public static Bitmap[] profile_pics = Images.profile_pics;
 	public static String[] names = {"Luxe Dental Clinic","Happy Habitat Petcare","Jacques La Coupe","Dine In Resturant"};
 	public static String[] category = {"Dental Care For Your Lifestyle","Petcare","Beauty Salon","Dining"};
@@ -47,7 +46,7 @@ public class SearchResultScreen extends MainScreen{
 				UiApplication.getUiApplication().invokeLater(new Runnable() {					
 					public void run() {
 						current_screen.delete(vrm);
-						drawList();						
+						updateScreen();						
 					}
 				});
 				break;
@@ -66,14 +65,15 @@ public class SearchResultScreen extends MainScreen{
 	private FieldChangeListener listItemListener = new FieldChangeListener() {		
 		public void fieldChanged(Field field, int context) {
 			int in = (field.getIndex()) % 3;
-			AboutDealScreenManager aboutDeals = new AboutDealScreenManager(new Deal(names[in], category[in], description[in], profile_pics[in]));
+			AboutDealScreenManager aboutDeals = new AboutDealScreenManager(new Business(names[in], category[in], description[in], profile_pics[in]));
 			aboutDeals.pushScreen();			
 		}
 	};
 		
-	public SearchResultScreen(){
+	public SearchResultScreen(DealController _dealController){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL);
 		current_screen = this;
+		dealController = _dealController;
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
 		
@@ -96,20 +96,15 @@ public class SearchResultScreen extends MainScreen{
 		statusButtonGroup.add(sb);
 		add(statusButtonGroup);
 		add(new SpaceField(3));
-		drawList();
+		updateScreen();
 	}
 	
-	public void drawList(){
-		
+	public void updateScreen(){
 		vrm = new VerticalFieldManager(Manager.USE_ALL_HEIGHT);
 		VerticalFieldManager listManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
-		for(int i=0; i < profile_pics.length; i++){
-			Field listItem = new ListingField(profile_pics[i], names[i], category[i],8);
-			listItem.setChangeListener(listItemListener);
-			listManager.add(listItem);
-		}
-		for(int i=0; i < profile_pics.length; i++){
-			Field listItem = new ListingField(profile_pics[i], names[i], category[i],8);
+		for(int i=0; i < dealController.getDeals().length; i++){
+			Deal deal = dealController.getDeals()[i];
+			Field listItem = new ListingField(Images.profile_pics[1], deal.getName(), deal.getCategory_name(),8);
 			listItem.setChangeListener(listItemListener);
 			listManager.add(listItem);
 		}

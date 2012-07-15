@@ -14,11 +14,13 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
 import app.AirCrewApp;
+import app.controllers.user.UserController;
 import app.models.Images;
 import app.views.fields.ScreenTitle;
 
 public class SignupScreen extends MainScreen{
 	
+	private UserController userController;
 	private CompositeTextBox nameField;
 	private CompositeTextBox emailField;
 	private CompositePasswordBox passwordField;
@@ -36,12 +38,13 @@ public class SignupScreen extends MainScreen{
 	private String[] gender = {"Female", "Male"};
 	private String[] designation = {"Flight Crew", "Cabin Crew"};
 	
-	public SignupScreen(){
+	public SignupScreen(UserController _userController){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_HORIZONTAL_SCROLLBAR);
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
 		setTitle(new ScreenTitle("Sign Up"));
 		
+		userController = _userController;
 		mvrm = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Manager.VERTICAL_SCROLLBAR);
 		nameField = new CompositeTextBox("Username","",true);
 		emailField = new CompositeTextBox("email", "", true);
@@ -88,7 +91,7 @@ public class SignupScreen extends MainScreen{
 	private FieldChangeListener signupListener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
-			AirCrewApp.app.userController.signupRequest.sign_up(emailField.getText(),
+			userController.signupRequest.sign_up(emailField.getText(),
 					passwordField.getText(),
 					nameField.getText(),
 					airlines[airlineField.getSelectedIndex()],
