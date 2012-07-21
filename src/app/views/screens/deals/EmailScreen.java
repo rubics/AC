@@ -9,14 +9,14 @@ import net.rim.device.api.ui.decor.BackgroundFactory;
 import app.models.Images;
 import app.views.fields.ScreenTitle;
 import app.views.fields.deals.CompositeDealLabel;
-import app.views.managers.deals.AboutDealScreenManager;
+import app.views.managers.deals.DealDetailsScreenManager;
 
 public class EmailScreen extends MainScreen{
-	private AboutDealScreenManager dealsInfo;
+	private DealDetailsScreenManager dealsInfo;
 	
 	private Manager manager;
 	
-	public EmailScreen(AboutDealScreenManager _dealsInfo){
+	public EmailScreen(DealDetailsScreenManager _dealsInfo){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL);
 		dealsInfo = _dealsInfo;
 		Manager mainManager = getMainManager();
@@ -25,8 +25,8 @@ public class EmailScreen extends MainScreen{
 		manager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		add(manager);
 		manager.add(new NullField());
-		manager.add(new ListItem(dealsInfo.deal, false));
-		manager.add(new CompositeDealLabel(dealsInfo.deal.image,dealsInfo.deal.description, null));
+//		manager.add(new ListItem(dealsInfo.deal, false));
+//		manager.add(new CompositeDealLabel(dealsInfo.deal.image,dealsInfo.deal.description, null));
 	}
 	
 	public boolean isDirty() {

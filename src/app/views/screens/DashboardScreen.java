@@ -98,7 +98,8 @@ public class DashboardScreen extends MainScreen{
 			
 			switch (index){
 			case 1:
-				dashboardController.getDealController();
+				dashboardController.getDealController().pushScreen();
+				
 				break;
 			case 2:
 				ChatScreenManager chatScreenManager = new ChatScreenManager();

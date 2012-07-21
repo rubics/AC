@@ -8,11 +8,11 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import app.models.Images;
 import app.views.fields.ScreenTitle;
-import app.views.managers.deals.AboutDealScreenManager;
+import app.views.managers.deals.DealDetailsScreenManager;
 
 public class LocationScreen extends MainScreen{
-	private AboutDealScreenManager dealsInfo;
-	public LocationScreen(AboutDealScreenManager _dealsInfo){
+	private DealDetailsScreenManager dealsInfo;
+	public LocationScreen(DealDetailsScreenManager _dealsInfo){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
 		dealsInfo = _dealsInfo;
 		Manager mainManager = getMainManager();

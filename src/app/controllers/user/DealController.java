@@ -1,40 +1,65 @@
 package app.controllers.user;
 
+import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.FieldChangeListener;
+import net.rim.device.api.ui.UiApplication;
+import app.models.Business;
 import app.models.Deal;
-import app.models.DealRequest;
+import app.models.DealDetailsRequest;
+import app.models.DealsRequest;
+import app.views.managers.deals.DealDetailsScreenManager;
 import app.views.managers.deals.DealScreenManager;
 import app.views.screens.deals.SearchResultScreen;
 
 public class DealController {
 	
 	private DashboardController dashboardController;
+	private DealController dealController;
 	private DealScreenManager dealScreenManger;
 	private Deal[] deals;
 	
 	public DealController(DashboardController _dashboardController){
 		dashboardController = _dashboardController;
-		// populate deals , defer UI fieldbuild to httpsuccess of dealrequest
-//		dealScreenManger = new DealScreenManager(this);
+		dealController = this;
+		dealScreenManger = new DealScreenManager(this);
 		
-		DealRequest dealRequest = new DealRequest(this);
+		DealsRequest dealRequest = new DealsRequest(this);
 		dealRequest.getAllDeals();
 	}
 	
 	public void pushScreen(){
-		dealScreenManger = new DealScreenManager(this);
 		dealScreenManger.pushScreen();
 	}
 	
 	public void setDeals(Deal[] _deals){
 		deals = _deals;
-		pushScreen();
-//		updateDealScreens();
+		updateDealScreens();
 	}
+	
 	public Deal[] getDeals(){
 		return deals;
 	}
 	
 	public void updateDealScreens(){
-//		((SearchResultScreen)dealScreenManger.getTabbedScreens()[0]).updateScreen();
+		((SearchResultScreen)dealScreenManger.getTabbedScreens()[0]).updateScreen();
 	}
+	
+	public FieldChangeListener dealDetails = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			final int index = field.getIndex();
+			DealDetailsRequest dealDetailsRequest = new DealDetailsRequest(dealController){
+				public void afterSuccess(){
+					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+						
+						public void run() {
+							DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
+							aboutDeals.pushScreen();
+						}
+					});
+				}
+			};
+			dealDetailsRequest.getDetials(deals[index]);
+		}
+	};
 }

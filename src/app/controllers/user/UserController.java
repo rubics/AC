@@ -57,11 +57,10 @@ public class UserController {
 					
 					user = new User(user_name, user_id, session_id);
 					
+					app.pushDashboardScreen(); // push Dashboard Screen
+					
 					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-						
 						public void run() {
-							app.dashboardController = new DashboardController();
-							app.dashboardController.pushScreen();
 							app.popScreen(signinScreen);
 						}		
 					});

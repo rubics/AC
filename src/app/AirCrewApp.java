@@ -28,15 +28,23 @@ public class AirCrewApp extends UiApplication {
 		app.enterEventDispatcher();
 	}
 	
-	public static final FieldChangeListener backButtonListener = new FieldChangeListener() {
-		
-		public void fieldChanged(Field field, int context) {
-			UiApplication.getUiApplication().popScreen(field.getScreen());
-		}
-	};
+	public void pushDashboardScreen(){  // to be called in UIEvent thread with invokeLater()
+		UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+			
+			public void run() {
+				dashboardController = new DashboardController();
+				dashboardController.pushScreen();
+			}		
+		});
+	}
 	
 	public UserController getUserController(){
 		return userController;
 	}
 	
+	public static final FieldChangeListener backButtonListener = new FieldChangeListener() {	
+		public void fieldChanged(Field field, int context) {
+			app.popScreen(field.getScreen());
+		}
+	};
 }
