@@ -15,7 +15,6 @@ import app.views.screens.deals.VideoScreen;
 public class DealDetailsScreenManager {
 	
 	public Deal deal;
-	
 	private TabbedScreenManager tabbedScreenManager;	
 	private MainScreen[] tabbedScreens = new MainScreen[4];	
 	private Manager tabbedPaneManager = new TabbedPaneManager(Manager.USE_ALL_WIDTH);

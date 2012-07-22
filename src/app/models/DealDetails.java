@@ -27,12 +27,38 @@ public class DealDetails {
 		images = new Vector(3,3);
 	}
 	
-	public void addImages(String _image_id, String _image_name, String _icon_name){
-		images.addElement(new Photos(_image_id, _image_name, _icon_name));
+	public String addImages(String _image_id, String _image_name, String _icon_name){
+		Photos photo = new Photos(_image_id, _image_name, _icon_name);
+		images.addElement(photo);
+		return (photo.toString());
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	public String getDeal() {
+		return deal;
+	}
+
+	public Vector getImages() {
+		return images;
+	}
+
 	public String toString(){
-		return ("------------------" + description +"\n" + website + "\n" + deal);
+		return ("--------  DealDetails  ----------\n" + description +"\n" + website + "\n" + deal);
 	}
 }
 
@@ -45,5 +71,9 @@ class Photos{
 		image_id = _image_id;
 		image_name = _image_name;
 		icon_name = _icon_name;
+	}
+	
+	public String toString(){
+		return ("---------  Photo  -------------\n" + image_id + "\n" + image_name + "\n" + icon_name);
 	}
 }

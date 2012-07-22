@@ -48,18 +48,26 @@ public class DealController {
 		
 		public void fieldChanged(Field field, int context) {
 			final int index = field.getIndex();
-			DealDetailsRequest dealDetailsRequest = new DealDetailsRequest(dealController){
-				public void afterSuccess(){
-					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-						
-						public void run() {
-							DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
-							aboutDeals.pushScreen();
-						}
-					});
-				}
-			};
-			dealDetailsRequest.getDetials(deals[index]);
+			if(deals[index].getDealDetails() == null){
+				DealDetailsRequest dealDetailsRequest = new DealDetailsRequest(dealController){
+					public void afterSuccess(){
+						UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+							public void run() {
+								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
+								aboutDeals.pushScreen();
+							}
+						});
+					}
+				};
+				dealDetailsRequest.getDetials(deals[index]);
+			} else {
+				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+					public void run() {
+						DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
+						aboutDeals.pushScreen();
+					}
+				});
+			}
 		}
 	};
 }

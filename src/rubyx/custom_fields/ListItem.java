@@ -1,7 +1,6 @@
 package rubyx.custom_fields;
 
 
-import app.models.Business;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
@@ -9,6 +8,8 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
+import app.models.Deal;
+import app.models.Images;
 
 public class ListItem extends Field{
 	
@@ -25,15 +26,15 @@ public class ListItem extends Field{
 	static Bitmap focus_background = Bitmap.getBitmapResource("images/listItem_background.png");
 	static Font name_font;
 	static Font category_font;
-	public Business deal;
+	public Deal deal;
 	Bitmap profilePicture;
 	boolean focusable;
 	
-	public ListItem( Business _deal, boolean _focusable){
+	public ListItem( Deal _deal, boolean _focusable){
 		super();
 		profilePicture = new Bitmap( bitmap_dimension, bitmap_dimension);
 		deal = _deal;
-		deal.image.scaleInto(0, 0, deal.image.getWidth(), deal.image.getHeight(), profilePicture, 0, 0, profilePicture.getWidth(), profilePicture.getHeight(), Bitmap.FILTER_BILINEAR);
+		Images.profile_pics[3].scaleInto(0, 0, Images.profile_pics[3].getWidth(), Images.profile_pics[3].getHeight(), profilePicture, 0, 0, profilePicture.getWidth(), profilePicture.getHeight(), Bitmap.FILTER_BILINEAR);
 		focusable = _focusable;
 		
 		category_font = Font.getDefault();
@@ -46,8 +47,8 @@ public class ListItem extends Field{
 		}
 		g.drawBitmap(bitmap_offset_h, bitmap_offset_v, bitmap_dimension, bitmap_dimension, profilePicture, 0, 0);
 		g.setColor(Color.WHITE);
-		g.drawText(deal.name, name_offset_h , bitmap_offset_v);
-		g.drawText(deal.category, name_offset_h, description_offset_v);
+		g.drawText(deal.getName(), name_offset_h , bitmap_offset_v);
+		g.drawText(deal.getCategory_name(), name_offset_h, description_offset_v);
 		g.setColor(0x555555);
 		if(focusable)
 			g.fillRect(5, 70, width-10, 2);
@@ -58,7 +59,7 @@ public class ListItem extends Field{
 	}
 	
 	protected void drawFocus(Graphics _graphics, boolean on) {
-
+		
 	}
 	
 	public boolean isFocusable(){

@@ -13,7 +13,7 @@ public class Deal {
 	private String y_code;
 	private String phone;
 	private String email;
-	private DealDetails dealDetails;
+	private DealDetails dealDetails = null;
 	
 	public Deal(String _id,
 			String _name,

@@ -33,7 +33,7 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 		try{
 			JSONObject json = new JSONObject(json_response);
 
-			if(json.has("business")) {
+			if(json.has("business")){
 
 				JSONObject response = json.getJSONObject("business");
 				JSONObject details = response.getJSONObject("0");
@@ -52,7 +52,7 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 					String _image_id = images.getJSONObject(i).getString("img_id");
 					String _image_name = images.getJSONObject(i).getString("image_name");
 					String _icon_name = images.getJSONObject(i).getString("icon_name");
-					_dealDetails.addImages(_image_id, _image_name, _icon_name);
+					System.out.println(_dealDetails.addImages(_image_id, _image_name, _icon_name));
 				}
 				
 				System.out.println(_dealDetails);
@@ -65,7 +65,6 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 				final String message = response.getString("message");
 				
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-					
 					public void run() {
 						Dialog.alert(message);
 					}		

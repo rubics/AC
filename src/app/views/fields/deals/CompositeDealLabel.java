@@ -1,5 +1,7 @@
 package app.views.fields.deals;
 
+import app.models.Deal;
+import app.models.Images;
 import rubyx.custom_fields.CustomTextArea;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
@@ -20,15 +22,15 @@ public class CompositeDealLabel extends Manager {
 	
 	private static final Font font = Font.getDefault().derive(Font.PLAIN, 6, Ui.UNITS_pt);
 		
-	public CompositeDealLabel(Bitmap _image, String _description, FieldChangeListener _listener){
+	public CompositeDealLabel(Deal _deal){
 		super(Manager.VERTICAL_SCROLL);
 		image = new Bitmap(140,140); 
-		_image.scaleInto(image, Bitmap.FILTER_BILINEAR, Bitmap.SCALE_TO_FIT);
-		descriptionField = new CustomTextArea(_description, descriptionFieldWidth - 10, font);
+		Images.profile_pics[3].scaleInto(image, Bitmap.FILTER_BILINEAR, Bitmap.SCALE_TO_FIT);
+		descriptionField = new CustomTextArea(_deal.getDealDetails().getDescription(), descriptionFieldWidth - 10, font);
 		descriptionField.color = Color.WHITE;
 		add(descriptionField);
 		buttonField = new ButtonField("More Details");
-		buttonField.setChangeListener(_listener);
+//		buttonField.setChangeListener(_listener);
 		add(buttonField);
 	}
 	

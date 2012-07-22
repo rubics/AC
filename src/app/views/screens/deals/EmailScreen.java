@@ -25,8 +25,8 @@ public class EmailScreen extends MainScreen{
 		manager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		add(manager);
 		manager.add(new NullField());
-//		manager.add(new ListItem(dealsInfo.deal, false));
-//		manager.add(new CompositeDealLabel(dealsInfo.deal.image,dealsInfo.deal.description, null));
+		manager.add(new ListItem(dealsInfo.deal, false));
+		manager.add(new CompositeDealLabel(dealsInfo.deal));
 	}
 	
 	public boolean isDirty() {
