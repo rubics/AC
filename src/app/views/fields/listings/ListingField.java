@@ -1,6 +1,5 @@
 package app.views.fields.listings;
 
-import app.models.Images;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
@@ -10,10 +9,12 @@ import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
 import net.rim.device.api.ui.Ui;
+import rubyx.custom_fields.WebImageField;
+import app.models.Images;
 
 public class ListingField extends Field{
 	
-	private Bitmap bitmap;
+	private WebImageField bitmap;
 	private String title;
 	private String description;
 	private int online;
@@ -34,13 +35,11 @@ public class ListingField extends Field{
 	
 	int xa,ya,yb;
 		
-	public ListingField(Bitmap _bitmap, String _title, String _description, int _online){
+	public ListingField(Object _bitmap, String _title, String _description, int _online){
 		super(0);
 				
-		bitmap = new Bitmap(height - 2*vertical_offset, height - 2*vertical_offset);
-		
-		_bitmap.scaleInto(bitmap, Bitmap.FILTER_BILINEAR);
-		
+		bitmap = new WebImageField(_bitmap, height - 2*vertical_offset, height - 2*vertical_offset);
+			
 		title = _title;
 		description = _description;
 		online = _online;
@@ -67,7 +66,7 @@ public class ListingField extends Field{
 			graphics.setGlobalAlpha(255);
 		}
 		
-		graphics.drawBitmap(horizontal_offset, vertical_offset, bitmap.getWidth(), bitmap.getHeight(), bitmap, 0, 0);
+		graphics.drawBitmap(horizontal_offset, vertical_offset, bitmap.get_width(), bitmap.get_height(), bitmap.returnBitmap(), 0, 0);
 		graphics.drawBitmap(xa, ya, Images.arrowhead.getWidth(), Images.arrowhead.getHeight(), Images.arrowhead, 0, 0);
 		if(online == STATUS_ONLINE)
 			graphics.drawBitmap(xa-Images.saway.getWidth(), yb, Images.saway.getWidth(), Images.saway.getHeight(), Images.saway, 0, 0);
@@ -75,10 +74,10 @@ public class ListingField extends Field{
 			graphics.drawBitmap(xa-Images.soffline.getWidth(), yb, Images.soffline.getWidth(), Images.soffline.getHeight(), Images.soffline, 0, 0);
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(title_font);
-		graphics.drawText(title, bitmap.getWidth() + horizontal_offset + vertical_offset + spacing, vertical_offset, DrawStyle.ELLIPSIS, this.width-horizontal_offset-2*vertical_offset);		
+		graphics.drawText(title, bitmap.get_width() + horizontal_offset + vertical_offset + spacing, vertical_offset, DrawStyle.ELLIPSIS, this.width-horizontal_offset-2*vertical_offset);		
 		graphics.setFont(description_font);
 		graphics.setColor(0xCCCCCC);
-		graphics.drawText(description, bitmap.getWidth() + + horizontal_offset + vertical_offset + spacing, this.height/2, DrawStyle.ELLIPSIS,this.width-horizontal_offset-2*vertical_offset);
+		graphics.drawText(description, bitmap.get_width() + + horizontal_offset + vertical_offset + spacing, this.height/2, DrawStyle.ELLIPSIS,this.width-horizontal_offset-2*vertical_offset);
 	}
 	
 	protected void drawFocus(Graphics graphics, boolean mode){

@@ -13,7 +13,6 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 	private Deal deal;
 	private DealController dealController;
 	private static final String method = "GET";
-	private HttpRequestListener requestListener = this;
 	private HttpRequestDispatcher dispatcher;
 	
 	public DealDetailsRequest(DealController _dealController){
@@ -22,7 +21,7 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 	
 	public void getDetials(Deal _deal){
 		deal = _deal;
-		dispatcher = new HttpRequestDispatcher(AirCrew.deal_detials + "/".concat(deal.getId()) , "GET", this, "");
+		dispatcher = new HttpRequestDispatcher(AirCrew.deal_detials + "/".concat(deal.getId()) , method, this, "");
 		dispatcher.start();
 	}
 	public void httpfailure(String errmsg) {

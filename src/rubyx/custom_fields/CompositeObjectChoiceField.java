@@ -14,8 +14,8 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 	private int height = 46;
 	
 	private static final int h_offset = 15;
-	private static final int v_offset = 7;
-	private static final int v_offset_correction = 5;
+	private static final int v_offset = 4;
+	private static final int v_offset_correction = 0;
 	private static final int r_offset = 20;
 	private static final int b_offset =1;
 	
@@ -51,7 +51,7 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 		layoutChild(getField(0), field_width, field_height);
 		layoutChild(getField(1), field_width, field_height);
 		
-		setPositionChild(getField(0), 2*h_offset, y);
+		setPositionChild(getField(0), 2*h_offset, (height - getField(0).getHeight())/2);
 		setPositionChild(getField(1),width/2, (height - getField(1).getHeight())/2);
 		
 		setExtent(width, height);

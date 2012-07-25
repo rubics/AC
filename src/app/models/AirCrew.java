@@ -8,4 +8,5 @@ public class AirCrew {
 	public static final String signout = url + "/index.php/iphone_4aircrew/logout_phone";
 	public static final String all_deals = url + "/index.php/iphone_4aircrew/all_deals";
 	public static final String deal_detials = url + "/index.php/iphone_4aircrew/deals_details/";
+	public static final String image_medium = url + "/assets/uploads/gallery/medium/";
 }

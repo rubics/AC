@@ -15,6 +15,7 @@ import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
 import app.AirCrewApp;
 import app.controllers.user.DealController;
+import app.models.AirCrew;
 import app.models.Business;
 import app.models.Deal;
 import app.models.Images;
@@ -69,7 +70,7 @@ public class SearchResultScreen extends MainScreen{
 				VerticalFieldManager listManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 				for(int i=0; i < dealController.getDeals().length; i++){
 					Deal deal = dealController.getDeals()[i];
-					Field listItem = new ListingField(Images.profile_pics[1], deal.getName(), deal.getCategory_name(),8);
+					Field listItem = new ListingField(AirCrew.image_medium + deal.getLogo(), deal.getName(), deal.getCategory_name(),8);
 					listItem.setChangeListener(dealController.dealDetails);
 					listManager.add(listItem);
 				}

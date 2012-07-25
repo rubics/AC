@@ -7,6 +7,7 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.CompositeButton;
 import rubyx.custom_fields.CompositeField;
+import rubyx.custom_fields.CompositeObjectChoiceField;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
@@ -20,6 +21,14 @@ public class DealFilterScreen extends MainScreen{
 	private DealController dealController;
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
+	private CompositeObjectChoiceField categoryChoiceField;
+	private CompositeObjectChoiceField countryChoiceField;
+	private CompositeObjectChoiceField cityChoiceField;
+	private TabbedButton filterButton;
+	
+	private String[] categories = {"Health", "Entertainment", "Travel", "Adventure", "Food and Dinining"};
+	private String[] countries = {"Nepal", "India", "China", "USA", "UK"};
+	private String[] city = {"Kathmandu","Pokhar", "Dharan", "Biratnager", "Birgunj"};
 	
 	private VerticalFieldManager vrManager;
 	
@@ -39,53 +48,22 @@ public class DealFilterScreen extends MainScreen{
 		
 		vrManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		
-		TabbedButtonManager statusButtonGroup = new TabbedButtonManager(480, 42, true, 2);
-		statusButtonGroup.add(new TabbedButton("Online",6));
-		statusButtonGroup.add(new TabbedButton("Offline",6));
-		statusButtonGroup.add(new TabbedButton("List All",6));
-		statusButtonGroup.setColorScheme(0xeeeeee, 0x186DEF, 0xF57000, Color.BLACK);
-		
-		vrManager.add(statusButtonGroup);
-		vrManager.add(new SpaceField(3));
-		
-		TabbedButtonManager genderButtonGroup = new TabbedButtonManager(480, 42, true, 2);
-		genderButtonGroup.add(new TabbedButton("Male",6));
-		genderButtonGroup.add(new TabbedButton("Female",6));
-		genderButtonGroup.add(new TabbedButton("List All",6));
-		genderButtonGroup.setColorScheme(0xeeeeee, 0x186DEF, 0xF57000, Color.BLACK);
-		
-		vrManager.add(genderButtonGroup);
-		vrManager.add(new SpaceField(3));
-		
-		TabbedButtonManager crewButtonGroup = new TabbedButtonManager(480, 42, true, 2);
-		crewButtonGroup.add(new TabbedButton("Cabin Crew",6));
-		crewButtonGroup.add(new TabbedButton("Flight Crew",6));
-		crewButtonGroup.add(new TabbedButton("List All",6));
-		crewButtonGroup.setColorScheme(0xeeeeee, 0x186DEF, 0xF57000, Color.BLACK);
-		
-		vrManager.add(crewButtonGroup);
-		vrManager.add(new SpaceField(3));
-	
-		CompositeButton airline = new CompositeButton("Airline");
-		airline.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
-		vrManager.add(airline);
-		vrManager.add(new SpaceField(3));
-		
-		CompositeButton country = new CompositeButton("Country");
-		country.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
-		vrManager.add(country);
-		vrManager.add(new SpaceField(3));
-		
-		CompositeButton city = new CompositeButton("City");
-		city.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
-		vrManager.add(city);
-		vrManager.add(new SpaceField(3));
-	
-		TabbedButton filterButton = new TabbedButton("Filter", 7, 480, 40);
-		filterButton.setRVAlue(12);
+		vrManager.add(new SpaceField(8));
+		categoryChoiceField = new CompositeObjectChoiceField("Category", categories, 0);
+		categoryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
+		vrManager.add(categoryChoiceField);
+		vrManager.add(new SpaceField(5));
+		countryChoiceField = new CompositeObjectChoiceField("Country", countries, 0);
+		countryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
+		vrManager.add(countryChoiceField);
+		vrManager.add(new SpaceField(5));
+		cityChoiceField = new CompositeObjectChoiceField("City", city, 0);
+		cityChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
+		vrManager.add(cityChoiceField);
+		vrManager.add(new SpaceField(45));
+		filterButton = new TabbedButton("Filter", 7, 480, 42);
+		filterButton.setRVAlue(15);
 		vrManager.add(filterButton);
-		vrManager.add(new SpaceField(3));
-		
 		add(vrManager);
 	}
 	

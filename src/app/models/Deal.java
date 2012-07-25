@@ -1,5 +1,7 @@
 package app.models;
 
+import net.rim.device.api.system.Bitmap;
+
 public class Deal {
 	
 	private String id;
@@ -13,6 +15,7 @@ public class Deal {
 	private String y_code;
 	private String phone;
 	private String email;
+	private Bitmap image;
 	private DealDetails dealDetails = null;
 	
 	public Deal(String _id,
@@ -37,7 +40,18 @@ public class Deal {
 		y_code = _y_code;
 		phone = _phone;
 		email = _email;
+//		downloadImage();
 	}
+	
+	public void downloadImage(){
+		ImageRequest imageRequest = new ImageRequest(this);
+		imageRequest.getImage();
+	}
+	
+	public void setImage(Bitmap _image){
+		image = _image;
+	}
+	
 	
 	public String getId() {
 		return id;
