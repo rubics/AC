@@ -54,6 +54,7 @@ public class UserController {
 					String user_id = response.getString("userId");
 					String session_id = response.getString("sessionId");
 					String message = response.getString("message");
+					System.out.println(json_response);
 					
 					user = new User(user_name, user_id, session_id);
 					

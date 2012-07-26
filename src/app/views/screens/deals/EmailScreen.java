@@ -6,9 +6,11 @@ import net.rim.device.api.ui.component.NullField;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
+import app.models.AirCrew;
 import app.models.Images;
 import app.views.fields.ScreenTitle;
 import app.views.fields.deals.CompositeDealLabel;
+import app.views.fields.listings.ListingField;
 import app.views.managers.deals.DealDetailsScreenManager;
 
 public class EmailScreen extends MainScreen{
@@ -26,6 +28,7 @@ public class EmailScreen extends MainScreen{
 		add(manager);
 		manager.add(new NullField());
 		manager.add(new ListItem(dealsInfo.deal, false));
+//		ListingField(AirCrew.image_medium + deal.getLogo(), deal.getName(), deal.getCategory_name(),8);
 		manager.add(new CompositeDealLabel(dealsInfo.deal));
 	}
 	
