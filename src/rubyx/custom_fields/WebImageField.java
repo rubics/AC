@@ -11,7 +11,7 @@ import rubyx.httpconnection.HttpRequestListener;
 
 public class WebImageField extends Field implements HttpRequestListener{
 	
-	static final Bitmap default_img = Images.profile_pics[0];
+	static final Bitmap default_img = Bitmap.getBitmapResource("images/splash_screen.png");
 	Bitmap image;
 	final String url;
 	final int width;

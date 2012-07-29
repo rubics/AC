@@ -39,7 +39,7 @@ public class Images {
 		Bitmap.getBitmapResource("images/profile_3.png"),
 		Bitmap.getBitmapResource("images/profile_4.png")
 	};
-	
+		
 	public static Bitmap resize(Bitmap _image, int available_width, int available_height){
 		
 		float aspect_ratio = (float)(_image.getWidth())/(float)(_image.getHeight());

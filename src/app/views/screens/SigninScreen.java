@@ -42,8 +42,8 @@ public class SigninScreen extends MainScreen{
 
 		this_screen = this;
 		userController = _userController;
-		usernameField = new CompositeTextBox("Email", "pratuat@gmail.com", true, composite_field_width);
-		passwordField = new CompositePasswordBox("Password", "letmein", true, composite_field_width);
+		usernameField = new CompositeTextBox("Email", "", true, composite_field_width);
+		passwordField = new CompositePasswordBox("Password", "", true, composite_field_width);
 		usernameField.setColorScheme(0x606060, Color.WHITE);
 		passwordField.setColorScheme(0x606060, Color.WHITE);
 		
