@@ -8,8 +8,10 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
+import app.models.AirCrew;
 import app.models.Deal;
 import app.models.Images;
+import app.views.fields.listings.ListingField;
 
 public class ListItem extends Field{
 	
@@ -27,14 +29,15 @@ public class ListItem extends Field{
 	static Font name_font;
 	static Font category_font;
 	public Deal deal;
-	Bitmap profilePicture;
+	WebImageField profilePicture;
 	boolean focusable;
 	
 	public ListItem( Deal _deal, boolean _focusable){
 		super();
-		profilePicture = new Bitmap( bitmap_dimension, bitmap_dimension);
 		deal = _deal;
-		Images.profile_pics[3].scaleInto(0, 0, Images.profile_pics[3].getWidth(), Images.profile_pics[3].getHeight(), profilePicture, 0, 0, profilePicture.getWidth(), profilePicture.getHeight(), Bitmap.FILTER_BILINEAR);
+		profilePicture = new WebImageField(AirCrew.image_medium + deal.getLogo(), bitmap_dimension, bitmap_dimension);
+//		ListingField(AirCrew.image_medium + deal.getLogo(), deal.getName(), deal.getCategory_name(),8);
+//		Images.profile_pics[3].scaleInto(0, 0, Images.profile_pics[3].getWidth(), Images.profile_pics[3].getHeight(), profilePicture, 0, 0, profilePicture.getWidth(), profilePicture.getHeight(), Bitmap.FILTER_BILINEAR);
 		focusable = _focusable;
 		
 		category_font = Font.getDefault();
@@ -45,7 +48,7 @@ public class ListItem extends Field{
 		if(isFocus()){
 			g.drawBitmap(0,0, width, height, focus_background, 0, 0);
 		}
-		g.drawBitmap(bitmap_offset_h, bitmap_offset_v, bitmap_dimension, bitmap_dimension, profilePicture, 0, 0);
+		g.drawBitmap(bitmap_offset_h, bitmap_offset_v, bitmap_dimension, bitmap_dimension, profilePicture.returnBitmap(), 0, 0);
 		g.setColor(Color.WHITE);
 		g.drawText(deal.getName(), name_offset_h , bitmap_offset_v);
 		g.drawText(deal.getCategory_name(), name_offset_h, description_offset_v);
