@@ -8,19 +8,19 @@ import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 import app.controllers.user.DealController;
 
-public class CategoriesRequest implements HttpRequestListener{
+public class CountriesRequest implements HttpRequestListener {
 	
 	private Deal deal;
 	private DealController dealController;
 	private static final String method = "GET";
 	private HttpRequestDispatcher dispatcher;
 	
-	public CategoriesRequest(DealController _dealController){
+	public CountriesRequest(DealController _dealController){
 		dealController = _dealController;
 	}
 	
-	public void getCategories(){
-		dispatcher = new HttpRequestDispatcher(AirCrew.categories, method, this, "");
+	public void getCountries(){
+		dispatcher = new HttpRequestDispatcher(AirCrew.countries, method, this, "");
 		dispatcher.start();
 	}
 	
@@ -30,21 +30,19 @@ public class CategoriesRequest implements HttpRequestListener{
 		try{
 			JSONObject json = new JSONObject(json_response);
 
-			if(json.has("category")){
+			if(json.has("Country")){
 
-				JSONArray categories_arr = json.getJSONArray("category");
+				JSONArray countries_arr = json.getJSONArray("Country");
 				
-				Category[] categories = new Category[categories_arr.length()];
+				Country[] countries = new Country[countries_arr.length()];
 				
-				for(int i=0; i<categories_arr.length(); i++){
-					String cat_id = ((JSONObject)(categories_arr.get(i))).getString("b_cat_id");
-					String cat_name = ((JSONObject)(categories_arr.get(i))).getString("b_cat_name");
-					categories[i] = new Category(cat_id, cat_name);
-					System.out.println(categories[i]);
-					System.out.println();
+				for(int i=0; i<countries_arr.length(); i++){
+					String country_id = ((JSONObject)(countries_arr.get(i))).getString("country_code");
+					String country_name = ((JSONObject)(countries_arr.get(i))).getString("country");
+					countries[i] = new Country(country_id, country_name);
 				}
 				
-				dealController.setCategories(categories);
+				dealController.setCountries(countries);
 	
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");

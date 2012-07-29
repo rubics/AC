@@ -3,9 +3,11 @@ package app.controllers.user;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
-import net.rim.device.api.ui.container.MainScreen;
 import app.models.CategoriesRequest;
 import app.models.Category;
+import app.models.City;
+import app.models.CountriesRequest;
+import app.models.Country;
 import app.models.Deal;
 import app.models.DealDetailsRequest;
 import app.models.DealsRequest;
@@ -19,7 +21,9 @@ public class DealController {
 	private DashboardController dashboardController;
 	private DealController dealController;
 	private DealScreenManager dealScreenManger;
-	private Category[] categories;
+	private Category[] categories = null;
+	private Country[] countries = null;
+	private City[] cities = {new City("Select a City", "Select a City")};
 	private Deal[] deals;
 	
 	public DealController(DashboardController _dashboardController){
@@ -30,8 +34,13 @@ public class DealController {
 		DealsRequest dealRequest = new DealsRequest(this);
 		dealRequest.getAllDeals();
 		
+		// populate deal categories
 		CategoriesRequest categoriesRequest = new CategoriesRequest(this);
 		categoriesRequest.getCategories();
+		
+		// populate countries
+		CountriesRequest countryRequest = new CountriesRequest(this);
+		countryRequest.getCountries();
 	}
 	
 	public void pushScreen(){
@@ -51,12 +60,36 @@ public class DealController {
 		return categories;
 	}
 
-	public void setCategories(Category[] categories) {
-		this.categories = categories;
-		DealFilterScreen _dealFilterScreen = (DealFilterScreen)dealScreenManger.getTabbedScreens()[1];
-		_dealFilterScreen.drawScreen();
+	public Country[] getCountries() {
+		return countries;
 	}
 
+	public void setCountries(Country[] countries) {
+		this.countries = countries;
+		updateDealFilterScreen(0,0);
+	}
+
+	public void setCategories(Category[] categories) {
+		this.categories = categories;
+		updateDealFilterScreen(0,0);
+	}
+	
+	public City[] getCity() {
+		return cities;
+	}
+
+	public void setCity(City[] cities) {
+		this.cities = cities;
+		DealFilterScreen _dealFilterScreen = (DealFilterScreen)dealScreenManger.getTabbedScreens()[1];
+		updateDealFilterScreen(_dealFilterScreen.categoryChoiceField.getSelectedIndex(), _dealFilterScreen.countryChoiceField.getSelectedIndex());
+	}
+
+	public void updateDealFilterScreen(int _category_index, int _country_index){		// draws UI for DealFilterScreen on fetcing categories, countries
+		if(categories != null && countries != null){
+			DealFilterScreen _dealFilterScreen = (DealFilterScreen)dealScreenManger.getTabbedScreens()[1];
+			_dealFilterScreen.drawScreen(_category_index, _country_index);
+		}
+	}
 	public void updateDealScreens(){
 		((SearchResultScreen)dealScreenManger.getTabbedScreens()[0]).updateScreen();
 	}

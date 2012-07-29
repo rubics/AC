@@ -2,6 +2,7 @@ package rubyx.custom_fields;
 
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
+import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Manager;
@@ -42,6 +43,7 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 		add(labelField);
 		objectChoiceField = new ObjectChoiceField();
 		objectChoiceField.setChoices(_objects);
+		objectChoiceField.setSelectedIndex(_startIndex);
 		objectChoiceField.setFont(font_composite_label);
 		add(objectChoiceField);
 	}
@@ -89,6 +91,10 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 	public void setColorScheme(int _color_foreground, int _color_font){
 		color_foreground = _color_foreground;
 		color_font = _color_font;
+	}
+	
+	public void setListener(FieldChangeListener listener){
+		objectChoiceField.setChangeListener(listener);
 	}
 	
 	public int getSelectedIndex(){

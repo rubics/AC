@@ -7,20 +7,24 @@ import net.rim.device.api.ui.component.Dialog;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 import app.controllers.user.DealController;
+import app.views.screens.deals.DealFilterScreen;
 
-public class CategoriesRequest implements HttpRequestListener{
+public class CityRequest implements HttpRequestListener {
 	
 	private Deal deal;
 	private DealController dealController;
+	private DealFilterScreen dealFilterScreen;
 	private static final String method = "GET";
 	private HttpRequestDispatcher dispatcher;
 	
-	public CategoriesRequest(DealController _dealController){
+	public CityRequest(DealController _dealController, DealFilterScreen _dealFilterScreen){
 		dealController = _dealController;
+		dealFilterScreen = _dealFilterScreen;
+		
 	}
 	
-	public void getCategories(){
-		dispatcher = new HttpRequestDispatcher(AirCrew.categories, method, this, "");
+	public void getCity(String _country_code){
+		dispatcher = new HttpRequestDispatcher(AirCrew.cities + _country_code, method, this, "");
 		dispatcher.start();
 	}
 	
@@ -30,22 +34,19 @@ public class CategoriesRequest implements HttpRequestListener{
 		try{
 			JSONObject json = new JSONObject(json_response);
 
-			if(json.has("category")){
+			if(json.has("City")){
 
-				JSONArray categories_arr = json.getJSONArray("category");
+				JSONArray cities_arr = json.getJSONArray("City");
 				
-				Category[] categories = new Category[categories_arr.length()];
+				City[] cities = new City[cities_arr.length()];
 				
-				for(int i=0; i<categories_arr.length(); i++){
-					String cat_id = ((JSONObject)(categories_arr.get(i))).getString("b_cat_id");
-					String cat_name = ((JSONObject)(categories_arr.get(i))).getString("b_cat_name");
-					categories[i] = new Category(cat_id, cat_name);
-					System.out.println(categories[i]);
-					System.out.println();
+				for(int i=0; i<cities_arr.length(); i++){
+					String city_id = ((JSONObject)(cities_arr.get(i))).getString("id");
+					String city_name = ((JSONObject)(cities_arr.get(i))).getString("city");
+					cities[i] = new City(city_id, city_name);
+					System.out.println(">> Cities: " + cities[i]);
 				}
-				
-				dealController.setCategories(categories);
-	
+				dealController.setCity(cities);
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");
 				final String code = response.getString("code");
