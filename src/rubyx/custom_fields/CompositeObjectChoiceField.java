@@ -25,7 +25,7 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 	
 	private int xb = width/2;
 	private static final int y = 2*v_offset + v_offset_correction;
-	private int field_width = xb - 2*h_offset;
+//	private int field_width = xb - 2*h_offset;
 	private int field_height = height - 2*v_offset;
 	
 	private static final Font font_composite_label = Font.getDefault().derive(Font.PLAIN, 20, Ui.UNITS_px);
@@ -48,11 +48,11 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 
 	
 	protected void sublayout(int _width, int _height){
-		layoutChild(getField(0), field_width, field_height);
-		layoutChild(getField(1), field_width, field_height);
+		layoutChild(getField(0), _width, field_height);
+		layoutChild(getField(1), Display.getWidth() - (getField(0).getWidth() + 4*h_offset), field_height);
 		
 		setPositionChild(getField(0), 2*h_offset, (height - getField(0).getHeight())/2);
-		setPositionChild(getField(1),width/2, (height - getField(1).getHeight())/2);
+		setPositionChild(getField(1),2*h_offset + getField(0).getWidth(), (height - getField(1).getHeight())/2);
 		
 		setExtent(width, height);
 	}

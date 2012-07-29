@@ -15,14 +15,14 @@ import app.views.screens.deals.VideoScreen;
 public class DealDetailsScreenManager {
 	
 	public Deal deal;
-	private TabbedScreenManager tabbedScreenManager;	
-	private MainScreen[] tabbedScreens = new MainScreen[4];	
+	private TabbedScreenManager tabbedScreenManager;
+	private MainScreen[] tabbedScreens = new MainScreen[4];
 	private Manager tabbedPaneManager = new TabbedPaneManager(Manager.USE_ALL_WIDTH);
 	private Field emailButton = new TabbedPaneButton("Email");
 	private Field videoButton =	new TabbedPaneButton("Video");
 	private Field locationButton = new TabbedPaneButton("Location");
 	private Field bookmarkButton = new TabbedPaneButton("Bookmark");
-		
+	
 	public DealDetailsScreenManager(Deal _deal) {
 		deal = _deal;
 		tabbedScreens[0] = new EmailScreen(this);
@@ -36,7 +36,6 @@ public class DealDetailsScreenManager {
 		tabbedPaneManager.add(bookmarkButton);
 				
 		tabbedScreenManager = new TabbedScreenManager(tabbedScreens, tabbedPaneManager);
-		
 	}
 	
 	public void pushScreen(){

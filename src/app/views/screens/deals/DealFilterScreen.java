@@ -2,6 +2,7 @@ package app.views.screens.deals;
 
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Manager;
+import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
@@ -45,26 +46,33 @@ public class DealFilterScreen extends MainScreen{
 		homeButton.setRVAlue(10);
 		
 		setTitle(new ScreenBannar("Filter Deals", 40, backButton, homeButton));
-		
-		vrManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
-		
-		vrManager.add(new SpaceField(8));
-		categoryChoiceField = new CompositeObjectChoiceField("Category", categories, 0);
-		categoryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
-		vrManager.add(categoryChoiceField);
-		vrManager.add(new SpaceField(5));
-		countryChoiceField = new CompositeObjectChoiceField("Country", countries, 0);
-		countryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
-		vrManager.add(countryChoiceField);
-		vrManager.add(new SpaceField(5));
-		cityChoiceField = new CompositeObjectChoiceField("City", city, 0);
-		cityChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
-		vrManager.add(cityChoiceField);
-		vrManager.add(new SpaceField(45));
-		filterButton = new TabbedButton("Filter", 7, 480, 42);
-		filterButton.setRVAlue(15);
-		vrManager.add(filterButton);
-		add(vrManager);
+	}
+	
+	public void drawScreen(){
+		UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+			
+			public void run() {
+				vrManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
+
+				vrManager.add(new SpaceField(8));
+				categoryChoiceField = new CompositeObjectChoiceField("Category", dealController.getCategories(), 0);
+				categoryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
+				vrManager.add(categoryChoiceField);
+				vrManager.add(new SpaceField(5));
+				countryChoiceField = new CompositeObjectChoiceField("Country", countries, 0);
+				countryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
+				vrManager.add(countryChoiceField);
+				vrManager.add(new SpaceField(5));
+				cityChoiceField = new CompositeObjectChoiceField("City", city, 0);
+				cityChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
+				vrManager.add(cityChoiceField);
+				vrManager.add(new SpaceField(45));
+				filterButton = new TabbedButton("Filter", 7, 480, 42);
+				filterButton.setRVAlue(15);
+				vrManager.add(filterButton);
+				add(vrManager);
+			}
+		});
 	}
 	
 	public boolean isDirty() {

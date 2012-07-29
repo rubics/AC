@@ -3,12 +3,15 @@ package app.controllers.user;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
-import app.models.Business;
+import net.rim.device.api.ui.container.MainScreen;
+import app.models.CategoriesRequest;
+import app.models.Category;
 import app.models.Deal;
 import app.models.DealDetailsRequest;
 import app.models.DealsRequest;
 import app.views.managers.deals.DealDetailsScreenManager;
 import app.views.managers.deals.DealScreenManager;
+import app.views.screens.deals.DealFilterScreen;
 import app.views.screens.deals.SearchResultScreen;
 
 public class DealController {
@@ -16,6 +19,7 @@ public class DealController {
 	private DashboardController dashboardController;
 	private DealController dealController;
 	private DealScreenManager dealScreenManger;
+	private Category[] categories;
 	private Deal[] deals;
 	
 	public DealController(DashboardController _dashboardController){
@@ -25,6 +29,9 @@ public class DealController {
 		
 		DealsRequest dealRequest = new DealsRequest(this);
 		dealRequest.getAllDeals();
+		
+		CategoriesRequest categoriesRequest = new CategoriesRequest(this);
+		categoriesRequest.getCategories();
 	}
 	
 	public void pushScreen(){
@@ -40,6 +47,16 @@ public class DealController {
 		return deals;
 	}
 	
+	public Category[] getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Category[] categories) {
+		this.categories = categories;
+		DealFilterScreen _dealFilterScreen = (DealFilterScreen)dealScreenManger.getTabbedScreens()[1];
+		_dealFilterScreen.drawScreen();
+	}
+
 	public void updateDealScreens(){
 		((SearchResultScreen)dealScreenManger.getTabbedScreens()[0]).updateScreen();
 	}
