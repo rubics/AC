@@ -74,6 +74,7 @@ public class DealFilterScreen extends MainScreen{
 				vrManager.add(new SpaceField(45));
 				filterButton = new TabbedButton("Filter", 7, 480, 42);
 				filterButton.setRVAlue(15);
+				filterButton.setChangeListener(filterButtonListener);
 				vrManager.add(filterButton);
 				add(vrManager);
 				vrManager.invalidate();
@@ -87,7 +88,6 @@ public class DealFilterScreen extends MainScreen{
 		public void fieldChanged(Field field, int context) {
 			try{
 				if(ObjectChoiceField.class.isInstance(field)){
-					System.out.println("--> ChoiceField Event: " + context);
 					ObjectChoiceField choiceField = (ObjectChoiceField)(field);
 					Country country = dealController.getCountries()[choiceField.getSelectedIndex()];
 			
@@ -97,6 +97,15 @@ public class DealFilterScreen extends MainScreen{
 			} catch(Exception e){
 				System.out.println();
 			}
+		}
+	};
+	
+	private FieldChangeListener filterButtonListener = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			dealController.filterDeals(categoryChoiceField.getSelectedIndex(),
+					countryChoiceField.getSelectedIndex(),
+					cityChoiceField.getSelectedIndex());
 		}
 	};
 	public boolean isDirty() {

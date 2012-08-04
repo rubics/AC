@@ -43,6 +43,13 @@ public class DealController {
 		countryRequest.getCountries();
 	}
 	
+	public void filterDeals(int _category_index, int _country_index, int _city_index){
+		DealsRequest dealRequest = new DealsRequest(this);
+		dealRequest.getFilteredDeals(categories[_category_index].getCategory_id(),
+				countries[_country_index].getCountry_code(),
+				cities[_city_index].getCity_id());
+	}
+	
 	public void pushScreen(){
 		dealScreenManger.pushScreen();
 	}
@@ -92,6 +99,7 @@ public class DealController {
 	}
 	public void updateDealScreens(){
 		((SearchResultScreen)dealScreenManger.getTabbedScreens()[0]).updateScreen();
+		dealScreenManger.getTabbedScreenManager().switchScreen(0);
 	}
 	
 	public FieldChangeListener dealDetails = new FieldChangeListener() {

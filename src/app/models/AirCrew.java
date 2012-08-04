@@ -12,4 +12,5 @@ public class AirCrew {
 	public static final String categories = url + "/index.php/iphone_4aircrew/i_category";
 	public static final String countries = url + "/index.php/iphone_4aircrew/i_country";
 	public static final String cities = url + "/index.php/iphone_4aircrew/i_city/";
+	public static final String filter_deals = url + "/index.php/iphone_4aircrew/deals_filter/";
 }

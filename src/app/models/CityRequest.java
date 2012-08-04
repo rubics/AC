@@ -30,7 +30,6 @@ public class CityRequest implements HttpRequestListener {
 	
 	public void httpsuccess(byte[] array, String str) {
 		final String json_response = new String(array);
-		
 		try{
 			JSONObject json = new JSONObject(json_response);
 
@@ -44,7 +43,6 @@ public class CityRequest implements HttpRequestListener {
 					String city_id = ((JSONObject)(cities_arr.get(i))).getString("id");
 					String city_name = ((JSONObject)(cities_arr.get(i))).getString("city");
 					cities[i] = new City(city_id, city_name);
-					System.out.println(">> Cities: " + cities[i]);
 				}
 				dealController.setCity(cities);
 			} else if (json.has("error") & !json.isNull("error")){

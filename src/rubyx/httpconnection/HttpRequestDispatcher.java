@@ -27,7 +27,7 @@ public class HttpRequestDispatcher extends Thread{
 	private byte[] post;
 	
 	public HttpRequestDispatcher (String url, String method, HttpRequestListener _requestListener,String postString){
-		this.url = url;
+		this.url = replaceAll(url, " ", "%20");
 		this.method = method;
 		this.requestListener = _requestListener;
 		this.post = postString.getBytes();
@@ -95,6 +95,22 @@ public class HttpRequestDispatcher extends Thread{
         }
 
         return null;
+    }
+    
+    public static String replaceAll(String source, String pattern,String replacement) 
+    {
+        if(source == null) return "";
+        StringBuffer    buffer = new StringBuffer();
+        int             idx = -1;
+        int             patIdx = 0;
+        while ((idx = source.indexOf(pattern, patIdx)) != -1) 
+        {
+            buffer.append(source.substring(patIdx, idx));
+            buffer.append(replacement);
+            patIdx = idx + pattern.length();
+        }
+        buffer.append(source.substring(patIdx));
+        return buffer.toString();
     }
 
 }

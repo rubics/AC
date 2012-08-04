@@ -98,7 +98,7 @@ public class Deal {
 	}
 
 	public String toString(){
-		return "\n" + id + "\n" + name + "\n" + description + "\n" + category_id + "\n" + category_name + "\n" + logo + "\n" + city + "\n" + x_code + "\n" + y_code + "\n" + phone + "\n" + email;
+		return "------->  DEALS  <--------\n" + id + "\n" + name + "\n" + description + "\n" + category_id + "\n" + category_name + "\n" + logo + "\n" + city + "\n" + x_code + "\n" + y_code + "\n" + phone + "\n" + email;
 	}
 	
 	public void setDealDetails(DealDetails _dealDetails){

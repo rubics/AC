@@ -1,6 +1,7 @@
 package app.models;
 
 import helpers.org.json.me.JSONArray;
+import helpers.org.json.me.JSONException;
 import helpers.org.json.me.JSONObject;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.Dialog;
@@ -23,9 +24,13 @@ public class DealsRequest implements HttpRequestListener {
 		dispatcher.start();
 	}
 	
+	public void getFilteredDeals(String _category_id, String _country_code, String _city_id){
+		dispatcher = new HttpRequestDispatcher(AirCrew.filter_deals + _category_id + "/" + _country_code + "/" + _city_id , method, this, "");
+		dispatcher.start();
+	}
+	
 	public void httpsuccess(byte[] array, String str) {
 		final String json_response = new String(array);
-		
 		try{
 			JSONObject json = new JSONObject(json_response);
 
@@ -39,7 +44,12 @@ public class DealsRequest implements HttpRequestListener {
 					String name = deal.getString("b_name");
 					String description = deal.getString("b_desc");
 					String category_id = deal.getString("b_cat");
-					String category_name = deal.getString("b_cat_name");
+					String category_name;
+					try{
+						category_name = deal.getString("b_cat_name");
+					}catch(Exception e){
+						category_name = "";
+					}
 					String logo = deal.getString("logo");
 					String city = deal.getString("city");
 					String x_code = deal.getString("x_code");

@@ -70,6 +70,7 @@ public class SearchResultScreen extends MainScreen{
 				VerticalFieldManager listManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 				for(int i=0; i < dealController.getDeals().length; i++){
 					Deal deal = dealController.getDeals()[i];
+					System.out.println(deal.toString());
 					Field listItem = new ListingField(AirCrew.image_medium + deal.getLogo(), deal.getName(), deal.getCategory_name(),8);
 					listItem.setChangeListener(dealController.dealDetails);
 					listManager.add(listItem);

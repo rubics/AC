@@ -56,14 +56,18 @@ public class TabbedScreenManager {
 		app.popScreen(tabbedScreens[currentScreenIndex]);
 	}
 	
-	private void switchScreen(int index){
+	public void switchScreen(final int index){
 		if(currentScreenIndex != index){
-			tabbedScreens[currentScreenIndex].setStatus(null);
-			popScreen();
-			currentScreenIndex = index;
-			tabbedScreens[currentScreenIndex].setStatus(tabbedFieldManager);
-			tabbedFieldManager.getField(currentScreenIndex).setFocus();
-			pushScreen();
+			UiApplication.getUiApplication().invokeAndWait(new Runnable(){
+				public void run() {
+					tabbedScreens[currentScreenIndex].setStatus(null);
+					popScreen();
+					currentScreenIndex = index;
+					tabbedScreens[currentScreenIndex].setStatus(tabbedFieldManager);
+					tabbedFieldManager.getField(currentScreenIndex).setFocus();
+					pushScreen();
+				}
+			});
 		}
 	}
 }

@@ -44,4 +44,8 @@ public class DealScreenManager {
 	public MainScreen[] getTabbedScreens() {
 		return tabbedScreens;
 	}
+	
+	public TabbedScreenManager getTabbedScreenManager(){
+		return tabbedScreenManager;
+	}
 }
