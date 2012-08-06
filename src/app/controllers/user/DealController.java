@@ -31,8 +31,8 @@ public class DealController {
 		dealController = this;
 		dealScreenManger = new DealScreenManager(this);
 		
-		DealsRequest dealRequest = new DealsRequest(this);
-		dealRequest.getAllDeals();
+//		DealsRequest dealRequest = new DealsRequest(this);
+//		dealRequest.getAllDeals();
 		
 		// populate deal categories
 		CategoriesRequest categoriesRequest = new CategoriesRequest(this);
@@ -78,6 +78,8 @@ public class DealController {
 
 	public void setCategories(Category[] categories) {
 		this.categories = categories;
+		((SearchResultScreen)dealScreenManger.getTabbedScreens()[0]).drawCategories();
+		dealScreenManger.getTabbedScreenManager().switchScreen(0);
 		updateDealFilterScreen(0,0);
 	}
 	
@@ -102,30 +104,40 @@ public class DealController {
 		dealScreenManger.getTabbedScreenManager().switchScreen(0);
 	}
 	
-	public FieldChangeListener dealDetails = new FieldChangeListener() {
+	public FieldChangeListener dealDetailsListener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
 			final int index = field.getIndex();
 			if(deals[index].getDealDetails() == null){
-				DealDetailsRequest dealDetailsRequest = new DealDetailsRequest(dealController){
+				DealDetailsRequest dealDetailsRequest = new DealDetailsRequest(){
 					public void afterSuccess(){
+						deals[index].setDealDetails(dealDetails);
 						UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 							public void run() {
-								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
+								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index].getDealDetails());
 								aboutDeals.pushScreen();
 							}
 						});
 					}
 				};
-				dealDetailsRequest.getDetials(deals[index]);
+				dealDetailsRequest.getDetials(deals[index].getId());
 			} else {
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 					public void run() {
-						DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
+						DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index].getDealDetails());
 						aboutDeals.pushScreen();
 					}
 				});
 			}
+		}
+	};
+	
+	public FieldChangeListener categorizedDeals = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			final int index = field.getIndex();
+			DealsRequest dealRequest = new DealsRequest(dealController);
+			dealRequest.getDealbyCategory(categories[index]);
 		}
 	};
 }

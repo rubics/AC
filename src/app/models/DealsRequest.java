@@ -1,12 +1,12 @@
 package app.models;
 
 import helpers.org.json.me.JSONArray;
-import helpers.org.json.me.JSONException;
 import helpers.org.json.me.JSONObject;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.Dialog;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
+import app.AirCrewApp;
 import app.controllers.user.DealController;
 
 public class DealsRequest implements HttpRequestListener {
@@ -28,6 +28,18 @@ public class DealsRequest implements HttpRequestListener {
 		dispatcher = new HttpRequestDispatcher(AirCrew.filter_deals + _category_id + "/" + _country_code + "/" + _city_id , method, this, "");
 		dispatcher.start();
 	}
+	
+	public void getDealbyCategory(Category _category){
+		dispatcher = new HttpRequestDispatcher(AirCrew.deal_by_category + _category.getCategory_id(), method, this, "");
+		dispatcher.start();
+	}
+	
+	public void getBookmarks(){
+		dispatcher = new HttpRequestDispatcher(AirCrew.bookmarks + AirCrewApp.app.getUserController().getUser().getUserId(), method, this, "");
+		dispatcher.start();
+	}
+	
+	
 	
 	public void httpsuccess(byte[] array, String str) {
 		final String json_response = new String(array);

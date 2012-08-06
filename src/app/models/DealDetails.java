@@ -6,7 +6,10 @@ import net.rim.device.api.util.StringUtilities;
 
 public class DealDetails {
 
+	private String name;
 	private String description;
+	private String category;
+	private String logo;
 	private String website;
 	private String address;
 	private String video;
@@ -14,12 +17,18 @@ public class DealDetails {
 	private Vector images;
 	
 	
-	public DealDetails(String _description,
+	public DealDetails(String _name,
+			String _description,
+			String _category,
+			String _logo,
 			String _website,
 			String  _address,
 			String _video,
 			String _deal){
+		name = _name;
 		description = _description;
+		category = _category;
+		logo = _logo;
 		website = _website;
 		address = _address;
 		video = _video;
@@ -27,6 +36,18 @@ public class DealDetails {
 		images = new Vector(3,3);
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
 	public String addImages(String _image_id, String _image_name, String _icon_name){
 		Photos photo = new Photos(_image_id, _image_name, _icon_name);
 		images.addElement(photo);
@@ -58,7 +79,7 @@ public class DealDetails {
 	}
 
 	public String toString(){
-		return ("--------  DealDetails  ----------\n" + description +"\n" + website + "\n" + deal);
+		return ("--------  DealDetails  ----------\n" + name + "\n" + description +"\n" + category + "\n" + deal);
 	}
 }
 

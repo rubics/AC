@@ -13,12 +13,12 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.controllers.user.BookmarkController;
 import app.controllers.user.DashboardController;
 import app.models.Images;
 import app.views.fields.DashboardItem;
 import app.views.fields.ScreenTitle;
 import app.views.managers.chat.ChatScreenManager;
-import app.views.managers.deals.DealScreenManager;
 import app.views.managers.profile.ProfileInfoScreenManager;
 import app.views.screens.favorites.FavoritesScreen;
 
@@ -98,15 +98,14 @@ public class DashboardScreen extends MainScreen{
 			
 			switch (index){
 			case 1:
-				dashboardController.getDealController().pushScreen();
-				
+				dashboardController.getDealController().pushScreen();	
 				break;
 			case 2:
 				ChatScreenManager chatScreenManager = new ChatScreenManager();
 				chatScreenManager.pushScreen();
 				break;
 			case 3:
-				app.pushScreen(new BookmarksScreen());
+				dashboardController.getBookmarkController().pushScreen();
 				break;
 			case 4:
 				app.pushScreen(new FavoritesScreen());

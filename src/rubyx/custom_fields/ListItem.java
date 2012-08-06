@@ -28,14 +28,16 @@ public class ListItem extends Field{
 	static Bitmap focus_background = Bitmap.getBitmapResource("images/listItem_background.png");
 	static Font name_font;
 	static Font category_font;
-	public Deal deal;
 	WebImageField profilePicture;
 	boolean focusable;
+	private String title;
+	private String description;
 	
-	public ListItem( Deal _deal, boolean _focusable){
+	public ListItem( String _title, String _description, String _logo, boolean _focusable){
 		super();
-		deal = _deal;
-		profilePicture = new WebImageField(AirCrew.image_medium + deal.getLogo(), bitmap_dimension, bitmap_dimension);
+		title = _title;
+		description = _description;
+		profilePicture = new WebImageField(AirCrew.image_medium + _logo, bitmap_dimension, bitmap_dimension);
 //		ListingField(AirCrew.image_medium + deal.getLogo(), deal.getName(), deal.getCategory_name(),8);
 //		Images.profile_pics[3].scaleInto(0, 0, Images.profile_pics[3].getWidth(), Images.profile_pics[3].getHeight(), profilePicture, 0, 0, profilePicture.getWidth(), profilePicture.getHeight(), Bitmap.FILTER_BILINEAR);
 		focusable = _focusable;
@@ -50,8 +52,8 @@ public class ListItem extends Field{
 		}
 		g.drawBitmap(bitmap_offset_h, bitmap_offset_v, bitmap_dimension, bitmap_dimension, profilePicture.returnBitmap(), 0, 0);
 		g.setColor(Color.WHITE);
-		g.drawText(deal.getName(), name_offset_h , bitmap_offset_v);
-		g.drawText(deal.getCategory_name(), name_offset_h, description_offset_v);
+		g.drawText(title, name_offset_h , bitmap_offset_v);
+		g.drawText(description, name_offset_h, description_offset_v);
 		g.setColor(0x555555);
 		if(focusable)
 			g.fillRect(5, 70, width-10, 2);

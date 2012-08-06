@@ -27,9 +27,11 @@ public class EmailScreen extends MainScreen{
 		manager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		add(manager);
 		manager.add(new NullField());
-		manager.add(new ListItem(dealsInfo.deal, false));
+		System.out.println(dealsInfo.dealDetails.getName());
+		System.out.println(dealsInfo.dealDetails.getDescription());
+		manager.add(new ListItem(dealsInfo.dealDetails.getName(), dealsInfo.dealDetails.getDescription(), dealsInfo.dealDetails.getLogo(), false));
 //		ListingField(AirCrew.image_medium + deal.getLogo(), deal.getName(), deal.getCategory_name(),8);
-		manager.add(new CompositeDealLabel(dealsInfo.deal));
+		manager.add(new CompositeDealLabel(dealsInfo.dealDetails));
 	}
 	
 	public boolean isDirty() {

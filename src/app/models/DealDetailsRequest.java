@@ -10,18 +10,17 @@ import rubyx.httpconnection.HttpRequestListener;
 
 public abstract class DealDetailsRequest implements HttpRequestListener{
 
-	private Deal deal;
-	private DealController dealController;
+	private String deal_id;
+	protected DealDetails dealDetails = null;
 	private static final String method = "GET";
 	private HttpRequestDispatcher dispatcher;
 	
-	public DealDetailsRequest(DealController _dealController){
-		dealController = _dealController;
+	public DealDetailsRequest(){
 	}
 	
-	public void getDetials(Deal _deal){
-		deal = _deal;
-		dispatcher = new HttpRequestDispatcher(AirCrew.deal_detials + "/".concat(deal.getId()) , method, this, "");
+	public void getDetials(String _deal_id){
+		deal_id = _deal_id;
+		dispatcher = new HttpRequestDispatcher(AirCrew.deal_detials + "/".concat(deal_id) , method, this, "");
 		dispatcher.start();
 	}
 	public void httpfailure(String errmsg) {
@@ -37,24 +36,26 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 				JSONObject response = json.getJSONObject("business");
 				JSONObject details = response.getJSONObject("0");
 				
+				String name = details.getString("b_name");
 				String description = details.getString("b_desc");
+				String category = details.getString("b_cat_name");
+				String logo = details.getString("logo");
 				String website = details.getString("web");
 				String address = details.getString("address");
 				String video = details.getString("video");
 				String _deal = details.getString("deal");
 				
-				DealDetails _dealDetails = new DealDetails(description, website, address, video, _deal);
-				deal.setDealDetails(_dealDetails);
-				
+				dealDetails = new DealDetails(name, description, category, logo, website, address, video, _deal);
+								
 				JSONArray images = response.getJSONArray("more_images");
 				for( int i=0; i<images.length(); i++){
 					String _image_id = images.getJSONObject(i).getString("img_id");
 					String _image_name = images.getJSONObject(i).getString("image_name");
 					String _icon_name = images.getJSONObject(i).getString("icon_name");
-					System.out.println(_dealDetails.addImages(_image_id, _image_name, _icon_name));
+					System.out.println(dealDetails.addImages(_image_id, _image_name, _icon_name));
 				}
 				
-				System.out.println(_dealDetails);
+				System.out.println(dealDetails);
 				
 				afterSuccess();
 				

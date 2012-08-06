@@ -7,14 +7,15 @@ import rubyx.tabbedUI.TabbedPaneButton;
 import rubyx.tabbedUI.TabbedPaneManager;
 import rubyx.tabbedUI.TabbedScreenManager;
 import app.models.Deal;
-import app.views.screens.deals.BookmarkScreen;
+import app.models.DealDetails;
+import app.views.screens.deals.DealBookmarkScreen;
 import app.views.screens.deals.EmailScreen;
 import app.views.screens.deals.LocationScreen;
 import app.views.screens.deals.VideoScreen;
 
 public class DealDetailsScreenManager {
 	
-	public Deal deal;
+	public DealDetails dealDetails;
 	private TabbedScreenManager tabbedScreenManager;
 	private MainScreen[] tabbedScreens = new MainScreen[4];
 	private Manager tabbedPaneManager = new TabbedPaneManager(Manager.USE_ALL_WIDTH);
@@ -23,12 +24,12 @@ public class DealDetailsScreenManager {
 	private Field locationButton = new TabbedPaneButton("Location");
 	private Field bookmarkButton = new TabbedPaneButton("Bookmark");
 	
-	public DealDetailsScreenManager(Deal _deal) {
-		deal = _deal;
+	public DealDetailsScreenManager(DealDetails _dealDetails) {
+		dealDetails = _dealDetails;
 		tabbedScreens[0] = new EmailScreen(this);
 		tabbedScreens[1] = new VideoScreen(this);
 		tabbedScreens[2] = new LocationScreen(this);
-		tabbedScreens[3] = new BookmarkScreen(this);
+		tabbedScreens[3] = new DealBookmarkScreen(this);
 		
 		tabbedPaneManager.add(emailButton);
 		tabbedPaneManager.add(videoButton);

@@ -29,12 +29,15 @@ public class WebImageField extends Field implements HttpRequestListener{
 			image = new Bitmap(width,height);
 			((Bitmap)_src).scaleInto(image, Bitmap.FILTER_BILINEAR);
 			url = "";
-		} else {
+		} else if (String.class.isInstance(_src)){
 			url = (String)_src;
 			dispatcher = new HttpRequestDispatcher(url, method, this, "");
 			dispatcher.start();
 			image = new Bitmap(width,height);
 			default_img.scaleInto(image, Bitmap.FILTER_BILINEAR);
+		} else {
+			image = default_img;
+			url = "";
 		}
 	}
 

@@ -9,6 +9,7 @@ public class DashboardController {
 	private AirCrewApp app = (AirCrewApp)UiApplication.getUiApplication();
 	private DashboardScreen dashboardScreen;
 	private DealController dealController;
+	private BookmarkController bookmarkController;
 	
 	public DashboardController(){		
 		dashboardScreen = new DashboardScreen(this);
@@ -22,5 +23,12 @@ public class DashboardController {
 		if(dealController == null)
 			dealController = new DealController(this);
 		return dealController;
+	}
+	
+	public BookmarkController getBookmarkController(){
+		if (bookmarkController == null){
+			bookmarkController = new BookmarkController(this);
+		}
+		return bookmarkController;
 	}
 }

@@ -1,6 +1,5 @@
 package app.views.fields.deals;
 
-import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
@@ -11,8 +10,7 @@ import net.rim.device.api.ui.component.ButtonField;
 import rubyx.custom_fields.CustomTextArea;
 import rubyx.custom_fields.WebImageField;
 import app.models.AirCrew;
-import app.models.Deal;
-import app.models.Images;
+import app.models.DealDetails;
 
 public class CompositeDealLabel extends Manager {
 	private WebImageField image;
@@ -23,11 +21,11 @@ public class CompositeDealLabel extends Manager {
 	
 	private static final Font font = Font.getDefault().derive(Font.PLAIN, 6, Ui.UNITS_pt);
 		
-	public CompositeDealLabel(Deal _deal){
+	public CompositeDealLabel(DealDetails _dealDetails){
 		super(Manager.VERTICAL_SCROLL);
-		image = new WebImageField(AirCrew.image_medium + _deal.getLogo(),140,140); 
+		image = new WebImageField(AirCrew.image_medium + _dealDetails.getLogo(),140,140); 
 //		Images.profile_pics[3].scaleInto(image, Bitmap.FILTER_BILINEAR, Bitmap.SCALE_TO_FIT);
-		descriptionField = new CustomTextArea(_deal.getDealDetails().getDescription(), descriptionFieldWidth - 10, font);
+		descriptionField = new CustomTextArea(_dealDetails.getDescription(), descriptionFieldWidth - 10, font);
 		descriptionField.color = Color.WHITE;
 		add(descriptionField);
 		buttonField = new ButtonField("More Details");

@@ -29,8 +29,7 @@ public class AirCrewApp extends UiApplication {
 	}
 	
 	public void pushDashboardScreen(){  // to be called in UIEvent thread with invokeLater()
-		UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-			
+		UiApplication.getUiApplication().invokeAndWait(new Runnable() {			
 			public void run() {
 				dashboardController = new DashboardController();
 				dashboardController.pushScreen();
