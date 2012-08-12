@@ -111,8 +111,7 @@ public class DashboardScreen extends MainScreen{
 				app.pushScreen(new FavoritesScreen());
 				break;
 			case 5:
-				ProfileInfoScreenManager profileInfo = new ProfileInfoScreenManager();
-				profileInfo.pushScreen();
+				dashboardController.getProfileController().pushScreen();
 				break;			
 			case 7:
 				app.pushScreen(new ToolboxScreen());

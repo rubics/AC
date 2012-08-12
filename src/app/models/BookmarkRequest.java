@@ -21,7 +21,8 @@ public class BookmarkRequest implements HttpRequestListener {
 	}
 	
 	public void getBookmarks(){
-		dispatcher = new HttpRequestDispatcher(AirCrew.bookmarks + "547", method, this, "");
+		AirCrewApp app = (AirCrewApp)(UiApplication.getUiApplication());
+		dispatcher = new HttpRequestDispatcher(AirCrew.bookmarks + app.getUserController().getUser().getUserId(),method, this, "");
 		dispatcher.start();
 	}
 	

@@ -15,4 +15,6 @@ public class AirCrew {
 	public static final String filter_deals = url + "/index.php/iphone_4aircrew/deals_filter/";
 	public static final String deal_by_category = url + "/index.php/iphone_4aircrew/deals_by_cat/";
 	public static final String bookmarks = url + "/index.php/iphone_4aircrew/bookmark/";
+	public static final String gallery = url + "/index.php/iphone_4aircrew/get_gallery/";
+	public static final String user_images = url + "/assets/uploads/app/user_images/";
 }

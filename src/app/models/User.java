@@ -2,12 +2,12 @@ package app.models;
 
 public class User {
 	private String user_name;
-	private String user_id;
+	private String user_id = "547";
 	private String session_id;
 
 	public User(String _user_name, String _user_id, String _session_id){
 		user_name = _user_name;
-		user_id = _user_id;
+//		user_id = _user_id;
 		session_id = _session_id; 
 	}
 

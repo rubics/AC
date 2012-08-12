@@ -40,6 +40,8 @@ public class Images {
 		Bitmap.getBitmapResource("images/profile_4.png")
 	};
 	
+	public static final Bitmap aircrew_small = Bitmap.getBitmapResource("images/aircrew_small.png");
+	
 	public static Bitmap resize(Bitmap _image, int available_width, int available_height){
 		
 		float aspect_ratio = (float)(_image.getWidth())/(float)(_image.getHeight());

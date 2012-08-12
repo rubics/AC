@@ -10,6 +10,7 @@ public class DashboardController {
 	private DashboardScreen dashboardScreen;
 	private DealController dealController;
 	private BookmarkController bookmarkController;
+	private ProfileController profileController;
 	
 	public DashboardController(){		
 		dashboardScreen = new DashboardScreen(this);
@@ -30,5 +31,12 @@ public class DashboardController {
 			bookmarkController = new BookmarkController(this);
 		}
 		return bookmarkController;
+	}
+	
+	public ProfileController getProfileController(){
+		if (profileController == null){
+			profileController = new ProfileController();
+		}
+		return profileController;
 	}
 }
