@@ -37,11 +37,11 @@ public class CityRequest implements HttpRequestListener {
 
 				JSONArray cities_arr = json.getJSONArray("City");
 				
-				City[] cities = new City[cities_arr.length()];
-				
-				for(int i=0; i<cities_arr.length(); i++){
-					String city_id = ((JSONObject)(cities_arr.get(i))).getString("id");
-					String city_name = ((JSONObject)(cities_arr.get(i))).getString("city");
+				City[] cities = new City[cities_arr.length()+1];
+				cities[0] = new City("0", "All Cities");
+				for(int i=1; i<cities_arr.length()+1; i++){
+					String city_id = ((JSONObject)(cities_arr.get(i-1))).getString("id");
+					String city_name = ((JSONObject)(cities_arr.get(i-1))).getString("city");
 					cities[i] = new City(city_id, city_name);
 				}
 				dealController.setCity(cities);

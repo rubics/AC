@@ -103,20 +103,7 @@ public class GalleryScreen extends MainScreen{
 			UiApplication.getUiApplication().pushScreen(new PreviewPopup(galleryImages[index].getImage()));
 		}
 	};
-	
-//	private void showImage(){
-//		vrManager = null;
-//		vrManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
-//		vrManager.add(new GalleryImageField(0, images[0]));
-//		
-//		Field a = new TabbedButton("Set as Default", 6);
-//		Field b = new TabbedButton("Delete", 6);
-//		Manager m = new TabbedButtonManager(Display.getWidth(), 40);
-//		m.add(a);
-//		m.add(b);
-//		vrManager.add(m);
-//		add(vrManager);
-//	}
+
 	public boolean isDirty() {
 	    return false;
 	}

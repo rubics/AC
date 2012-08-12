@@ -34,11 +34,11 @@ public class CategoriesRequest implements HttpRequestListener{
 
 				JSONArray categories_arr = json.getJSONArray("category");
 				
-				Category[] categories = new Category[categories_arr.length()];
-				
-				for(int i=0; i<categories_arr.length(); i++){
-					String cat_id = ((JSONObject)(categories_arr.get(i))).getString("b_cat_id");
-					String cat_name = ((JSONObject)(categories_arr.get(i))).getString("b_cat_name");
+				Category[] categories = new Category[categories_arr.length()+1];
+				categories[0] = new Category("0", "All Categories");
+				for(int i=1; i<categories_arr.length()+1; i++){
+					String cat_id = ((JSONObject)(categories_arr.get(i-1))).getString("b_cat_id");
+					String cat_name = ((JSONObject)(categories_arr.get(i-1))).getString("b_cat_name");
 					categories[i] = new Category(cat_id, cat_name);
 					System.out.println(categories[i]);
 					System.out.println();
