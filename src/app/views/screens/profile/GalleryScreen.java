@@ -10,7 +10,7 @@ import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.ScreenBannar;
-import rubyx.custom_fields.SpaceField;
+import rubyx.custom_fields.updatable_imagefield.UpdatableImageField;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
@@ -29,14 +29,7 @@ public class GalleryScreen extends MainScreen{
 	private VerticalFieldManager vrManager;
 	private GridViewController gridImageController;
 	private Field addButton;
-	
-	private FieldChangeListener gridFieldListener = new FieldChangeListener() {
-		
-		public void fieldChanged(Field field, int context) {
-			int index = field.getIndex();
-			UiApplication.getUiApplication().pushScreen(new PreviewPopup(images[index]));
-		}
-	};
+	private GalleryImage[] galleryImages;
 	
 //	public static Bitmap[] images;
 	
@@ -70,6 +63,7 @@ public class GalleryScreen extends MainScreen{
 	}
 	
 	public void showGallery(final GalleryImage[] galleryImages){
+		this.galleryImages = galleryImages;
 		UiApplication.getUiApplication().invokeLater(new Runnable() {
 			public void run() {
 				current_screen.delete(vrManager);
@@ -90,20 +84,25 @@ public class GalleryScreen extends MainScreen{
 				gridImageController = new GridViewController(columnStyles,columnWidths,0, Manager.FIELD_HCENTER|Manager.USE_ALL_WIDTH);
 				
 				for (int i = 0;i < galleryImages.length; i++){
-//					Field field = new GridImageField(images[i]);
-					Field field = galleryImages[i].getWebImageField();
+					GridImageField field = new GridImageField(galleryImages[i].getImage());
+					galleryImages[i].addUpdatableFields(field);
 					field.setChangeListener(gridFieldListener);
 					gridImageController.add(field);
 				}
 				
 				vrManager.add(gridImageController);
-//				vrManager.add(new SpaceField(10));
-//				addButton = new TabbedButton("Add", 8, 400, 40);
-//				vrManager.add(addButton);
 				add(vrManager);
 			}
 		});
 	}
+	
+	private FieldChangeListener gridFieldListener = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			int index = field.getIndex();
+			UiApplication.getUiApplication().pushScreen(new PreviewPopup(galleryImages[index].getImage()));
+		}
+	};
 	
 //	private void showImage(){
 //		vrManager = null;

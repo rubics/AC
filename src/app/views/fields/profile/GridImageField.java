@@ -1,12 +1,13 @@
 package app.views.fields.profile;
 
+import rubyx.custom_fields.updatable_imagefield.UpdatableImageField;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
 
-public class GridImageField extends Field{
+public class GridImageField extends Field implements UpdatableImageField{
 	
 	private static final int width = 95;
 	private static final int height = 95;
@@ -16,14 +17,18 @@ public class GridImageField extends Field{
 	public static final int t_width = width + 2*offset;
 	public static final int t_height = height + 2*offset;
 	
-	final Bitmap image; 
+	private Bitmap image; 
 	
-	public GridImageField(Bitmap _image){
-		
-		super();
-		
+	public GridImageField(Bitmap _image){	
+		super();		
 		image = new Bitmap(width, height);		
 		_image.scaleInto(0, 0, _image.getWidth(),_image.getHeight(), image, 0, 0, width, height, Bitmap.FILTER_BILINEAR);		
+	}
+	
+	public void updateImage(Bitmap bitmap) {
+		image = new Bitmap(width, height);		
+		bitmap.scaleInto(image, Bitmap.FILTER_BILINEAR);
+		invalidate();
 	}
 	
 	protected void layout(int _width,int _height){
@@ -67,5 +72,4 @@ public class GridImageField extends Field{
 	protected void fieldChangeNotify(int context) {
 		super.fieldChangeNotify(context);
 	}
-	
 }

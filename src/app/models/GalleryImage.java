@@ -1,15 +1,17 @@
 package app.models;
 
+import net.rim.device.api.system.Bitmap;
 import rubyx.custom_fields.WebImageField;
+import rubyx.custom_fields.updatable_imagefield.UpdatableImageModel;
 
-public class GalleryImage {
+public class GalleryImage extends UpdatableImageModel{
 	
 	private String id;
 	private String image_name;
 	private String def;
 	private String order;
 	private String user_id;
-	private WebImageField imageField;
+	private Bitmap image = default_image;
 	
 	public GalleryImage(String id, String imageName, String defaultFlag,
 			String order, String userId) {
@@ -19,7 +21,14 @@ public class GalleryImage {
 		def = defaultFlag;
 		this.order = order;
 		user_id = userId;
-		imageField = new WebImageField(AirCrew.user_images + image_name, 95, 95);
+		ImageRequest image_request = new ImageRequest() {
+			public void onSuccess(final Bitmap _bitmap) {
+				image = _bitmap;
+				invokeUpdate(image);
+			}
+		};
+		System.out.println(">> Gallery Images: " + AirCrew.user_images + image_name);
+		image_request.getImage(AirCrew.user_images + image_name);
 	}
 
 	public String getId() {
@@ -42,7 +51,8 @@ public class GalleryImage {
 		return user_id;
 	}
 	
-	public WebImageField getWebImageField(){
-		return imageField;
+	public Bitmap getImage(){
+		return image;
 	}
+
 }

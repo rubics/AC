@@ -8,7 +8,7 @@ public class User {
 	public User(String _user_name, String _user_id, String _session_id){
 		user_name = _user_name;
 //		user_id = _user_id;
-		session_id = _session_id; 
+		session_id = _session_id;
 	}
 
 	public String getUserName(){

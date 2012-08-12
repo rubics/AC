@@ -6,28 +6,27 @@ import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 import app.controllers.user.DealController;
 
-public class ImageRequest implements HttpRequestListener{
+public abstract class ImageRequest implements HttpRequestListener{
 
-	private Deal deal;
-	private DealController dealController;
 	private static final String method = "GET";
 	private HttpRequestDispatcher dispatcher;
 	
-	public ImageRequest(Deal _deal){
-		deal = _deal;
+	public ImageRequest(){
 	}
 	
-	public void getImage(){
-		dispatcher = new HttpRequestDispatcher(AirCrew.image_medium + deal.getLogo(), method, this, "");
+	public void getImage(String url){
+		dispatcher = new HttpRequestDispatcher(url, method, this, "");
 		dispatcher.start();
 	}
 
 	public void httpsuccess(byte[] array, String str) {
-		if(str.equalsIgnoreCase("image/jpeg")){
+		if(str.equalsIgnoreCase("image/jpeg") || str.equalsIgnoreCase("image/png") || str.equalsIgnoreCase("image/gif")){
 			 EncodedImage encodedImage = EncodedImage.createEncodedImage(array, 0, array.length);
-			 deal.setImage(encodedImage.getBitmap());
+			 onSuccess(encodedImage.getBitmap());
 		}
-	}//image/jpeg, text/html
+	}
 	
 	public void httpfailure(String errmsg) {}
+	
+	public abstract void onSuccess(Bitmap bitmap);
 }

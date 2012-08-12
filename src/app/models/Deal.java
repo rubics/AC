@@ -40,12 +40,6 @@ public class Deal {
 		y_code = _y_code;
 		phone = _phone;
 		email = _email;
-//		downloadImage();
-	}
-	
-	public void downloadImage(){
-		ImageRequest imageRequest = new ImageRequest(this);
-		imageRequest.getImage();
 	}
 	
 	public void setImage(Bitmap _image){
