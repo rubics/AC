@@ -62,12 +62,16 @@ public class WebImageField extends Field implements HttpRequestListener{
 	}
 	private void updateImage(Bitmap _bitmap){
 		image = new Bitmap(width,height);
+		System.out.println("Width: " + image.getWidth() + "\tHeight: " + image.getHeight());
 		_bitmap.scaleInto(image, Bitmap.FILTER_BILINEAR);
 		UiApplication.getUiApplication().getActiveScreen().invalidate();
 	}
 	
 	public void httpsuccess(byte[] array, String str) {
-		if(str.equalsIgnoreCase("image/jpeg")){
+		System.out.println(">> Image Response Received: " + str);
+		
+		if(str.equalsIgnoreCase("image/jpeg") || str.equalsIgnoreCase("image/png") || str.equalsIgnoreCase("image/gif")){
+			System.out.println(">> mime type: image");
 			 EncodedImage encodedImage = EncodedImage.createEncodedImage(array, 0, array.length);
 			 updateImage(encodedImage.getBitmap());
 		}

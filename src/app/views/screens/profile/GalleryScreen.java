@@ -14,6 +14,7 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.models.GalleryImage;
 import app.models.Images;
 import app.views.fields.profile.GridImageField;
 import app.views.fields.profile.GridViewController;
@@ -56,7 +57,7 @@ public class GalleryScreen extends MainScreen{
 		backButton = new TabbedButton("Back", 6, 100, 36);
 		backButton.setRVAlue(10);
 		backButton.setChangeListener(AirCrewApp.backButtonListener);
-		homeButton = new TabbedButton("Home", 6, 100, 36);
+		homeButton = new TabbedButton("Add", 6, 100, 36);
 		homeButton.setRVAlue(10);
 		
 		setTitle(new ScreenBannar("Gallery", 40, backButton, homeButton));
@@ -68,7 +69,7 @@ public class GalleryScreen extends MainScreen{
 //		showImage();
 	}
 	
-	public void showGallery(){
+	public void showGallery(final GalleryImage[] galleryImages){
 		UiApplication.getUiApplication().invokeLater(new Runnable() {
 			public void run() {
 				current_screen.delete(vrManager);
@@ -88,16 +89,17 @@ public class GalleryScreen extends MainScreen{
 				
 				gridImageController = new GridViewController(columnStyles,columnWidths,0, Manager.FIELD_HCENTER|Manager.USE_ALL_WIDTH);
 				
-				for (int i = 0;i < images.length; i++){
-					Field field = new GridImageField(images[i]);
+				for (int i = 0;i < galleryImages.length; i++){
+//					Field field = new GridImageField(images[i]);
+					Field field = galleryImages[i].getWebImageField();
 					field.setChangeListener(gridFieldListener);
 					gridImageController.add(field);
 				}
 				
 				vrManager.add(gridImageController);
-				vrManager.add(new SpaceField(10));
-				addButton = new TabbedButton("Add", 8, 400, 40);
-				vrManager.add(addButton);
+//				vrManager.add(new SpaceField(10));
+//				addButton = new TabbedButton("Add", 8, 400, 40);
+//				vrManager.add(addButton);
 				add(vrManager);
 			}
 		});

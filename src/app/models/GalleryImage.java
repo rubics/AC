@@ -9,7 +9,7 @@ public class GalleryImage {
 	private String def;
 	private String order;
 	private String user_id;
-	private WebImageField image;
+	private WebImageField imageField;
 	
 	public GalleryImage(String id, String imageName, String defaultFlag,
 			String order, String userId) {
@@ -19,7 +19,7 @@ public class GalleryImage {
 		def = defaultFlag;
 		this.order = order;
 		user_id = userId;
-		image = new WebImageField(AirCrew.gallery + image_name, 95, 95);
+		imageField = new WebImageField(AirCrew.user_images + image_name, 95, 95);
 	}
 
 	public String getId() {
@@ -40,5 +40,9 @@ public class GalleryImage {
 
 	public String getUser_id() {
 		return user_id;
+	}
+	
+	public WebImageField getWebImageField(){
+		return imageField;
 	}
 }

@@ -2,7 +2,7 @@ package app.models;
 
 public class User {
 	private String user_name;
-	private String user_id = "547";
+	private String user_id = "574";
 	private String session_id;
 
 	public User(String _user_name, String _user_id, String _session_id){

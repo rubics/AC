@@ -27,7 +27,7 @@ public class ProfileController {
 	
 	public void drawGalleryScreen(){
 		GalleryScreen galleryScreen = (GalleryScreen)profileInfoScreenManager.getTabbedScreens()[2];
-		galleryScreen.showGallery();	
+		galleryScreen.showGallery(galleryImages);	
 	}
 	
 	public void pushScreen(){
