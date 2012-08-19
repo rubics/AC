@@ -29,9 +29,9 @@ public class ProfileScreen extends MainScreen{
 	private CompositeTextBox emailIdField;
 	private CompositePasswordBox passwordField;
 	private Field airlineField;
-	private CompositeTextBox designationField;
+	private CompositeObjectChoiceField designationField;
 	private CompositeObjectChoiceField genderField;
-	private CompositeTextBox locationField;
+	private CompositeObjectChoiceField locationField;
 	private TabbedButton saveButton;
 	
 	private Manager vrManager;
@@ -83,9 +83,9 @@ public class ProfileScreen extends MainScreen{
 				emailIdField = new CompositeTextBox("email", profile.getUser_email(), true);
 				passwordField = new CompositePasswordBox("Password", AirCrewApp.app.getUserController().getUser().getPassword(), true);
 				airlineField = new CompositeObjectChoiceField("Airlines",AirCrewResources.airlines,0);
-				designationField = new CompositeTextBox("Designation", profile.getDesig(), true);
-				genderField = new CompositeObjectChoiceField("Gender", gender,0);
-				locationField = new CompositeTextBox("Location", profile.getCountry(), true);
+				designationField = new CompositeObjectChoiceField("Designation", AirCrewResources.designations,0);
+				genderField = new CompositeObjectChoiceField("Gender", AirCrewResources.gender,0);
+				locationField = new CompositeObjectChoiceField("Country", AirCrewResources.countries, 0);
 				
 				CompositeFieldManager manager = new CompositeFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 				

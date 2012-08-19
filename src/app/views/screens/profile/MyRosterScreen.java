@@ -15,6 +15,7 @@ import rubyx.custom_fields.CheckboxManager;
 import rubyx.custom_fields.CompositeButton;
 import rubyx.custom_fields.CompositeField;
 import rubyx.custom_fields.CompositeFieldManager;
+import rubyx.custom_fields.CompositeObjectChoiceField;
 import rubyx.custom_fields.CompositeSpinBox;
 import rubyx.custom_fields.CustomDateField;
 import rubyx.custom_fields.RoundedBackgroundManager;
@@ -31,7 +32,7 @@ public class MyRosterScreen extends MainScreen{
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
 	
-	private CompositeSpinBox locationField;
+	private CompositeObjectChoiceField locationField;
 	private CustomDateField dateFrom;
 	private CustomDateField dateTo;
 	private CompositeButton detailsField;
@@ -54,7 +55,7 @@ public class MyRosterScreen extends MainScreen{
 		
 		setTitle(new ScreenBannar("My Roster", 40, backButton, homeButton));
 		mvrm = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Manager.VERTICAL_SCROLLBAR);
-		locationField = new CompositeSpinBox("Airline", AirCrewResources.airlines, "Select One", CompositeField.DRAWSTYLE_TOP);
+		locationField = new CompositeObjectChoiceField("Location",AirCrewResources.countries,0);
 		dateFrom = new CustomDateField("Date From", System.currentTimeMillis(), DateField.DATE);
 		dateTo = new CustomDateField("Date To", System.currentTimeMillis(), DateField.DATE);
 		detailsField = new CompositeButton("Details");
