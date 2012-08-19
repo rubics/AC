@@ -15,6 +15,7 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
 import app.controllers.user.DealController;
+import app.models.AirCrewResources;
 import app.models.CityRequest;
 import app.models.Country;
 import app.models.Images;
@@ -63,7 +64,7 @@ public class DealFilterScreen extends MainScreen{
 				categoryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
 				vrManager.add(categoryChoiceField);
 				vrManager.add(new SpaceField(5));
-				countryChoiceField = new CompositeObjectChoiceField("Country", dealController.getCountries(), _country_index);
+				countryChoiceField = new CompositeObjectChoiceField("Country", AirCrewResources.countries, _country_index);
 				countryChoiceField.setDrawStyle(CompositeField.DRAWSTYLE_SINGLE);
 				countryChoiceField.setListener(countryChoiceListener);
 				vrManager.add(countryChoiceField);
@@ -89,7 +90,7 @@ public class DealFilterScreen extends MainScreen{
 			try{
 				if(ObjectChoiceField.class.isInstance(field)){
 					ObjectChoiceField choiceField = (ObjectChoiceField)(field);
-					Country country = dealController.getCountries()[choiceField.getSelectedIndex()];
+					Country country = AirCrewResources.countries[choiceField.getSelectedIndex()];
 			
 					CityRequest cityRequest = new CityRequest(dealController, this_screen);
 					cityRequest.getCity(country.getCountry_code());

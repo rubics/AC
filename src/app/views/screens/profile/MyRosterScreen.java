@@ -13,14 +13,16 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.CheckboxManager;
 import rubyx.custom_fields.CompositeButton;
+import rubyx.custom_fields.CompositeField;
 import rubyx.custom_fields.CompositeFieldManager;
-import rubyx.custom_fields.CompositeTextBox;
+import rubyx.custom_fields.CompositeSpinBox;
 import rubyx.custom_fields.CustomDateField;
 import rubyx.custom_fields.RoundedBackgroundManager;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.models.AirCrewResources;
 import app.models.Images;
 import app.views.managers.profile.ProfileInfoScreenManager;
 
@@ -29,7 +31,7 @@ public class MyRosterScreen extends MainScreen{
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
 	
-	private CompositeButton locationField;
+	private CompositeSpinBox locationField;
 	private CustomDateField dateFrom;
 	private CustomDateField dateTo;
 	private CompositeButton detailsField;
@@ -52,7 +54,7 @@ public class MyRosterScreen extends MainScreen{
 		
 		setTitle(new ScreenBannar("My Roster", 40, backButton, homeButton));
 		mvrm = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Manager.VERTICAL_SCROLLBAR);
-		locationField = new CompositeButton("Location");
+		locationField = new CompositeSpinBox("Airline", AirCrewResources.airlines, "Select One", CompositeField.DRAWSTYLE_TOP);
 		dateFrom = new CustomDateField("Date From", System.currentTimeMillis(), DateField.DATE);
 		dateTo = new CustomDateField("Date To", System.currentTimeMillis(), DateField.DATE);
 		detailsField = new CompositeButton("Details");

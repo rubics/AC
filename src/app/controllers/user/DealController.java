@@ -3,6 +3,7 @@ package app.controllers.user;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
+import app.models.AirCrewResources;
 import app.models.CategoriesRequest;
 import app.models.Category;
 import app.models.City;
@@ -22,7 +23,6 @@ public class DealController {
 	private DealController dealController;
 	private DealScreenManager dealScreenManger;
 	private Category[] categories = null;
-	private Country[] countries = null;
 	private City[] cities = {new City("Select a City", "Select a City")};
 	private Deal[] deals;
 	
@@ -37,16 +37,12 @@ public class DealController {
 		// populate deal categories
 		CategoriesRequest categoriesRequest = new CategoriesRequest(this);
 		categoriesRequest.getCategories();
-		
-		// populate countries
-		CountriesRequest countryRequest = new CountriesRequest(this);
-		countryRequest.getCountries();
 	}
 	
 	public void filterDeals(int _category_index, int _country_index, int _city_index){
 		DealsRequest dealRequest = new DealsRequest(this);
 		dealRequest.getFilteredDeals(categories[_category_index].getCategory_id(),
-				countries[_country_index].getCountry_code(),
+				AirCrewResources.countries[_country_index].getCountry_code(),
 				cities[_city_index].getCity_id());
 	}
 	
@@ -67,15 +63,6 @@ public class DealController {
 		return categories;
 	}
 
-	public Country[] getCountries() {
-		return countries;
-	}
-
-	public void setCountries(Country[] countries) {
-		this.countries = countries;
-		updateDealFilterScreen(0,0);
-	}
-
 	public void setCategories(Category[] categories) {
 		this.categories = categories;
 		((SearchResultScreen)dealScreenManger.getTabbedScreens()[0]).drawCategories();
@@ -94,7 +81,7 @@ public class DealController {
 	}
 
 	public void updateDealFilterScreen(int _category_index, int _country_index){		// draws UI for DealFilterScreen on fetcing categories, countries
-		if(categories != null && countries != null){
+		if(categories != null && AirCrewResources.countries != null){
 			DealFilterScreen _dealFilterScreen = (DealFilterScreen)dealScreenManger.getTabbedScreens()[1];
 			_dealFilterScreen.drawScreen(_category_index, _country_index);
 		}

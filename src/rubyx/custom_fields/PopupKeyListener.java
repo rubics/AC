@@ -13,7 +13,7 @@ public class PopupKeyListener implements KeyListener {
 	}
     public boolean keyChar( char key, int status, int time ) 
     {
-        if ( key == Characters.ESCAPE ) 
+        if ( key == Characters.ESCAPE) 
         {
         	UiApplication.getUiApplication().popScreen(screen);
         }

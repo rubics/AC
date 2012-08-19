@@ -8,16 +8,12 @@ import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 import app.controllers.user.DealController;
 
-public class CountriesRequest implements HttpRequestListener {
+public abstract class CountriesRequest implements HttpRequestListener {
 	
-	private Deal deal;
-	private DealController dealController;
 	private static final String method = "GET";
 	private HttpRequestDispatcher dispatcher;
 	
-	public CountriesRequest(DealController _dealController){
-		dealController = _dealController;
-	}
+	public CountriesRequest(){}
 	
 	public void getCountries(){
 		dispatcher = new HttpRequestDispatcher(AirCrew.countries, method, this, "");
@@ -42,8 +38,7 @@ public class CountriesRequest implements HttpRequestListener {
 					countries[i] = new Country(country_id, country_name);
 				}
 				
-				dealController.setCountries(countries);
-	
+				afterSuccess(countries);
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");
 				final String code = response.getString("code");
@@ -61,8 +56,7 @@ public class CountriesRequest implements HttpRequestListener {
 		}
 	}
 	
-	public void httpfailure(String errmsg) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void httpfailure(String errmsg) {}
+	
+	public abstract void afterSuccess(Country[] countries);
 }

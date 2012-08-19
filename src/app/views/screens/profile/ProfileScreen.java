@@ -10,6 +10,7 @@ import rubyx.custom_fields.CompositeFieldManager;
 import rubyx.custom_fields.CompositeObjectChoiceField;
 import rubyx.custom_fields.CompositePasswordBox;
 import rubyx.custom_fields.CompositeTextBox;
+import rubyx.custom_fields.CustomSpinBox;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
