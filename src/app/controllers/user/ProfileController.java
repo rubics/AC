@@ -3,6 +3,7 @@ package app.controllers.user;
 import app.AirCrewApp;
 import app.models.GalleryImage;
 import app.models.GalleryRequest;
+import app.models.Profile;
 import app.views.managers.profile.ProfileInfoScreenManager;
 import app.views.screens.profile.GalleryScreen;
 
@@ -11,6 +12,7 @@ public class ProfileController {
 	private ProfileInfoScreenManager profileInfoScreenManager;
 	private ProfileController profileController;
 	private GalleryImage[] galleryImages;
+	private Profile profile;
 		
 	public ProfileController(){
 		profileController = this;
@@ -32,5 +34,13 @@ public class ProfileController {
 	
 	public void pushScreen(){
 		profileInfoScreenManager.pushScreen(2);
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 }

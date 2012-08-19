@@ -8,7 +8,7 @@ import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import app.models.Images;
-import app.models.Profile;
+import app.models.__Profile;
 
 public class ProfileView extends Manager{
 	

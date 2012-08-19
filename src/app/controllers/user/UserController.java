@@ -56,7 +56,7 @@ public class UserController {
 					String message = response.getString("message");
 					System.out.println(json_response);
 					
-					user = new User(user_name, user_id, session_id);
+					user = new User(user_name, user_id, session_id, signinScreen.getPassword());
 					
 					app.pushDashboardScreen(); // push Dashboard Screen
 					

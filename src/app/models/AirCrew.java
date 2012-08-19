@@ -17,4 +17,6 @@ public class AirCrew {
 	public static final String bookmarks = url + "/index.php/iphone_4aircrew/bookmark/";
 	public static final String gallery = url + "/index.php/iphone_4aircrew/get_gallery/";
 	public static final String user_images = url + "/assets/uploads/app/user_images/";
+	public static final String my_profile = url + "/index.php/iphone_4aircrew/i_edit_profile/";
+	public static final String airlines = url + "/index.php/iphone_4aircrew/i_airline";
 }

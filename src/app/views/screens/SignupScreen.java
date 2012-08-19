@@ -82,6 +82,10 @@ public class SignupScreen extends MainScreen{
 		add(mvrm);		
 	}
 	
+	public String getPassword() {
+		return passwordField.getText();
+	}
+	
 	public boolean isDirty() {
 	    return false;
 	}

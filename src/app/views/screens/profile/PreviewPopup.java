@@ -1,5 +1,6 @@
 package app.views.screens.profile;
 
+import rubyx.custom_fields.PopupKeyListener;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
@@ -21,10 +22,11 @@ public class PreviewPopup extends PopupScreen{
 	Screen this_screen;
 	
 	public PreviewPopup(Bitmap image){
-		
+
 		super(new HorizontalFieldManager(Field.FIELD_HCENTER));
 		Manager manager = new VerticalFieldManager();
 		this_screen = this;
+		addKeyListener(new PopupKeyListener(this));
 		Field imageField = new ResizedBitmapField(image);
 		imageField.setChangeListener(new FieldChangeListener() {
 			
@@ -137,7 +139,5 @@ public class PreviewPopup extends PopupScreen{
 		protected void fieldChangeNotify(int context) {
 			super.fieldChangeNotify(context);
 		}
-		
 	}
 }
-

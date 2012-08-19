@@ -77,6 +77,12 @@ public class SigninScreen extends MainScreen{
 		register.setChangeListener(registerListener);
 	}
 	
+	
+	public String getPassword() {
+		return passwordField.getText();
+	}
+
+
 	public boolean isDirty() {
 	    return false;
 	}
