@@ -35,15 +35,17 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 	
 	private LabelField labelField;
 	private ObjectChoiceField objectChoiceField;
+	private Object[] choices;
 	
 	public CompositeObjectChoiceField(String _label, Object[] _objects, int _startIndex){
 		super(0);
+		choices = _objects;
 		labelField = new LabelField(_label);
 		labelField.setFont(font_composite_label);
 		add(labelField);
 		objectChoiceField = new ObjectChoiceField();
 		objectChoiceField.setChoices(_objects);
-		objectChoiceField.setSelectedIndex(_startIndex);
+//		objectChoiceField.setSelectedIndex(0);
 		objectChoiceField.setFont(font_composite_label);
 		add(objectChoiceField);
 	}
@@ -99,5 +101,9 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 	
 	public int getSelectedIndex(){
 		return objectChoiceField.getSelectedIndex();
+	}
+	
+	public Object getSelectedObject(){
+		return choices[objectChoiceField.getSelectedIndex()];
 	}
 }

@@ -30,6 +30,9 @@ public class CompositeFieldManager extends VerticalFieldManager{
 				((CompositeField)getField(0)).setDrawStyle(CompositePasswordBox.DRAWSTYLE_TOP);
 			if(CompositeField.class.isInstance(getField(fieldcount-1)))
 				((CompositeField)getField(fieldcount-1)).setDrawStyle(CompositePasswordBox.DRAWSTYLE_BOTTOM);
+			for(int i=1; i<fieldcount-1; i++){
+				((CompositeField)getField(i)).setDrawStyle(CompositePasswordBox.DRAWSTYLE_MID);
+			}
 			return;
 			
 		}

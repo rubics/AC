@@ -16,6 +16,7 @@ import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
 import app.controllers.user.DealController;
 import app.models.AirCrewResources;
+import app.models.City;
 import app.models.CityRequest;
 import app.models.Country;
 import app.models.Images;
@@ -92,7 +93,11 @@ public class DealFilterScreen extends MainScreen{
 					ObjectChoiceField choiceField = (ObjectChoiceField)(field);
 					Country country = AirCrewResources.countries[choiceField.getSelectedIndex()];
 			
-					CityRequest cityRequest = new CityRequest(dealController, this_screen);
+					CityRequest cityRequest = new CityRequest(){
+						public void afterSuccess(City[] cities){
+							dealController.setCity(cities);
+						}
+					};
 					cityRequest.getCity(country.getCountry_code());
 				}
 			} catch(Exception e){
