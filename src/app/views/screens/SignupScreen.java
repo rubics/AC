@@ -15,6 +15,7 @@ import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
 import app.AirCrewApp;
 import app.controllers.user.UserController;
+import app.models.AirCrewResources;
 import app.models.Images;
 import app.views.fields.ScreenTitle;
 
@@ -35,8 +36,6 @@ public class SignupScreen extends MainScreen{
 	private Manager mvrm;
 	
 	private String[] airlines =  {"Indian", "Kingfisher", "Deccan Air"};
-	private String[] gender = {"Female", "Male"};
-	private String[] designation = {"Flight Crew", "Cabin Crew"};
 	
 	public SignupScreen(UserController _userController){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_HORIZONTAL_SCROLLBAR);
@@ -51,8 +50,8 @@ public class SignupScreen extends MainScreen{
 		passwordField = new CompositePasswordBox("Password", "", true);
 		confirmPasswordField = new CompositePasswordBox("Confirm Password", "", true);
 		airlineField = new CompositeObjectChoiceField("Airlines", airlines,0);
-		designationField = new CompositeObjectChoiceField("Designation", designation, 0);
-		genderField = new CompositeObjectChoiceField("Gender", gender,0);
+		designationField = new CompositeObjectChoiceField("Designation", AirCrewResources.designations, 0);
+		genderField = new CompositeObjectChoiceField("Gender", AirCrewResources.genders,0);
 		locationField = new CompositeTextBox("Location", "", true);
 		countryField = new CompositeTextBox("Country", "", true);
 		

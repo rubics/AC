@@ -127,4 +127,14 @@ public class DealController {
 			dealRequest.getDealbyCategory(categories[index]);
 		}
 	};
+	
+	public FieldChangeListener allDeals = new FieldChangeListener() {
+		
+		public void fieldChanged(Field field, int context) {
+			DealsRequest dealRequest = new DealsRequest(dealController);
+			dealRequest.getAllDeals();
+		}
+	};
+	
+	
 }

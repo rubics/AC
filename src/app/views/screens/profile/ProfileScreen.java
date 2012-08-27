@@ -94,7 +94,7 @@ public class ProfileScreen extends MainScreen{
 				passwordField = new CompositePasswordBox("Password", AirCrewApp.app.getUserController().getUser().getPassword(), true);
 				airlineField = new CompositeObjectChoiceField("Airlines",AirCrewResources.airlines,0);
 				designationField = new CompositeObjectChoiceField("Designation", AirCrewResources.designations,0);
-				genderField = new CompositeObjectChoiceField("Gender", AirCrewResources.gender,0);
+				genderField = new CompositeObjectChoiceField("Gender", AirCrewResources.genders,0);
 				countryField = new CompositeObjectChoiceField("Country", AirCrewResources.countries, 0);
 				countryField.setListener(countryChoiceListener);
 				cityField = new CompositeObjectChoiceField("City", cities, 0);

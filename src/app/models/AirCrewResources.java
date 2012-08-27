@@ -3,8 +3,9 @@ package app.models;
 public class AirCrewResources {
 	public static Country[] countries;
 	public static Airline[] airlines;
-	public static String[] designations = {"Select one", "Flight Crew", "Cabin Crew"};
-	public static String[] gender = {"Select one", "Male", "Female"};
+	public static Gender[] genders;
+	public static Designation[] designations;
+	
 	
 	public AirCrewResources(){
 		
@@ -22,5 +23,21 @@ public class AirCrewResources {
 			}
 		};
 		airlineRequest.getAirlines();
+		
+		DesignationRequest designationRequest = new DesignationRequest() {
+			
+			public void afterSuccess(Designation[] _designations) {
+				designations = _designations;
+			}
+		};
+		designationRequest.getDesignations();
+		
+		GenderRequest genderRequest = new GenderRequest() {
+			
+			public void afterSuccess(Gender[] _genders) {
+				genders = _genders;
+			}
+		};
+		genderRequest.getGenders();
 	}
 }

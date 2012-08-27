@@ -89,6 +89,10 @@ public class SearchResultScreen extends MainScreen{
 				current_screen.delete(vrm);
 				vrm = new VerticalFieldManager(Manager.USE_ALL_HEIGHT);
 				VerticalFieldManager listManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
+				Category allcategories = new Category("0", "All Categories");
+				Field firstListItem = new ListingField(AirCrew.image_medium + "", allcategories.getCategory_name(), "",8);
+				firstListItem.setChangeListener(dealController.allDeals);
+				listManager.add(firstListItem);
 				for(int i=0; i < dealController.getCategories().length; i++){
 					Category category = dealController.getCategories()[i];
 					Field listItem = new ListingField(AirCrew.image_medium + "", category.getCategory_name(), "",8);

@@ -1,12 +1,12 @@
-RIM-COD-SHA1-9: 99 62 79 36 41 eb 4a f4 5c 30 b3 d3 1b bc 53 e8 35 8d 0c b2
-RIM-COD-SHA1-8: b6 74 3e c0 55 4e 35 3c b4 9b d6 7e 03 b5 f2 26 22 51 5a 32
-RIM-COD-SHA1-7: 5e 43 41 2d bd e7 0e 86 f9 d8 e5 10 e1 24 37 28 65 c3 a0 55
-RIM-COD-SHA1-6: 1c 8f e4 12 63 00 fa 2f bc c1 f8 32 80 4c c1 db a1 92 de 1d
-RIM-COD-SHA1-5: a9 cf 0c 0a 71 b2 8f f5 5b 6f 98 c9 0b 24 fd ee a4 1c c7 3d
-RIM-COD-SHA1-4: a2 09 f8 19 9e db 6b 05 22 69 68 15 64 c0 ec e3 8e 49 e8 fc
-RIM-COD-SHA1-3: 38 35 85 27 ef c9 23 68 df eb 44 f6 d1 be 11 da 5a 88 e1 61
-RIM-COD-SHA1-2: b5 c4 31 78 45 68 e6 18 e9 85 3a 53 1d c3 19 59 42 4b 48 52
-RIM-COD-SHA1-1: 45 05 31 6d 34 51 c9 09 a3 db 7d 8a ee 54 32 d3 8a 1a 94 f4
+RIM-COD-SHA1-9: 1a 73 58 be 6f be 06 0e d4 8f 51 42 fd 44 ea 26 d8 85 7e 39
+RIM-COD-SHA1-8: 46 29 59 a3 07 a4 d9 21 de 55 d6 2c e3 6b bd 69 df bf 3b b5
+RIM-COD-SHA1-7: 77 7d 5d c6 e5 29 16 79 c4 cd f0 1c 46 b8 2a d2 58 07 08 bb
+RIM-COD-SHA1-6: 2b a6 a7 87 86 69 47 98 7d 60 ed 1c 1d 52 97 17 6c ef 7f ed
+RIM-COD-SHA1-5: bb d4 40 88 03 5f e0 7b 9d f1 a6 17 5d a4 fd a0 fc 1d d2 32
+RIM-COD-SHA1-4: 73 39 89 85 22 32 0e 35 91 e4 17 f7 0f f0 0b 75 01 b5 1a ea
+RIM-COD-SHA1-3: 91 d5 d3 e1 3a aa 76 5d f1 71 3c 33 8a cf f2 ad 40 5b ef 7d
+RIM-COD-SHA1-2: 13 b9 4f 68 4e 2a 1d 3a f8 23 95 cb e4 df 02 4c f4 8a f5 01
+RIM-COD-SHA1-1: db 16 23 49 a9 67 d5 1d 27 bb 1a 00 c7 92 80 f3 b3 b1 c9 61
 RIM-COD-Size-22: 64516
 RIM-COD-Size-21: 52460
 RIM-COD-Size-20: 50388
@@ -18,7 +18,7 @@ RIM-COD-URL-15: AirCrew-15.cod
 RIM-COD-URL-14: AirCrew-14.cod
 RIM-COD-URL-13: AirCrew-13.cod
 RIM-COD-URL-12: AirCrew-12.cod
-RIM-COD-Size: 58496
+RIM-COD-Size: 56816
 RIM-COD-URL-11: AirCrew-11.cod
 RIM-COD-URL-10: AirCrew-10.cod
 MIDlet-Vendor: BlackBerry Developer
@@ -37,37 +37,37 @@ RIM-COD-Size-10: 50632
 MIDlet-Version: 1.1.0
 MicroEdition-Profile: MIDP-2.0
 RIM-MIDlet-Position-1: 2
-RIM-COD-SHA1-22: 49 ce 3c 1c ec a5 5e 54 83 d9 d3 bb c7 db 42 e3 08 a3 ea b4
-RIM-COD-SHA1-21: 5b cd ff 4b 58 58 16 46 59 87 fd d5 b3 1b 2f be ad 47 ba f2
-RIM-COD-SHA1-20: 11 d6 4a 14 63 02 74 41 0e b1 c6 40 6f 14 d3 bd cb bb 24 eb
+RIM-COD-SHA1-22: 6b 91 ae 1b ab 1a 10 42 78 51 ba 98 ca fb 85 12 cf d4 bc 71
+RIM-COD-SHA1-21: a5 ae 7d af c9 f4 1b bf 25 c9 e9 2b f7 ef 23 86 b0 60 31 cc
+RIM-COD-SHA1-20: cc 4d 33 e7 3a f8 f8 6d 76 70 d0 dc ec 1a 7a 37 4f dd 07 bc
 RIM-COD-URL: AirCrew.cod
-RIM-COD-Creation-Time: 1346082702
+RIM-COD-Creation-Time: 1346089210
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-Jar-URL: BB4AC.jar
-RIM-COD-SHA1-19: 4d 3b d8 01 b4 f4 ae 6b b5 db d9 ce cc bc 66 32 95 15 e7 c9
-RIM-COD-SHA1-18: 75 1d 1c 51 19 9e 4a 54 6e 47 d1 fb 40 1a 49 4b 04 df 8d c5
-RIM-COD-SHA1-17: 2c cf e3 a5 44 c4 53 fa c2 ce 5b fa ef dd 5d bc 94 7e 89 46
-RIM-COD-SHA1-16: 57 3a c1 5f 7b 6c 75 e8 f7 6a 1f 46 58 65 67 69 3c 87 17 6f
-RIM-COD-SHA1-15: 4a 8b 9c 1a 37 03 b2 37 a2 7d 97 0b 4e 08 79 16 89 77 a7 1a
-RIM-COD-SHA1-14: 72 bd ce dd 17 97 fc 85 0b 76 7c ce 92 b7 af 23 05 e1 59 a8
-RIM-COD-SHA1-13: cd 74 fe 6f 23 83 a9 d2 93 bc 2c a9 91 08 b7 33 12 98 7a 9e
-RIM-COD-SHA1-12: 52 0c 1d 4d f2 2c 75 08 d0 4f 11 d3 6b 24 c4 44 fb cb 75 f7
+RIM-COD-SHA1-19: 72 7e f8 a1 ca 41 9b c4 24 63 3a c0 ec 1a 1b 92 0c 54 1f 90
+RIM-COD-SHA1-18: d1 59 10 cd bd e8 4d 08 6b a5 7d 85 7d 4a 52 37 4f 3c cf 67
+RIM-COD-SHA1-17: 78 bd b5 81 a8 f3 f0 e7 2b 64 bb 22 5f f4 44 3d ae 74 0d 58
+RIM-COD-SHA1-16: 55 86 64 81 4a ef 53 be 9b f6 1a 3d f5 06 6e 05 c9 6a 91 4f
+RIM-COD-SHA1-15: 08 dd cc af 5b 75 44 70 7c e7 a0 3d 35 94 20 39 5b 7b 8b 8e
+RIM-COD-SHA1-14: 1f 0b 58 89 fc 20 88 7e 05 1d 0b 85 5e db fe 70 bf f1 cd f1
+RIM-COD-SHA1-13: 8c 68 f9 77 63 be c5 a8 21 90 c0 0d 15 0d 75 24 38 7e 72 f5
+RIM-COD-SHA1-12: cb 27 70 1d 43 8d 9a da 8b e0 40 54 20 f4 2c 5d 15 97 3e 04
 RIM-COD-Size-9: 56168
-RIM-COD-SHA1-11: af f6 38 06 2c 0a 82 3f bc c6 5d 2b 6c 23 cf 2c 81 ae 7f a4
+RIM-COD-SHA1-11: 9c 91 01 c8 45 c7 a6 90 53 18 30 64 c5 d6 e5 76 51 fc c8 40
 RIM-COD-Size-8: 58100
-RIM-COD-SHA1-10: fd 99 24 3b 23 63 60 3c ff bb 9f 58 c0 09 2e be f5 30 e3 57
+RIM-COD-SHA1-10: 57 29 e3 25 50 a2 83 da c3 01 df 52 67 14 e0 d9 67 ad 6e 59
 RIM-COD-Size-7: 50388
 RIM-COD-Size-6: 57424
 RIM-COD-Size-5: 57372
-RIM-COD-Size-4: 58580
-RIM-COD-Size-3: 64132
-RIM-COD-Size-2: 63472
-RIM-COD-Size-1: 62744
+RIM-COD-Size-4: 63212
+RIM-COD-Size-3: 63812
+RIM-COD-Size-2: 63644
+RIM-COD-Size-1: 62764
 MIDlet-1: AirCrew,,
 MIDlet-Name: BB4AC
-RIM-COD-SHA1: c1 27 b1 53 29 df 92 1a ae ef e9 11 e8 c0 a0 75 3a 54 e5 3a
-RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_os,net_rim_bb_lbs_api_2
-MIDlet-Jar-Size: 2419172
+RIM-COD-SHA1: 62 ba 7c b9 c3 bf c0 4e d3 9e f1 f5 0a bf 5a 97 86 38 4f 2d
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_bb_lbs_api_2,net_rim_os
+MIDlet-Jar-Size: 2428342
 RIM-COD-URL-9: AirCrew-9.cod
 RIM-COD-URL-8: AirCrew-8.cod
 RIM-COD-URL-7: AirCrew-7.cod
