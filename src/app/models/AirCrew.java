@@ -20,5 +20,5 @@ public class AirCrew {
 	public static final String my_profile = url + "/index.php/iphone_4aircrew/i_edit_profile/";
 	public static final String airlines = url + "/index.php/iphone_4aircrew/i_airline";
 	public static final String update_profile = url + "/index.php/iphone_4aircrew/i_edit_profile_update/";
-	public static final String update_roster = url + "/update_roser/";
+	public static final String update_roster = url + "/index.php/iphone_4aircrew/my_roster_update/";
 }

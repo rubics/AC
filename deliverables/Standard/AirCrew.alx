@@ -1,13 +1,13 @@
 <loader version="1.0">
 	<application id="AirCrew">
 		<name >
-			
+			AirCrew
 		</name>
 		<description >
 			
 		</description>
 		<version >
-			1.0.0
+			1.1.0
 		</version>
 		<vendor >
 			BlackBerry Developer
@@ -15,9 +15,19 @@
 		<copyright >
 			Copyright (c) 2012 BlackBerry Developer
 		</copyright>
-		<fileset Java="1.49" _blackberryVersion="[5.0.0)">
+		<fileset Java="1.49" _blackberryVersion="[5.0.0,5.0.1)">
 			<directory >
 				5.0.0
+			</directory>
+			<files >
+				AirCrew.cod
+
+			</files>
+
+		</fileset>
+		<fileset Java="1.49" _blackberryVersion="[6.0.0)">
+			<directory >
+				6.0.0
 			</directory>
 			<files >
 				AirCrew.cod

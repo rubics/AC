@@ -11,13 +11,14 @@ import app.controllers.user.DealController;
 
 public class UpdateProfileRequest implements HttpRequestListener {
 	
-	private static final String method = "GET";
+	private static final String method = "POST";
 	private HttpRequestListener requestListener = this;
 	private HttpRequestDispatcher dispatcher;
 	
 	public UpdateProfileRequest(){}
 	
 	public void updateProfile(String postString){
+		System.out.println(postString);
 		dispatcher = new HttpRequestDispatcher(AirCrew.update_profile, method, requestListener, postString);
 		dispatcher.start();
 	}
