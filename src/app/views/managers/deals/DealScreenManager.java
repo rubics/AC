@@ -8,7 +8,7 @@ import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
 import rubyx.custom_fields.CustomButton;
 import rubyx.tabbedUI.TabbedScreenManager;
-import app.controllers.user.DealController;
+import app.controllers.DealController;
 import app.models.Images;
 import app.views.screens.deals.DealFilterScreen;
 import app.views.screens.deals.SearchResultScreen;

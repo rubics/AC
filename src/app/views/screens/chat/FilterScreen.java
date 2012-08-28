@@ -12,7 +12,7 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
 import app.AirCrewApp;
-import app.controllers.user.DealController;
+import app.controllers.DealController;
 import app.models.Images;
 
 public class FilterScreen extends MainScreen{

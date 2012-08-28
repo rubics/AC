@@ -14,7 +14,7 @@ import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import rubyx.tabbedUI.TabbedButtonManager;
 import app.AirCrewApp;
-import app.controllers.user.UserController;
+import app.controllers.UserController;
 import app.models.AirCrewResources;
 import app.models.Images;
 import app.views.fields.ScreenTitle;

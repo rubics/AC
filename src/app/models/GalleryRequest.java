@@ -6,7 +6,7 @@ import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.Dialog;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
-import app.controllers.user.DealController;
+import app.controllers.DealController;
 
 public abstract class GalleryRequest implements HttpRequestListener{
 	private DealController dealController;

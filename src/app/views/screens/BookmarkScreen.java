@@ -11,7 +11,7 @@ import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
-import app.controllers.user.BookmarkController;
+import app.controllers.BookmarkController;
 import app.models.AirCrew;
 import app.models.Bookmark;
 import app.models.Deal;

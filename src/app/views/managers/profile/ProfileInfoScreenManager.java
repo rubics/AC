@@ -7,7 +7,7 @@ import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
 import rubyx.custom_fields.CustomButton;
 import rubyx.tabbedUI.TabbedScreenManager;
-import app.controllers.user.ProfileController;
+import app.controllers.ProfileController;
 import app.views.screens.DashboardScreen;
 import app.views.screens.profile.GalleryScreen;
 import app.views.screens.profile.MyRosterScreen;

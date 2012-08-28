@@ -92,10 +92,10 @@ public class ProfileScreen extends MainScreen{
 				nameField = new CompositeTextBox("Username",profile.getUser_name(),true);
 				emailIdField = new CompositeTextBox("email", profile.getUser_email(), true);
 				passwordField = new CompositePasswordBox("Password", AirCrewApp.app.getUserController().getUser().getPassword(), true);
-				airlineField = new CompositeObjectChoiceField("Airlines",AirCrewResources.airlines,0);
-				designationField = new CompositeObjectChoiceField("Designation", AirCrewResources.designations,0);
-				genderField = new CompositeObjectChoiceField("Gender", AirCrewResources.genders,0);
-				countryField = new CompositeObjectChoiceField("Country", AirCrewResources.countries, 0);
+				airlineField = new CompositeObjectChoiceField("Airlines",AirCrewResources.airlines,AirCrewResources.getAirlineIndex(profileInfo.getProfileController().getProfile().getAirline_id()));
+				designationField = new CompositeObjectChoiceField("Designation", AirCrewResources.designations,AirCrewResources.getDestinationIndex(profileInfo.getProfileController().getProfile().getDesignation()));
+				genderField = new CompositeObjectChoiceField("Gender", AirCrewResources.genders,AirCrewResources.getGenderIndex(profileInfo.getProfileController().getProfile().getGender()));
+				countryField = new CompositeObjectChoiceField("Country", AirCrewResources.countries, AirCrewResources.getCountryIndex(profileInfo.getProfileController().getProfile().getCountry_code()));
 				countryField.setListener(countryChoiceListener);
 				cityField = new CompositeObjectChoiceField("City", cities, 0);
 				

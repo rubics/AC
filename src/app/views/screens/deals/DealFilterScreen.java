@@ -14,7 +14,7 @@ import rubyx.custom_fields.ScreenBannar;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
-import app.controllers.user.DealController;
+import app.controllers.DealController;
 import app.models.AirCrewResources;
 import app.models.City;
 import app.models.CityRequest;

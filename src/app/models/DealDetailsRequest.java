@@ -4,7 +4,7 @@ import helpers.org.json.me.JSONArray;
 import helpers.org.json.me.JSONObject;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.Dialog;
-import app.controllers.user.DealController;
+import app.controllers.DealController;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 

@@ -4,7 +4,7 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.EncodedImage;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
-import app.controllers.user.DealController;
+import app.controllers.DealController;
 
 public abstract class ImageRequest implements HttpRequestListener{
 

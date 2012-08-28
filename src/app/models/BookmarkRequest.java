@@ -7,7 +7,7 @@ import net.rim.device.api.ui.component.Dialog;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 import app.AirCrewApp;
-import app.controllers.user.BookmarkController;
+import app.controllers.BookmarkController;
 
 public class BookmarkRequest implements HttpRequestListener {
 	

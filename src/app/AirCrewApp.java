@@ -3,8 +3,8 @@ package app;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
-import app.controllers.user.DashboardController;
-import app.controllers.user.UserController;
+import app.controllers.DashboardController;
+import app.controllers.UserController;
 import app.models.AirCrewResources;
 import app.views.screens.SplashScreen;
 
@@ -18,6 +18,7 @@ public class AirCrewApp extends UiApplication {
 	private AirCrewApp(){
 		
 		app = this;
+		
 		resources = new AirCrewResources();
 		
 		userController = new UserController();
