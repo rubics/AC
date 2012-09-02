@@ -44,7 +44,6 @@ public class ProfileScreen extends MainScreen{
 	private Manager vrManager;
 	CompositeFieldManager manager;
 	
-	private String[] gender = {"Male", "Female"};
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
 	
@@ -71,6 +70,14 @@ public class ProfileScreen extends MainScreen{
 			public void afterSuccess(Profile profile) {
 				profileInfo.getProfileController().setProfile(profile);
 				updateScreen();
+				
+				CityRequest cityRequest = new CityRequest(){
+					public void afterSuccess(City[] _cities){
+						cities = _cities;
+						updateCityChoiceField();
+					}
+				};
+				cityRequest.getCity(profileInfo.getProfileController().getProfile().getCountry_code());
 			}
 		};
 		myProfileRequest.getMyProfileInfo();
@@ -124,9 +131,11 @@ public class ProfileScreen extends MainScreen{
 	public void updateCityChoiceField(){
 		UiApplication.getUiApplication().invokeLater(new Runnable() {
 			
-			public void run() {
+			public void run(){
 				manager.delete(cityField);
-				cityField = new CompositeObjectChoiceField("City", cities, 0);
+				String city_id = profileInfo.getProfileController().getProfile().getCityId();
+				System.out.println(">> City: " + getCityIndex(city_id));
+				cityField = new CompositeObjectChoiceField("City", cities, getCityIndex(city_id));
 				manager.add(cityField);
 				currentScreen.invalidate();
 			}
@@ -177,6 +186,15 @@ public class ProfileScreen extends MainScreen{
 			updateProfile.updateProfile(postString.toString());
 		}
 	};
+	
+	private int getCityIndex(String city_id){
+		for(int i=0; i<cities.length; i++){
+			System.out.println(city_id + "---" + cities[i].getCity_id() + ">> " + cities[i].getCity_name());
+			if(cities[i].getCity_id().equals(city_id))
+				return i;
+		}
+		return 0;
+	}
 	
 	public boolean isDirty() {
 	    return false;

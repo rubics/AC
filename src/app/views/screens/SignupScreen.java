@@ -29,8 +29,8 @@ public class SignupScreen extends MainScreen{
 	private CompositeObjectChoiceField airlineField;
 	private CompositeObjectChoiceField designationField;
 	private CompositeObjectChoiceField genderField;
-	private CompositeTextBox locationField;
-	private CompositeTextBox countryField;
+	private CompositeObjectChoiceField locationField;
+	private CompositeObjectChoiceField countryField;
 	private TabbedButton signUpButton;
 	private TabbedButton backButton;
 	private Manager mvrm;
@@ -49,11 +49,11 @@ public class SignupScreen extends MainScreen{
 		emailField = new CompositeTextBox("email", "", true);
 		passwordField = new CompositePasswordBox("Password", "", true);
 		confirmPasswordField = new CompositePasswordBox("Confirm Password", "", true);
-		airlineField = new CompositeObjectChoiceField("Airlines", airlines,0);
+		airlineField = new CompositeObjectChoiceField("Airlines", AirCrewResources.airlines,0);
 		designationField = new CompositeObjectChoiceField("Designation", AirCrewResources.designations, 0);
 		genderField = new CompositeObjectChoiceField("Gender", AirCrewResources.genders,0);
-		locationField = new CompositeTextBox("Location", "", true);
-		countryField = new CompositeTextBox("Country", "", true);
+		locationField = new CompositeObjectChoiceField("Location", AirCrewResources.countries, 0);
+		countryField = new CompositeObjectChoiceField("Country", AirCrewResources.countries, 0);
 		
 		CompositeFieldManager manager = new CompositeFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		
@@ -78,7 +78,7 @@ public class SignupScreen extends MainScreen{
 		
 		mvrm.add(tabbedButtonManager);
 		mvrm.add(new SpaceField(10));
-		add(mvrm);		
+		add(mvrm);
 	}
 	
 	public String getPassword() {
@@ -100,7 +100,7 @@ public class SignupScreen extends MainScreen{
 					airlines[airlineField.getSelectedIndex()],
 					String.valueOf(designationField.getSelectedIndex()+1),
 					String.valueOf(genderField.getSelectedIndex()+1),
-					countryField.getText(),
+					countryField.getSelectedObject().toString(),
 					String.valueOf(1),
 					String.valueOf(1),
 					confirmPasswordField.getText(),

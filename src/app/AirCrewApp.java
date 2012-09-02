@@ -22,7 +22,7 @@ public class AirCrewApp extends UiApplication {
 		resources = new AirCrewResources();
 		
 		userController = new UserController();
-		userController.pushSignInScreen();
+		userController.pushSignInScreen(true);
 		
 		SplashScreen splash = new SplashScreen((float) 0.5);
 		pushScreen(splash);

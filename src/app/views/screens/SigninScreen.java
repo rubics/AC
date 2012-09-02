@@ -42,8 +42,8 @@ public class SigninScreen extends MainScreen{
 
 		this_screen = this;
 		userController = _userController;
-		usernameField = new CompositeTextBox("Email", "pratuat@gmail.com", true, composite_field_width);
-		passwordField = new CompositePasswordBox("Password", "letmein", true, composite_field_width);
+		usernameField = new CompositeTextBox("Email", "", true, composite_field_width);
+		passwordField = new CompositePasswordBox("Password", "", true, composite_field_width);
 		usernameField.setColorScheme(0x606060, Color.WHITE);
 		passwordField.setColorScheme(0x606060, Color.WHITE);
 		
@@ -64,7 +64,7 @@ public class SigninScreen extends MainScreen{
 				graphics.setColor(Color.WHITE);
 				graphics.setFont(graphics.getFont().derive(Font.ITALIC, 2, Ui.UNITS_pt));
 				super.paint(graphics);
-			}
+			}			
 		};
 		
 		LoginControls loginControls = new LoginControls(0);
@@ -75,6 +75,11 @@ public class SigninScreen extends MainScreen{
 		
 		login.setChangeListener(loginListener);
 		register.setChangeListener(registerListener);
+	}
+	
+	public void setCredentials(String user_name, String password){
+		usernameField.setText(user_name);
+		passwordField.setText(password);
 	}
 	
 	

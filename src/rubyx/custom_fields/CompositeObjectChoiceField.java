@@ -45,7 +45,8 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 		add(labelField);
 		objectChoiceField = new ObjectChoiceField();
 		objectChoiceField.setChoices(_objects);
-		objectChoiceField.setSelectedIndex(_startIndex);
+		if (_startIndex > 0)
+			objectChoiceField.setSelectedIndex(_startIndex);
 		objectChoiceField.setFont(font_composite_label);
 		add(objectChoiceField);
 	}

@@ -14,8 +14,10 @@ import rubyx.custom_fields.updatable_imagefield.UpdatableImageField;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.models.DeleteImageRequest;
 import app.models.GalleryImage;
 import app.models.Images;
+import app.models.SetMainImageRequest;
 import app.views.fields.profile.GridImageField;
 import app.views.fields.profile.GridViewController;
 import app.views.managers.profile.ProfileInfoScreenManager;
@@ -30,6 +32,7 @@ public class GalleryScreen extends MainScreen{
 	private GridViewController gridImageController;
 	private Field addButton;
 	private GalleryImage[] galleryImages;
+	private int image_index = 0;
 	
 //	public static Bitmap[] images;
 	
@@ -99,8 +102,27 @@ public class GalleryScreen extends MainScreen{
 	private FieldChangeListener gridFieldListener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
-			int index = field.getIndex();
-			UiApplication.getUiApplication().pushScreen(new PreviewPopup(galleryImages[index].getImage()));
+			image_index = field.getIndex();
+			PreviewPopup preview_popup = new PreviewPopup(galleryImages[image_index].getImage());
+			preview_popup.setListeners(deleteImageListener, setMainImageListener);
+			UiApplication.getUiApplication().pushScreen(preview_popup);
+		}
+	};
+	
+	private FieldChangeListener setMainImageListener = new FieldChangeListener() {	
+		public void fieldChanged(Field field, int context) {
+			SetMainImageRequest setMainImage = new SetMainImageRequest();
+			setMainImage.setMainImage(AirCrewApp.app.getUserController().getUser().getUserId(),
+					galleryImages[image_index].getId());
+			UiApplication.getUiApplication().popScreen(field.getScreen());
+		}
+	};
+	
+	private FieldChangeListener deleteImageListener = new FieldChangeListener() {	
+		public void fieldChanged(Field field, int context) {
+			DeleteImageRequest deleteImage = new DeleteImageRequest();
+			deleteImage.deleteImage(galleryImages[image_index].getId());
+			UiApplication.getUiApplication().popScreen(field.getScreen());
 		}
 	};
 

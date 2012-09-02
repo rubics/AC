@@ -9,7 +9,7 @@ public class Profile {
 	private String about_me;
 	private String designation;
 	private String country;
-	private String city;
+	private String city_id;
 	private String airline_name;
 	private String airline_id;
 	private String type;
@@ -19,7 +19,7 @@ public class Profile {
 	
 	public Profile(String userId, String userName, String userEmail,
 			String airline, String gender, String aboutMe, String designation,
-			String country, String city, String airlineName, String airlineId,
+			String country, String city_id, String airlineName, String airlineId,
 			String type, String desig, String cityName, String countryCode) {
 		super();
 		user_id = userId;
@@ -30,7 +30,7 @@ public class Profile {
 		about_me = aboutMe;
 		this.designation = designation;
 		this.country = country;
-		this.city = city;
+		this.city_id = city_id;
 		airline_name = airlineName;
 		airline_id = airlineId;
 		this.type = type;
@@ -71,8 +71,8 @@ public class Profile {
 		return country;
 	}
 
-	public String getCity() {
-		return city;
+	public String getCityId() {
+		return city_id;
 	}
 
 	public String getAirline_name() {

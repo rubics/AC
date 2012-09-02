@@ -6,46 +6,38 @@ import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.Dialog;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
-import app.controllers.DealController;
-import app.views.screens.deals.DealFilterScreen;
 
-public abstract class CityRequest implements HttpRequestListener {
+
+public class SetMainImageRequest implements HttpRequestListener {
 	
-	private Deal deal;
-	private DealController dealController;
 	private static final String method = "GET";
+	private HttpRequestListener requestListener = this;
 	private HttpRequestDispatcher dispatcher;
 	
-	public CityRequest(){}
+	public SetMainImageRequest(){}
 	
-	public void getCity(String _country_code){
-		dispatcher = new HttpRequestDispatcher(AirCrew.cities + _country_code, method, this, "");
+	public void setMainImage(String user_id, String image_id){
+		dispatcher = new HttpRequestDispatcher(AirCrew.set_main_image + user_id +"/" + image_id, method, requestListener, "");
 		dispatcher.start();
 	}
 	
 	public void httpsuccess(byte[] array, String str) {
 		final String json_response = new String(array);
+		System.out.println(json_response);
 		try{
 			JSONObject json = new JSONObject(json_response);
 
-			if(json.has("City")){
+			if(json.has("response")) {
 
-				JSONArray cities_arr = json.getJSONArray("City");
-				
-				City[] cities = new City[cities_arr.length()];
-				for(int i=0; i<cities_arr.length(); i++){
-					String city_id = ((JSONObject)(cities_arr.get(i))).getString("id");
-					String city_name = ((JSONObject)(cities_arr.get(i))).getString("city");
-					cities[i] = new City(city_id, city_name);
-					System.out.println(cities[i]);
-				}
-				afterSuccess(cities);
+				JSONObject response = json.getJSONObject("response");
+
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");
 				final String code = response.getString("code");
 				final String message = response.getString("message");
 				
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+					
 					public void run() {
 						Dialog.alert(message);
 					}		
@@ -59,6 +51,4 @@ public abstract class CityRequest implements HttpRequestListener {
 	}
 	
 	public void httpfailure(String errmsg) {}
-	
-	public abstract void afterSuccess(City[] cities);
 }

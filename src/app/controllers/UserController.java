@@ -19,11 +19,14 @@ public class UserController {
 	private SigninScreen signinScreen;
 	private SignupScreen signupScreen;
 	
+	
 
 	public UserController(){}
 
-	public void pushSignInScreen(){
+	public void pushSignInScreen(boolean remember_me){
 		signinScreen = new SigninScreen(this);
+		if (remember_me)
+			signinScreen.setCredentials("pratuat@gmail.com", "letmein");
 		AirCrewApp.app.pushScreen(signinScreen);
 	}
 	
@@ -121,7 +124,7 @@ public class UserController {
 						
 						public void run() {
 							UiApplication.getUiApplication().popScreen(UiApplication.getUiApplication().getActiveScreen());
-							pushSignInScreen();
+							pushSignInScreen(false);
 							Dialog.alert(message);
 						}		
 					});
@@ -154,8 +157,8 @@ public class UserController {
 						
 						public void run() {
 							UiApplication.getUiApplication().popScreen(UiApplication.getUiApplication().getActiveScreen());
-							pushSignInScreen();
-							Dialog.inform(message);
+							pushSignInScreen(false);
+//							Dialog.inform(message);
 						}
 					});
 

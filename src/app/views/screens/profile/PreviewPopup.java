@@ -20,6 +20,8 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 public class PreviewPopup extends PopupScreen{
 	
 	Screen this_screen;
+	TabbedButton deleteButton;
+	TabbedButton setAsMainButton;
 	
 	public PreviewPopup(Bitmap image){
 
@@ -36,15 +38,20 @@ public class PreviewPopup extends PopupScreen{
 		});
 		manager.add(imageField);
 		manager.add(new SpaceField(10));
-		Field a = new TabbedButton("Set as Default", 6);
-		Field b = new TabbedButton("Delete", 6);
+		deleteButton = new TabbedButton("Delete", 6);
+		setAsMainButton = new TabbedButton("Set as Main Picture", 5);
 		Manager m = new TabbedButtonManager(360, 40);
-		m.add(a);
-		m.add(b);
+		m.add(deleteButton);
+		m.add(setAsMainButton);
 		manager.add(m);
 		add(manager);
 		
 //		add(m);
+	}
+	
+	public void setListeners(FieldChangeListener delete_image, FieldChangeListener set_main_image){
+		deleteButton.setChangeListener(delete_image);
+		setAsMainButton.setChangeListener(set_main_image);
 	}
 	
 	class ResizedBitmapField extends Field{
