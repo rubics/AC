@@ -54,5 +54,4 @@ public class GalleryImage extends UpdatableImageModel{
 	public Bitmap getImage(){
 		return image;
 	}
-
 }

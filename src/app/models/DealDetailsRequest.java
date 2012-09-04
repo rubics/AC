@@ -52,7 +52,6 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 					String _image_id = images.getJSONObject(i).getString("img_id");
 					String _image_name = images.getJSONObject(i).getString("image_name");
 					String _icon_name = images.getJSONObject(i).getString("icon_name");
-					System.out.println(dealDetails.addImages(_image_id, _image_name, _icon_name));
 				}
 				
 				System.out.println(dealDetails);

@@ -21,21 +21,23 @@ public class CustomEditField extends VerticalFieldManager{
 	private static final Font font = Font.getDefault().derive(Font.PLAIN, 5, Ui.UNITS_pt);	
 	
 	public CustomEditField(String _string, int _width, int _height){
-		super();
+		super(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		string = _string;
 		width = _width;
 		height = _height;
-		field = new EditField("", string);
+		field = new EditField(EditField.NO_LEARNING | EditField.STATUS_MOVE_FOCUS_VERTICALLY | EditField.NON_SPELLCHECKABLE);
+		field.setLabel("");
+		field.setText(string);
 		field.setFont(font);
 		Manager manager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | VERTICAL_SCROLLBAR){
 			public void sublayout(int a, int b){
 				layoutChild(getField(0), width  - 2*H_OFFSET, b);
 				setPositionChild(getField(0),H_OFFSET, V_OFFSET);
-				setExtent(width, height);				
+				setExtent(width, height);
 			}
 		};
 		manager.add(field);
-		add(manager);		
+		add(manager);
 	}
 	
 	public void sublayout(int a, int b){

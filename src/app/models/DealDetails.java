@@ -2,9 +2,12 @@ package app.models;
 
 import java.util.Vector;
 
-import net.rim.device.api.util.StringUtilities;
+import net.rim.device.api.system.Display;
 
-public class DealDetails {
+import rubyx.custom_fields.WebImageField;
+import rubyx.custom_fields.updatable_imagefield.UpdatableImageModel;
+
+public class DealDetails extends UpdatableImageModel{
 
 	private String name;
 	private String description;
@@ -48,10 +51,9 @@ public class DealDetails {
 		return logo;
 	}
 
-	public String addImages(String _image_id, String _image_name, String _icon_name){
-		Photos photo = new Photos(_image_id, _image_name, _icon_name);
-		images.addElement(photo);
-		return (photo.toString());
+	public void addImages(String _image_id, String _icon_name){
+		DealImage deal_image = new DealImage(_image_id, _icon_name);
+		images.addElement(deal_image);
 	}
 	
 	public String getDescription() {
@@ -80,21 +82,5 @@ public class DealDetails {
 
 	public String toString(){
 		return ("--------  DealDetails  ----------\n" + name + "\n" + description +"\n" + category + "\n" + deal);
-	}
-}
-
-class Photos{
-	private String image_id;
-	private String image_name;
-	private String icon_name;
-	
-	public Photos(String _image_id, String _image_name, String _icon_name){
-		image_id = _image_id;
-		image_name = _image_name;
-		icon_name = _icon_name;
-	}
-	
-	public String toString(){
-		return ("---------  Photo  -------------\n" + image_id + "\n" + image_name + "\n" + icon_name);
 	}
 }

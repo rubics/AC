@@ -1,5 +1,7 @@
 package app.views.screens.chat;
 
+import javax.microedition.lcdui.TextBox;
+
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
@@ -29,10 +31,9 @@ public class ChatScreen  extends MainScreen{
 	FieldChangeListener listener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
-			vrm.add(new ChatMessageField(Images.avatar_a[(switcher) ? 0 : 1], chatBox.getText(),switcher));
+			vrm.add(new ChatMessageField(Images.avatar_a[0], chatBox.getText(),switcher));
 			vrm.invalidate();
 			chatBox.setText("");
-			switcher = !switcher;
 		}
 	};
 	

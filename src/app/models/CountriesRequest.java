@@ -30,11 +30,10 @@ public abstract class CountriesRequest implements HttpRequestListener {
 
 				JSONArray countries_arr = json.getJSONArray("Country");
 				
-				Country[] countries = new Country[countries_arr.length()+1];
-				countries[0] = new Country("0", "All Countries");
-				for(int i=1; i<countries_arr.length()+1; i++){
-					String country_id = ((JSONObject)(countries_arr.get(i-1))).getString("country_code");
-					String country_name = ((JSONObject)(countries_arr.get(i-1))).getString("country");
+				Country[] countries = new Country[countries_arr.length()];
+				for(int i=0; i<countries_arr.length(); i++){
+					String country_id = ((JSONObject)(countries_arr.get(i))).getString("country_code");
+					String country_name = ((JSONObject)(countries_arr.get(i))).getString("country");
 					countries[i] = new Country(country_id, country_name);
 				}
 				
@@ -46,7 +45,7 @@ public abstract class CountriesRequest implements HttpRequestListener {
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 					public void run() {
 						Dialog.alert(message);
-					}		
+					}
 				});
 			}
 			

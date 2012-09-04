@@ -31,9 +31,6 @@ public class DealController {
 		dealController = this;
 		dealScreenManger = new DealScreenManager(this);
 		
-//		DealsRequest dealRequest = new DealsRequest(this);
-//		dealRequest.getAllDeals();
-		
 		// populate deal categories
 		CategoriesRequest categoriesRequest = new CategoriesRequest(this);
 		categoriesRequest.getCategories();
