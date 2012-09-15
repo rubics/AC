@@ -1,6 +1,13 @@
 package app.views.screens.deals;
 
-import net.rim.device.api.lbs.MapField;
+import net.rim.device.api.lbs.maps.MapDimensions;
+import net.rim.device.api.lbs.maps.MapFactory;
+import net.rim.device.api.lbs.maps.model.MapDataModel;
+import net.rim.device.api.lbs.maps.model.MapLocation;
+import net.rim.device.api.lbs.maps.model.MapPoint;
+import net.rim.device.api.lbs.maps.model.Mappable;
+import net.rim.device.api.lbs.maps.ui.RichMapField;
+import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Manager;
@@ -131,10 +138,20 @@ public class SearchResultScreen extends MainScreen{
 				current_screen.delete(vrm);
 				vrm = new VerticalFieldManager(Manager.USE_ALL_HEIGHT);
 				VerticalFieldManager listManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR | Manager.USE_ALL_WIDTH);
-				MapField mapField = new MapField(Field.FIELD_HCENTER | Field.USE_ALL_WIDTH);
-				mapField.setPreferredSize(460, 200);
-				mapField.moveTo(4500000, 9000000);
-				mapField.setZoom(1);
+				
+				RichMapField mapField = MapFactory.getInstance().generateRichMapField();
+				MapDataModel mapDataModel = mapField.getModel();
+				MapDimensions mapDimensions = new MapDimensions(Display.getWidth(), 220);
+				mapDimensions.setZoom(3);
+				mapDimensions.setCentre(new MapPoint(Double.parseDouble(dealController.getDeals()[0].getX_code()), Double.parseDouble(dealController.getDeals()[0].getY_code())));
+				mapField.getMapField().setDimensions(mapDimensions);
+				
+				MapDataModel dataModel = mapField.getModel();
+				for(int i=0; i < dealController.getDeals().length; i++){
+					Deal deal = dealController.getDeals()[i];
+					dataModel.add((Mappable) new MapLocation(Double.parseDouble(deal.getX_code()), Double.parseDouble(deal.getY_code()), deal.getName(), deal.getDescription()), deal.getDescription(), true);
+				}
+								
 				listManager.add(mapField);
 				vrm.add(listManager);
 				add(vrm);

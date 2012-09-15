@@ -10,8 +10,8 @@ import net.rim.device.api.ui.Keypad;
 
 public class DealImageField extends Field implements UpdatableImageField{
 	
-	private static final int image_width = 120;
-	private static final int image_height = 100;
+	private static final int image_width = 240;
+	private static final int image_height = 200;
 	
 	public static final int offset = 5;
 	
@@ -20,9 +20,9 @@ public class DealImageField extends Field implements UpdatableImageField{
 	
 	private Bitmap image; 
 	
-	public DealImageField(Bitmap _image, int height){
+	public DealImageField(Bitmap _image){
 		super();
-		this.height = height;
+		this.height = image_height+20;
 		image = new Bitmap(image_width, image_height);		
 		_image.scaleInto(image, Bitmap.FILTER_BILINEAR);		
 	}

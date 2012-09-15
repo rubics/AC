@@ -1,20 +1,20 @@
 package rubyx.custom_fields;
 
-
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
+import net.rim.device.api.ui.DrawStyle;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
+import net.rim.device.api.ui.Ui;
 import app.models.AirCrew;
 import app.models.Deal;
 import app.models.Images;
 import app.views.fields.listings.ListingField;
 
 public class ListItem extends Field{
-	
 	static int width = Display.getWidth();
 	static int height = 72;
 	static int bitmap_dimension = 60;
@@ -42,8 +42,8 @@ public class ListItem extends Field{
 //		Images.profile_pics[3].scaleInto(0, 0, Images.profile_pics[3].getWidth(), Images.profile_pics[3].getHeight(), profilePicture, 0, 0, profilePicture.getWidth(), profilePicture.getHeight(), Bitmap.FILTER_BILINEAR);
 		focusable = _focusable;
 		
-		category_font = Font.getDefault();
-		name_font = category_font.derive(Font.BOLD);
+		category_font = Font.getDefault().derive(0, 5, Ui.UNITS_pt);
+		name_font = Font.getDefault().derive(0, 7, Ui.UNITS_pt);
 	}
 	
 	protected void paint(Graphics g){
@@ -52,8 +52,10 @@ public class ListItem extends Field{
 		}
 		g.drawBitmap(bitmap_offset_h, bitmap_offset_v, bitmap_dimension, bitmap_dimension, profilePicture.returnBitmap(), 0, 0);
 		g.setColor(Color.WHITE);
-		g.drawText(title, name_offset_h , bitmap_offset_v);
-		g.drawText(description, name_offset_h, description_offset_v);
+		g.setFont(name_font);
+		g.drawText(title, name_offset_h , bitmap_offset_v,DrawStyle.ELLIPSIS, Display.getWidth() - name_offset_h - bitmap_offset_h);
+		g.setFont(category_font);
+		g.drawText(description, name_offset_h, description_offset_v, DrawStyle.ELLIPSIS, Display.getWidth() - name_offset_h - bitmap_offset_h);
 		g.setColor(0x555555);
 		if(focusable)
 			g.fillRect(5, 70, width-10, 2);
@@ -91,5 +93,4 @@ public class ListItem extends Field{
 	protected void fieldChangeNotify(int context) {
 		super.fieldChangeNotify(context);
 	}
-
 }

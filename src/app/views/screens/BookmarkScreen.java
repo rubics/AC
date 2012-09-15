@@ -79,8 +79,8 @@ public class BookmarkScreen extends MainScreen{
 						bookmarks[index].setDealDetails(dealDetails);
 						UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 							public void run() {
-								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(bookmarks[index].getDealDetails());
-								aboutDeals.pushScreen();
+//								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(bookmarks[index]);
+//								aboutDeals.pushScreen();
 							}
 						});
 					}
@@ -89,8 +89,8 @@ public class BookmarkScreen extends MainScreen{
 			} else {
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 					public void run() {
-						DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(bookmarks[index].getDealDetails());
-						aboutDeals.pushScreen();
+//						DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(bookmarks[index].getDealDetails());
+//						aboutDeals.pushScreen();
 					}
 				});
 			}

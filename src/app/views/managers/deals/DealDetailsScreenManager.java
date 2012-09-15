@@ -15,7 +15,8 @@ import app.views.screens.deals.VideoScreen;
 
 public class DealDetailsScreenManager {
 	
-	public DealDetails dealDetails;
+//	public DealDetails dealDetails;
+	public Deal deal;
 	private TabbedScreenManager tabbedScreenManager;
 	private MainScreen[] tabbedScreens = new MainScreen[4];
 	private Manager tabbedPaneManager = new TabbedPaneManager(Manager.USE_ALL_WIDTH);
@@ -24,8 +25,9 @@ public class DealDetailsScreenManager {
 	private Field locationButton = new TabbedPaneButton("Location");
 	private Field bookmarkButton = new TabbedPaneButton("Bookmark");
 	
-	public DealDetailsScreenManager(DealDetails _dealDetails) {
-		dealDetails = _dealDetails;
+	public DealDetailsScreenManager(Deal deal) {
+//		dealDetails = _dealDetails;
+		this.deal = deal;
 		tabbedScreens[0] = new EmailScreen(this);
 		tabbedScreens[1] = new VideoScreen(this);
 		tabbedScreens[2] = new LocationScreen(this);

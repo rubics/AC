@@ -30,20 +30,20 @@ public class EmailScreen extends MainScreen{
 		manager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		add(manager);
 		manager.add(new NullField());
-		System.out.println(dealsInfo.dealDetails.getName());
-		System.out.println(dealsInfo.dealDetails.getDescription());
-		manager.add(new ListItem(dealsInfo.dealDetails.getName(), dealsInfo.dealDetails.getDescription(), dealsInfo.dealDetails.getLogo(), false));
+		System.out.println(dealsInfo.deal.getDealDetails().getName());
+		System.out.println(dealsInfo.deal.getDealDetails().getDescription());
+		manager.add(new ListItem(dealsInfo.deal.getDealDetails().getName(), dealsInfo.deal.getDealDetails().getDescription(), dealsInfo.deal.getDealDetails().getLogo(), false));
 		HorizontalFieldManager image_scroller = new HorizontalFieldManager(Manager.HORIZONTAL_SCROLL);
 		// override focus movement with arrow keys
-		Vector deal_images = dealsInfo.dealDetails.getImages(); 
-		for(int i=0; i<5; i++){
+		Vector deal_images = dealsInfo.deal.getDealDetails().getImages();
+		for(int i=0; i<deal_images.size(); i++){
 			DealImage deal_image = (DealImage)deal_images.elementAt(i);
-			DealImageField field = new DealImageField(Images.avatar_a[0], 130);
+			DealImageField field = new DealImageField(Images.aircrew_small);
 			deal_image.addUpdatableFields(field);
 			image_scroller.add(field);
 		}
 		manager.add(image_scroller);
-		manager.add(new CompositeDealLabel(dealsInfo.dealDetails));
+		manager.add(new CompositeDealLabel(dealsInfo.deal.getDealDetails()));
 	}
 	
 	public boolean isDirty() {

@@ -98,7 +98,7 @@ public class DealController {
 						deals[index].setDealDetails(dealDetails);
 						UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 							public void run() {
-								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index].getDealDetails());
+								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
 								aboutDeals.pushScreen();
 							}
 						});
@@ -108,7 +108,7 @@ public class DealController {
 			} else {
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 					public void run() {
-						DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index].getDealDetails());
+						DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(deals[index]);
 						aboutDeals.pushScreen();
 					}
 				});
