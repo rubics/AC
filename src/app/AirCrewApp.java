@@ -4,13 +4,16 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
 import app.controllers.DashboardController;
+import app.controllers.PersistenceController;
 import app.controllers.UserController;
 import app.models.AirCrewResources;
+import app.models.User;
 import app.views.screens.SplashScreen;
 
 public class AirCrewApp extends UiApplication {
 	
 	public static AirCrewApp app;
+	public PersistenceController persistenceController;
 	private UserController userController;
 	public DashboardController dashboardController;
 	public AirCrewResources resources;
@@ -21,8 +24,14 @@ public class AirCrewApp extends UiApplication {
 		
 		resources = new AirCrewResources();
 		
+		persistenceController = new PersistenceController();
 		userController = new UserController();
-		userController.pushSignInScreen(true);
+		
+		if(persistenceController.retrieveUser() != null){
+			userController.setUser(persistenceController.retrieveUser());
+			pushDashboardScreen();
+		} else
+			userController.pushSignInScreen(false);
 		
 		SplashScreen splash = new SplashScreen((float) 0.5);
 		pushScreen(splash);

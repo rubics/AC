@@ -1,5 +1,7 @@
 package app.models;
 
+import net.rim.device.api.system.Bitmap;
+
 public class AirCrew {
 	public static final String url = "http://4aircrew.com/dev";
 	
@@ -25,4 +27,19 @@ public class AirCrew {
 	public static final String designation = url + "/index.php/iphone_4aircrew/i_designation";
 	public static final String set_main_image = url + "/index.php/iphone_4aircrew/set_img_default/";
 	public static final String delete_image = url + "/index.php/iphone_4aircrew/remove_gallery_img/";
+	public static final String favorites = url + "/index.php/iphone_4aircrew/my_connection/";
+	public static final String[] toolbox_url = {url + "/index.php/iphone_4aircrew/i_cc",
+												"http://www.weather.com",
+												"http://aviationweather.gov/obs/sat/intl",
+												"http://aviationweather.gov/adds/metars",
+												url + "/index.php/iphone_4aircrew/crew_discussion/574",
+												url + "/index.php/iphone_4aircrew/recommend_aircrew"};
+	
+	public static final Bitmap[] toolbox = {Bitmap.getBitmapResource("images/listing/iconCurrency.png"),
+		Bitmap.getBitmapResource("images/listing/iconWeather.png"),
+		Bitmap.getBitmapResource("images/listing/iconSatelite.png"),
+		Bitmap.getBitmapResource("images/listing/iconTaf.png"),
+		Bitmap.getBitmapResource("images/listing/iconCrew.png"),
+		Bitmap.getBitmapResource("images/listing/iconRecommendation.png")};
+	public static final String[] toolbox_names ={"Currency Converter", "Weather Forecast", "Satellite Map", "METAR & TAF", "Crew Discussion", "Recommend 4Aircrew"};
 }

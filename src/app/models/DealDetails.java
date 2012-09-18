@@ -17,9 +17,19 @@ public class DealDetails extends UpdatableImageModel{
 	private String address;
 	private String video;
 	private String deal;
+	private String x_code;
+	private String y_code;
 	private Vector images;
 	
 	
+	public String getX_code() {
+		return x_code;
+	}
+
+	public String getY_code() {
+		return y_code;
+	}
+
 	public DealDetails(String _name,
 			String _description,
 			String _category,
@@ -27,7 +37,9 @@ public class DealDetails extends UpdatableImageModel{
 			String _website,
 			String  _address,
 			String _video,
-			String _deal){
+			String _deal,
+			String _x_code,
+			String _y_code){
 		name = _name;
 		description = _description;
 		category = _category;
@@ -36,6 +48,8 @@ public class DealDetails extends UpdatableImageModel{
 		address = _address;
 		video = _video;
 		deal = _deal;
+		x_code = _x_code;
+		y_code = _y_code;
 		images = new Vector(3,3);
 	}
 	

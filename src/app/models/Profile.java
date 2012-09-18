@@ -98,6 +98,4 @@ public class Profile {
 	public String getCountry_code() {
 		return country_code;
 	}
-	
-	
 }

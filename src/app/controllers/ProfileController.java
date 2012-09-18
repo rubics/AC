@@ -13,7 +13,7 @@ public class ProfileController {
 	private ProfileController profileController;
 	private GalleryImage[] galleryImages;
 	private Profile profile;
-		
+	
 	public ProfileController(){
 		profileController = this;
 		profileInfoScreenManager = new ProfileInfoScreenManager(this);

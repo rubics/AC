@@ -108,7 +108,7 @@ public class DashboardScreen extends MainScreen{
 				dashboardController.getBookmarkController().pushScreen();
 				break;
 			case 4:
-				app.pushScreen(new FavoritesScreen());
+				dashboardController.getFavoritesController().pushFavoritesScreen();
 				break;
 			case 5:
 				dashboardController.getProfileController().pushScreen();

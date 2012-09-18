@@ -22,7 +22,7 @@ public class BookmarkRequest implements HttpRequestListener {
 	
 	public void getBookmarks(){
 		AirCrewApp app = (AirCrewApp)(UiApplication.getUiApplication());
-		dispatcher = new HttpRequestDispatcher(AirCrew.bookmarks + app.getUserController().getUser().getUserId(),method, this, "");
+		dispatcher = new HttpRequestDispatcher(AirCrew.bookmarks + AirCrewApp.app.getUserController().getUser().getUserId(),method, this, "");
 		dispatcher.start();
 	}
 	
@@ -34,7 +34,7 @@ public class BookmarkRequest implements HttpRequestListener {
 			if(json.has("bookmark")) {
 // {"bookmark":[{"bookmark_id":"9","b_id":"4","u_id":"364","b_name":null,"b_desc":"","logo":null}]}
 				JSONArray response = json.getJSONArray("bookmark");
-				final Bookmark[] bookmarks = new Bookmark[response.length()];
+				final Deal[] bookmarks = new Deal[response.length()];
 				for(int i=0; i<response.length(); i++){
 					JSONObject bookmark = (JSONObject)response.get(i);
 					String bookmark_id = bookmark.getString("bookmark_id");
@@ -43,7 +43,7 @@ public class BookmarkRequest implements HttpRequestListener {
 					String b_name = bookmark.getString("b_name");
 					String b_desc = bookmark.getString("b_desc");
 					String logo = bookmark.getString("logo");
-					bookmarks[i] = new Bookmark(bookmark_id, b_id, u_id, b_name, b_desc,logo);
+					bookmarks[i] = new Deal(b_id, b_name, b_desc,"", "",logo, "", "", "", "", "");
 				}
 				bookmarksController.setBookmarks(bookmarks);
 			} else if (json.has("error") & !json.isNull("error")){

@@ -8,7 +8,7 @@ import app.views.screens.BookmarkScreen;
 
 public class BookmarkController {
 	
-	private Bookmark[] bookmarks;
+	private Deal[] bookmarks;
 	private BookmarkRequest bookmarkRequest;
 	private BookmarkScreen bookmarkScreen;
 	private DashboardController dashboardController;
@@ -26,12 +26,12 @@ public class BookmarkController {
 		UiApplication.getUiApplication().pushScreen(bookmarkScreen);
 	}
 	
-	public void setBookmarks(Bookmark[] _bookmark){
+	public void setBookmarks(Deal[] _bookmark){
 		bookmarks = _bookmark;
 		bookmarkScreen.updateScreen();
 	}
 	
-	public Bookmark[] getBookmarks(){
+	public Deal[] getBookmarks(){
 		return bookmarks;
 	}
 }

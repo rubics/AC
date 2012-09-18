@@ -44,8 +44,12 @@ public abstract class DealDetailsRequest implements HttpRequestListener{
 				String address = details.getString("address");
 				String video = details.getString("video");
 				String _deal = details.getString("deal");
+				String x_code = details.getString("x_code");
+				String y_code = details.getString("y_code");
 				
-				dealDetails = new DealDetails(name, description, category, logo, website, address, video, _deal);
+				System.out.println(">> X_code: " + x_code + "\t>> Y_code: " + y_code);
+				
+				dealDetails = new DealDetails(name, description, category, logo, website, address, video, _deal, x_code, y_code);
 								
 				JSONArray images = response.getJSONArray("more_images");
 				for( int i=0; i<images.length(); i++){

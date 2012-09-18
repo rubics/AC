@@ -14,7 +14,6 @@ import app.views.screens.SignupScreen;
 
 public class UserController {
 
-	private AirCrewApp app = (AirCrewApp)UiApplication.getUiApplication();
 	private User user;
 	private SigninScreen signinScreen;
 	private SignupScreen signupScreen;
@@ -24,9 +23,8 @@ public class UserController {
 	public UserController(){}
 
 	public void pushSignInScreen(boolean remember_me){
+		
 		signinScreen = new SigninScreen(this);
-		if (remember_me)
-			signinScreen.setCredentials("pratuat@gmail.com", "letmein");
 		AirCrewApp.app.pushScreen(signinScreen);
 	}
 	
@@ -39,6 +37,20 @@ public class UserController {
 		return user;
 	}
 	
+	
+	public void setUser(User user){
+		this.user = user;
+	}
+	
+	public void registerUser(User user, boolean remember_me){
+		this.user = user;
+		if(remember_me){
+			AirCrewApp.app.persistenceController.persistUser(user);
+		} else {
+			AirCrewApp.app.persistenceController.removeUser();
+		}
+	}
+	
 	//------------------------------------------------------------------------------//
 	
 	public SigninRequest signinRequest = new SigninRequest() {
@@ -46,7 +58,8 @@ public class UserController {
 		public void httpsuccess(byte[] array, String str){
 
 			final String json_response = new String(array);
-			
+			System.out.println("-------------------------");
+			System.out.println(json_response);
 			try{
 				JSONObject json = new JSONObject(json_response);
 
@@ -61,11 +74,11 @@ public class UserController {
 					
 					user = new User(user_name, user_id, session_id, signinScreen.getPassword());
 					
-					app.pushDashboardScreen(); // push Dashboard Screen
+					AirCrewApp.app.pushDashboardScreen(); // push Dashboard Screen
 					
 					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 						public void run() {
-							app.popScreen(signinScreen);
+							AirCrewApp.app.popScreen(signinScreen);
 						}		
 					});
 
@@ -106,7 +119,6 @@ public class UserController {
 					String user_id = response.getString("userId");
 					final String message = response.getString("message");
 					
-									
 					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 						
 						public void run() {

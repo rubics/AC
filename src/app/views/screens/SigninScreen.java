@@ -1,5 +1,6 @@
 package app.views.screens;
 
+import helpers.org.json.me.JSONObject;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
@@ -9,8 +10,10 @@ import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.Ui;
+import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.ButtonField;
 import net.rim.device.api.ui.component.CheckboxField;
+import net.rim.device.api.ui.component.Dialog;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.CompositeFieldManager;
@@ -19,6 +22,8 @@ import rubyx.custom_fields.CompositeTextBox;
 import rubyx.custom_fields.SpaceField;
 import app.AirCrewApp;
 import app.controllers.UserController;
+import app.models.SigninRequest;
+import app.models.User;
 
 
 public class SigninScreen extends MainScreen{
@@ -94,10 +99,67 @@ public class SigninScreen extends MainScreen{
 	
 	//---------------------------------------------------------------------
 	
+	public SigninRequest signinRequest = new SigninRequest() {
+
+		public void httpsuccess(byte[] array, String str){
+
+			final String json_response = new String(array);
+			System.out.println(json_response);
+			
+			try{
+				JSONObject json = new JSONObject(json_response);
+
+				if(json.has("response") & !json.isNull("response")) {
+
+					JSONObject response = json.getJSONObject("response");
+					String user_name = response.getString("username");
+					String user_id = response.getString("userId");
+					String session_id = response.getString("sessionId");
+					String message = response.getString("message");
+					System.out.println(json_response);
+					
+					userController.registerUser(new User(user_name, user_id, session_id, getPassword()), rememberMe.getChecked()); 
+					
+					AirCrewApp.app.pushDashboardScreen(); // push Dashboard Screen
+					
+					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+						public void run() {
+							AirCrewApp.app.popScreen(this_screen);
+						}		
+					});
+
+				} else if (json.has("error") & !json.isNull("error")){
+					JSONObject response = json.getJSONObject("error");
+					final String code = response.getString("code");
+					final String message = response.getString("message");
+					
+					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+						
+						public void run() {
+							Dialog.alert(message);
+						}		
+					});
+				}
+				
+			}catch(Exception e){
+				System.out.println(">> Exception @ SignInScreen\n" + e.getClass().getName());
+				e.printStackTrace();
+				
+				UiApplication.getUiApplication().invokeLater(new Runnable() {
+					
+					public void run() {
+						Dialog.alert("Login Failed.");
+					}
+				});
+			}
+		}
+		public void httpfailure(String errmsg) {}
+	};
+	
 	private FieldChangeListener loginListener = new FieldChangeListener() {
 		
 		public void fieldChanged(Field field, int context) {
-			userController.signinRequest.sign_in(usernameField.getText(), passwordField.getText());
+			signinRequest.sign_in(usernameField.getText(), passwordField.getText());
 		}
 	};
 	

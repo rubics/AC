@@ -54,10 +54,10 @@ public class BookmarkScreen extends MainScreen{
 				currentScreen.delete(vrManager);
 				vrManager = new VerticalFieldManager(Manager.USE_ALL_HEIGHT);
 				VerticalFieldManager listManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
-				Bookmark[] bookmarks = bookmarkController.getBookmarks();
+				Deal[] bookmarks = bookmarkController.getBookmarks();
 				for(int i=0; i < bookmarks.length; i++){
-					Bookmark bookmark = bookmarks[i];
-					Field listItem = new ListingField(AirCrew.image_medium + bookmark.getLogo(), bookmark.getB_name(), "",8);
+					Deal bookmark = bookmarks[i];
+					Field listItem = new ListingField(AirCrew.image_medium + bookmark.getLogo(), bookmark.getName(), "",8);
 					listItem.setChangeListener(bookmarkDetailsListener);
 					listManager.add(listItem);
 				}
@@ -72,20 +72,20 @@ public class BookmarkScreen extends MainScreen{
 		
 		public void fieldChanged(Field field, int context) {
 			final int index = field.getIndex();
-			final Bookmark[] bookmarks = bookmarkController.getBookmarks();
+			final Deal[] bookmarks = bookmarkController.getBookmarks();
 			if(bookmarks[index].getDealDetails() == null){
 				DealDetailsRequest dealDetailsRequest = new DealDetailsRequest(){
 					public void afterSuccess(){
 						bookmarks[index].setDealDetails(dealDetails);
 						UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 							public void run() {
-//								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(bookmarks[index]);
-//								aboutDeals.pushScreen();
+								DealDetailsScreenManager aboutDeals = new DealDetailsScreenManager(bookmarks[index]);
+								aboutDeals.pushScreen();
 							}
 						});
 					}
 				};
-				dealDetailsRequest.getDetials(bookmarks[index].getB_id());
+				dealDetailsRequest.getDetials(bookmarks[index].getId());
 			} else {
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 					public void run() {

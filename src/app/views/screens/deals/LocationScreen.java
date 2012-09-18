@@ -33,10 +33,11 @@ public class LocationScreen extends MainScreen{
 		MapDataModel mapDataModel = mapField.getModel();
 		MapDimensions mapDimensions = new MapDimensions(Display.getWidth(), 270);
 		mapDimensions.setZoom(3);
-		mapDimensions.setCentre(new MapPoint(Double.parseDouble(dealsInfo.deal.getX_code()), Double.parseDouble(dealsInfo.deal.getY_code())));
+		System.out.println("X_Code: " + dealsInfo.deal.getDealDetails().getX_code() + "\tY_Code: " + dealsInfo.deal.getDealDetails().getY_code());
+		mapDimensions.setCentre(new MapPoint(Double.parseDouble(dealsInfo.deal.getDealDetails().getX_code()), Double.parseDouble(dealsInfo.deal.getDealDetails().getY_code())));
 		mapField.getMapField().setDimensions(mapDimensions);
 		
-		MapLocation location1 = new MapLocation(Double.parseDouble(dealsInfo.deal.getX_code()), Double.parseDouble(dealsInfo.deal.getY_code()), dealsInfo.deal.getName(), dealsInfo.deal.getDescription());
+		MapLocation location1 = new MapLocation(Double.parseDouble(dealsInfo.deal.getDealDetails().getX_code()), Double.parseDouble(dealsInfo.deal.getDealDetails().getY_code()), dealsInfo.deal.getName(), dealsInfo.deal.getDescription());
 		int index = mapDataModel.add((Mappable)location1, dealsInfo.deal.getName());
 		mapDataModel.tag(index, dealsInfo.deal.getName());
 		
@@ -61,7 +62,6 @@ public class LocationScreen extends MainScreen{
 			}catch(Exception e){
 				
 			}
-			
 		}
 	}
 }
