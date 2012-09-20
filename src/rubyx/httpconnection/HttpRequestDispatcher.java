@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 
+import app.models.AirCrew;
+
 import net.rim.device.api.io.http.HttpProtocolConstants;
 import net.rim.device.api.servicebook.ServiceBook;
 import net.rim.device.api.servicebook.ServiceRecord;
@@ -43,6 +45,8 @@ public class HttpRequestDispatcher extends Thread{
 			
 	        String connectionParameters = updateConnectionSuffix();
 	        String hit_url = (method.equalsIgnoreCase(METHOD_POST)) ? url : (url + "?" + new String(post));
+	        System.out.println(">> HIT-URL: " + hit_url);
+			System.out.println();
 	        HttpConnection connection = (HttpConnection)Connector.open(hit_url + connectionParameters);
 	        connection.setRequestMethod(method);
 		

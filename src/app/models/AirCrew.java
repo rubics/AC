@@ -3,7 +3,7 @@ package app.models;
 import net.rim.device.api.system.Bitmap;
 
 public class AirCrew {
-	public static final String url = "http://4aircrew.com/dev";
+	public static final String url = "http://www.4aircrew.com/dev";
 	
 	public static final String signin = url + "/index.php/iphone_4aircrew/login_phone";
 	public static final String signup = url + "/index.php/iphone_4aircrew/i_register";

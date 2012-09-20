@@ -1,6 +1,5 @@
 package app.views.screens.favorites;
 
-import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Manager;
@@ -12,6 +11,8 @@ import rubyx.custom_fields.ScreenBannar;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
 import app.controllers.FavoritesController;
+import app.models.AirCrew;
+import app.models.Connection;
 import app.models.Images;
 import app.views.fields.listings.ListingField;
 import app.views.screens.profile.GalleryScreen;
@@ -23,6 +24,8 @@ public class FavoritesScreen extends MainScreen{
 	private TabbedButton homeButton;
 	private VerticalFieldManager vrManager;
 	private FavoritesScreen this_screen;
+	
+	int displayed_index = 0;
 	
 	public FavoritesScreen(FavoritesController favoritesController){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
@@ -42,9 +45,10 @@ public class FavoritesScreen extends MainScreen{
 		add(vrManager);
 	}
 	
-	public FieldChangeListener listener = new FieldChangeListener() {
+	public FieldChangeListener favoritesListener = new FieldChangeListener() {
 		public void fieldChanged(Field field, int context) {
-			UiApplication.getUiApplication().pushScreen(new ProfileViewScreen(GalleryScreen.images[field.getIndex()]));
+			displayed_index = field.getIndex();
+			UiApplication.getUiApplication().pushScreen(new ProfileViewScreen(favoritesController.getConnections(), field.getIndex()));
 		}
 	};
 	
@@ -54,9 +58,12 @@ public class FavoritesScreen extends MainScreen{
 			public void run() {
 				this_screen.delete(vrManager);
 				vrManager = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
-				
-				for(int i=0; i<favoritesController.getConnections().length; i++){
-//					ListingField field = new ListingField(_bitmap, _title, _description, _online)
+				Connection[] connections = favoritesController.getConnections(); 
+				for(int i=0; i<connections.length; i++){
+					int visit_status = (connections[i].getVisit_status().equals("online") ? ListingField.STATUS_ONLINE : ListingField.STATUS_OFFLINE);
+					ListingField field = new ListingField(AirCrew.user_images + connections[i].getImage_name(), connections[i].getUser_name(), connections[i].getAbout_me(), visit_status);
+					field.setChangeListener(favoritesListener);
+					vrManager.add(field);
 				}
 				add(vrManager);
 			}
