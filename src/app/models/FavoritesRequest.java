@@ -19,7 +19,8 @@ public abstract class FavoritesRequest implements HttpRequestListener {
 	}
 	
 	public void getFavorites(){
-		dispatcher = new HttpRequestDispatcher(AirCrew.favorites + AirCrewApp.app.getUserController().getUser().getUserId(), method, requestListener, "");
+//		dispatcher = new HttpRequestDispatcher(AirCrew.favorites + AirCrewApp.app.getUserController().getUser().getUserId(), method, requestListener, "");
+		dispatcher = new HttpRequestDispatcher(AirCrew.favorites + "547", method, requestListener, "");
 		dispatcher.start();
 	}
 	
@@ -61,7 +62,6 @@ public abstract class FavoritesRequest implements HttpRequestListener {
 				}
 				
 				afterSuccess(connections);
-				
 				
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");

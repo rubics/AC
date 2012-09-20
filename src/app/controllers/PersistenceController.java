@@ -32,10 +32,7 @@ public class PersistenceController {
 	}
 	
 	public void removeUser(){
-		persistentHash.setUserId("");
-		persistentHash.setUserName("");
-		persistentHash.setUserPassword("");
-		persistentHash.setSessionId("");
+		persistentHash = null;
 		setContents();
 	}
 	

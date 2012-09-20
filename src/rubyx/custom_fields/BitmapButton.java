@@ -30,15 +30,15 @@ public class BitmapButton extends Field {
 		
 		graphics.setColor(Color.BLACK);
 		
-		graphics.fillRect(0, 0, icon.getWidth(), icon.getHeight());
+//		graphics.fillRect(0, 0, icon.getWidth(), icon.getHeight());
 		
-		if(isFocus())
-			graphics.setColor(0x186DEF);
-		else
-			graphics.setColor(Color.BLACK);
+//		if(isFocus())
+//			graphics.setColor(0x186DEF);
+//		else
+//			graphics.setColor(Color.BLACK);
 		
 		
-		graphics.fillRoundRect(0, 0, icon.getWidth(), icon.getHeight(),7,7);
+//		graphics.fillRoundRect(0, 0, icon.getWidth(), icon.getHeight(),7,7);
 //		graphics.setGlobalAlpha(70);
 //		graphics.setColor(Color.WHITE);
 //		graphics.fillRect(0, 0, icon.getWidth(), icon.getHeight()/2);		
@@ -46,14 +46,22 @@ public class BitmapButton extends Field {
 		graphics.setGlobalAlpha(255);
 		graphics.drawBitmap(0, 0, icon.getWidth(), icon.getHeight(), icon, 0, 0);
 		
+		if(isFocus()){
+			graphics.setColor(Color.WHITE);
+			graphics.setGlobalAlpha(60);
+			graphics.fillRect(0, 0, icon.getWidth(), icon.getHeight());
+		}
+		
 	}
 	
-	protected void paintBackground(Graphics graphics){
-		graphics.setBackgroundColor(Color.BLACK	);
-		graphics.setGlobalAlpha(255);
-		graphics.setColor(Color.BLACK);
-		graphics.fillRect(0, 0, icon.getWidth(), icon.getHeight());
-	}
+//	protected void paintBackground(Graphics graphics){
+//		graphics.setBackgroundColor(Color.BLACK	);
+//		graphics.setGlobalAlpha(255);
+//		graphics.setColor(Color.BLACK);
+//		graphics.fillRect(0, 0, icon.getWidth(), icon.getHeight());
+//	}
+	
+	public void drawFocus(Graphics g, boolean mode){}
 	
 	public boolean isFocusable(){
 		return focusable;

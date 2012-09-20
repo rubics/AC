@@ -26,7 +26,7 @@ public class FavoritesController {
 	
 	public void setConnections(Connection[] connections){
 		this.connections = connections;
-		// update Screen
+		favoritesScreen.updateFavoritesScreen();
 	}
 	
 	public Connection[] getConnections(){

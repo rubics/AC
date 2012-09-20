@@ -191,5 +191,4 @@ class LoginControls extends Manager{
 		
 		setExtent(width,height);
 	}
-	
 }

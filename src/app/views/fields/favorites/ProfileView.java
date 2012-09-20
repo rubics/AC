@@ -4,11 +4,11 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Manager;
-import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.container.HorizontalFieldManager;
-import net.rim.device.api.ui.container.VerticalFieldManager;
+import rubyx.custom_fields.BitmapButton;
+import rubyx.custom_fields.WebImageField;
 import app.models.Images;
-import app.models.__Profile;
+import app.views.screens.favorites.ProfileViewScreen;
 
 public class ProfileView extends Manager{
 	
@@ -19,24 +19,28 @@ public class ProfileView extends Manager{
 	protected float resizedHeight;
 	
 	protected HorizontalFieldManager avatarArea;
-	Bitmap resizedImage;
+	WebImageField webImage;
 	
-	public ProfileView(long style, Bitmap src_image){
+	public ProfileView(long style, ProfileViewScreen profileScreen){
 		super(style);
 
 		dimensions(Images.avatar);
-//		resizedImage = new Bitmap((int)resizedWidth, (int)resizedHeight);
-		resizedImage = new Bitmap(avatar_maxwidth, avatar_maxheight);
-		src_image.scaleInto(resizedImage, Bitmap.FILTER_BILINEAR);
 		
-		add(new BitmapField(Images.prevProfile));
-		add(new BitmapField(resizedImage));
-		add(new BitmapField(Images.nextProfile));
+		this.webImage = profileScreen.p_image;
+		
+		Field prevProfile = new BitmapButton(Images.prevProfile);
+		Field nextProfile = new BitmapButton(Images.nextProfile);
+		prevProfile.setChangeListener(profileScreen.previousProfileListener);
+		nextProfile.setChangeListener(profileScreen.nextProfileListener);
+		
+		add(prevProfile);
+		add(webImage);
+		add(nextProfile);
 	};
 	
 	protected void sublayout(int _width, int _height) {
 		setPositionChild(getField(0), 0, 0);
-		setPositionChild(getField(1),(Display.getWidth()- resizedImage.getWidth())/2, 0);
+		setPositionChild(getField(1),(Display.getWidth()- avatar_maxwidth)/2, 0);
 		setPositionChild(getField(2), Display.getWidth()-54, 0);
 		
 		layoutChild(getField(0), 54, 78);

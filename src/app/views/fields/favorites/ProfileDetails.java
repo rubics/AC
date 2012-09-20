@@ -9,7 +9,7 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Ui;
-import net.rim.device.api.ui.container.VerticalFieldManager;
+import app.models.Connection;
 
 public class ProfileDetails extends Field{
 	
@@ -18,6 +18,7 @@ public class ProfileDetails extends Field{
 	private int label_height;
 	private static final int h_offset = 5;
 	private static final int v_correction = 20;
+	private Connection connection;
 	
 	String name;
 	String status;
@@ -27,17 +28,24 @@ public class ProfileDetails extends Field{
 	String aboutMe;
 	private Vector lines;
 	
-	String[] labels = {"Name", "Status", "Location", "Designation", "Airlines", "About Me"};
-	String [] values = {"Kristine Jacob", "Online", "Dubai, UAE", "Cabin Crew", "Emirates",""};
-	String descp = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,";
+	private static final String[] labels = {"Name", "Status", "Location", "Designation", "Airlines", "About Me"};
+	String[] values;
 	private static final Font font = Font.getDefault().derive(Font.PLAIN, 20, Ui.UNITS_px);
 	
-	public ProfileDetails(){
+	public ProfileDetails(Connection connection){
 		super();
 		setFont(font);
-		lines = wrap(descp, width);
+		lines = wrap(connection.getAbout_me(), width);
 		label_height = labels.length * font.getHeight();
 		height = label_height + lines.size() * font.getHeight() + v_correction;
+//		String [] values = {"Kristine Jacob", "Online", "Dubai, UAE", "Cabin Crew", "Emirates",""};		
+		values = new String[6];
+		values[0] = connection.getUser_name();
+		values[1] = connection.getVisit_status();
+		values[2] = connection.getCity_name() + ", " + connection.getCountry();
+		values[3] = connection.getType();
+		values[4] = connection.getAirline_name();
+		values[5] = "";
 	}
 
 	protected void paint(Graphics graphics) {

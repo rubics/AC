@@ -18,8 +18,6 @@ public class UserController {
 	private SigninScreen signinScreen;
 	private SignupScreen signupScreen;
 	
-	
-
 	public UserController(){}
 
 	public void pushSignInScreen(boolean remember_me){
@@ -57,6 +55,7 @@ public class UserController {
 
 		public void httpsuccess(byte[] array, String str){
 
+			System.out.println("-------------	RESPONSE	------------");
 			final String json_response = new String(array);
 			System.out.println("-------------------------");
 			System.out.println(json_response);
@@ -70,8 +69,7 @@ public class UserController {
 					String user_id = response.getString("userId");
 					String session_id = response.getString("sessionId");
 					String message = response.getString("message");
-					System.out.println(json_response);
-					
+										
 					user = new User(user_name, user_id, session_id, signinScreen.getPassword());
 					
 					AirCrewApp.app.pushDashboardScreen(); // push Dashboard Screen
@@ -164,7 +162,7 @@ public class UserController {
 
 					JSONObject response = json.getJSONObject("response");
 					final String message = response.getString("message");
-					
+					AirCrewApp.app.persistenceController.removeUser();
 					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 						
 						public void run() {
@@ -192,7 +190,7 @@ public class UserController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		public void httpfailure(String errmsg) {}
 	};
 }

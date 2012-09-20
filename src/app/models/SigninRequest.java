@@ -13,9 +13,7 @@ public abstract class SigninRequest implements HttpRequestListener{
 	public SigninRequest(){}
 
 	public void sign_in(String userEmail, String password){
-		System.out.println(">> URL: " + AirCrew.signin + "?" + "user_email="+userEmail+"&user_pass="+password);
-		System.out.println();
-		dispatcher = new HttpRequestDispatcher(AirCrew.signin + "?" + "user_email="+userEmail+"&user_pass="+password, method,requestListener,"" );
+		dispatcher = new HttpRequestDispatcher(AirCrew.signin, method,requestListener,"user_email=" + userEmail + "&user_pass=" + password );
 		dispatcher.start();
 	}
 
