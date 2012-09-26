@@ -10,12 +10,15 @@ import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.ScreenBannar;
-import rubyx.custom_fields.updatable_imagefield.UpdatableImageField;
+import rubyx.custom_fields.SpaceField;
+import rubyx.image_selector.UploadImagePopup;
+import rubyx.image_selector.gallery.ImagePopup;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
 import app.models.DeleteImageRequest;
 import app.models.GalleryImage;
+import app.models.ImageUploader;
 import app.models.Images;
 import app.models.SetMainImageRequest;
 import app.views.fields.profile.GridImageField;
@@ -33,6 +36,7 @@ public class GalleryScreen extends MainScreen{
 	private Field addButton;
 	private GalleryImage[] galleryImages;
 	private int image_index = 0;
+	private CustomPopup customPopup;
 	
 //	public static Bitmap[] images;
 	
@@ -54,16 +58,20 @@ public class GalleryScreen extends MainScreen{
 		backButton.setRVAlue(10);
 		backButton.setChangeListener(AirCrewApp.backButtonListener);
 		homeButton = new TabbedButton("Add", 6, 100, 36);
+		homeButton.setChangeListener(addImageListener);
 		homeButton.setRVAlue(10);
 		
 		setTitle(new ScreenBannar("Gallery", 40, backButton, homeButton));
 		
 		vrManager = new VerticalFieldManager(Manager.USE_ALL_HEIGHT);
 		add(vrManager);
-	
-//		showGallery();
-//		showImage();
 	}
+	
+	FieldChangeListener addImageListener = new FieldChangeListener() {
+		public void fieldChanged(Field field, int context) {
+			UiApplication.getUiApplication().pushScreen(CustomPopup.getInstance());
+		}
+	};
 	
 	public void showGallery(final GalleryImage[] galleryImages){
 		this.galleryImages = galleryImages;
@@ -113,7 +121,7 @@ public class GalleryScreen extends MainScreen{
 		public void fieldChanged(Field field, int context) {
 			SetMainImageRequest setMainImage = new SetMainImageRequest();
 			setMainImage.setMainImage(AirCrewApp.app.getUserController().getUser().getUserId(),
-					galleryImages[image_index].getId());
+			galleryImages[image_index].getId());
 			UiApplication.getUiApplication().popScreen(field.getScreen());
 		}
 	};
@@ -128,5 +136,53 @@ public class GalleryScreen extends MainScreen{
 
 	public boolean isDirty() {
 	    return false;
+	}
+}
+
+class CustomPopup extends UploadImagePopup{
+	
+	private static CustomPopup customPopup = null;
+	
+	public static CustomPopup getInstance(){
+		if(customPopup == null)
+			customPopup = new CustomPopup();
+		return customPopup;
+	} 
+	
+	private CustomPopup(){
+		super();
+		VerticalFieldManager vrManager = new VerticalFieldManager(Manager.FIELD_VCENTER);
+		
+		takePicture = new TabbedButton("Take Picture", 6, 240, 50);
+		selectImage = new TabbedButton("Photo Albums", 6, 240, 50);
+		cancelButton = new TabbedButton("Cancel", 6, 240, 50);
+
+		vrManager.add(takePicture);
+		vrManager.add(new SpaceField(10));
+		vrManager.add(selectImage);
+		vrManager.add(new SpaceField(10));
+		vrManager.add(cancelButton);
+		
+		takePicture.setChangeListener(invokeCamera);
+		selectImage.setChangeListener(invokeGallery);
+		cancelButton.setChangeListener(cancelSelection);
+		
+		add(vrManager);
+	}
+
+	public void onImageReturn(final String file_name, final byte[] imageBytes) {
+		UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+			public void run(){
+				Bitmap image = Bitmap.createBitmapFromBytes(imageBytes, 0, imageBytes.length, 1);
+				ImagePopup imagePopup = new ImagePopup(image);
+				imagePopup.uploadButton.setChangeListener(new FieldChangeListener() {
+					public void fieldChanged(Field field, int context) {
+						ImageUploader imageUploader = new ImageUploader();
+						imageUploader.insertToGallery(file_name, imageBytes);
+					}
+				});
+				UiApplication.getUiApplication().pushScreen(imagePopup);
+			}
+		});
 	}
 }
