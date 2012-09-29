@@ -7,9 +7,8 @@ import net.rim.device.api.ui.component.Dialog;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 import app.AirCrewApp;
-import app.controllers.user.DealController;
 
-public class DealsRequest implements HttpRequestListener {
+public abstract class DealsRequest implements HttpRequestListener {
 	
 	private static final String method = "GET";
 	private HttpRequestListener requestListener = this;
@@ -35,7 +34,8 @@ public class DealsRequest implements HttpRequestListener {
 					JSONObject deal = (JSONObject)response.get(i);
 					String id = deal.getString("b_id");
 				}
-				dealController.setDeals(deals);
+				
+				afterSuccess();
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");
 				final String code = response.getString("code");
@@ -54,6 +54,8 @@ public class DealsRequest implements HttpRequestListener {
 			e.printStackTrace();
 		}
 	}
+	
+	public abstract void afterSuccess();
 	
 	public void httpfailure(String errmsg) {}
 }

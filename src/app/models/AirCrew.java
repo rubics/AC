@@ -22,7 +22,9 @@ public class AirCrew {
 	public static final String my_profile = url + "/index.php/iphone_4aircrew/i_edit_profile/";
 	public static final String airlines = url + "/index.php/iphone_4aircrew/i_airline";
 	public static final String update_profile = url + "/index.php/iphone_4aircrew/i_edit_profile_update/";
+	public static final String my_roster = url + "/index.php/iphone_4aircrew/my_roster/";
 	public static final String update_roster = url + "/index.php/iphone_4aircrew/my_roster_update/";
+	public static final String delete_my_roster = url + "/index.php/iphone_4aircrew/delete_my_roster/";
 	public static final String gender = url + "/index.php/iphone_4aircrew/i_gender";
 	public static final String designation = url + "/index.php/iphone_4aircrew/i_designation";
 	public static final String set_main_image = url + "/index.php/iphone_4aircrew/set_img_default/";

@@ -34,8 +34,8 @@ public class ImageUploader implements HttpRequestListener {
 		String file_name = file_path.substring(file_path.lastIndexOf('/')+1, file_path.length());
 		System.out.println("File Name: " + file_name);
 		System.out.println("Content: " + imageBytes.length);
-		System.out.println("User ID: " + AirCrewApp.app.getUserController().getUser().getUserId());
-		dispatcher = new UploadImageRequest(AirCrew.insert_to_gallery, AirCrewApp.app.getUserController().getUser().getUserId(), file_name, imageBytes, requestListener);
+		System.out.println("User ID: " + AirCrew.insert_to_gallery + AirCrewApp.app.getUserController().getUser().getUserId());
+		dispatcher = new UploadImageRequest(AirCrew.insert_to_gallery + AirCrewApp.app.getUserController().getUser().getUserId(), AirCrewApp.app.getUserController().getUser().getUserId(), file_name, imageBytes, requestListener);
 		dispatcher.start();
 	}
 	
@@ -144,7 +144,7 @@ class UploadImageRequest extends Thread{
 		pos.write(boundary.getBytes());
 		pos.write(lineend.getBytes());
 		
-		pos.write("Content-Disposition: form-data; name=\"Filedata\"; filename=\"".getBytes());
+		pos.write("Content-Disposition: form-data; name=\"image\"; filename=\"".getBytes());
 		pos.write(file_name.getBytes());
 		pos.write("\"".getBytes());
 		pos.write(lineend.getBytes());
@@ -163,7 +163,7 @@ class UploadImageRequest extends Thread{
 		pos.write(lineend.getBytes());
 		
 		pos.flush();
-		pos.close();	
+		pos.close();
 		
 		String contenttype = connection.getHeaderField("Content-type");		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -187,7 +187,6 @@ class UploadImageRequest extends Thread{
 		requestListener.httpsuccess(baos.toByteArray(), contenttype);
 		responsedata.close();
 		connection.close();
-	       
 		}
 		
 		catch(Exception exception){	

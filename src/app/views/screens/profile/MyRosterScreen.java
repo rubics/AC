@@ -11,6 +11,7 @@ import net.rim.device.api.ui.component.CheckboxField;
 import net.rim.device.api.ui.component.DateField;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.component.ObjectChoiceField;
+import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
@@ -28,6 +29,7 @@ import app.models.AirCrewResources;
 import app.models.City;
 import app.models.CityRequest;
 import app.models.Country;
+import app.models.DeleteRosterRequest;
 import app.models.Images;
 import app.models.UpdateRosterRequest;
 import app.views.managers.profile.ProfileInfoScreenManager;
@@ -45,6 +47,7 @@ public class MyRosterScreen extends MainScreen{
 	private CheckboxField allProfile;
 	private CheckboxField myFavorites;
 	private int checkboxPreference = 0;
+	private TabbedButton clearButton;
 	private TabbedButton saveButton;
 	
 	CompositeFieldManager manager;
@@ -67,6 +70,7 @@ public class MyRosterScreen extends MainScreen{
 		
 		setTitle(new ScreenBannar("My Roster", 40, backButton, homeButton));
 		mvrm = new VerticalFieldManager(Manager.VERTICAL_SCROLL|Manager.VERTICAL_SCROLLBAR);
+		
 		countryField = new CompositeObjectChoiceField("Country",AirCrewResources.countries,0);
 		countryField.setListener(countryChoiceListener);
 		cityField = new CompositeObjectChoiceField("Country",cities,0);
@@ -124,10 +128,19 @@ public class MyRosterScreen extends MainScreen{
 		checkboxManager.add(myFavorites);
 		mvrm.add(checkboxManager);
 		
-		saveButton = new TabbedButton("Save", 7, 470, 40);
+		HorizontalFieldManager hrManager = new HorizontalFieldManager();
+		
+		clearButton = new TabbedButton("Clear", 7, 240, 40);
+//		clearButton.setChangeListener(saveRosterListener);
+		clearButton.setRVAlue(12);
+		hrManager.add(clearButton);
+		
+		saveButton = new TabbedButton("Save", 7, 240, 40);
 		saveButton.setChangeListener(saveRosterListener);
 		saveButton.setRVAlue(12);
-		mvrm.add(saveButton);
+		
+		hrManager.add(saveButton);
+		mvrm.add(hrManager);
 		mvrm.add(new SpaceField(10));
 		
 		add(mvrm);
@@ -164,6 +177,16 @@ public class MyRosterScreen extends MainScreen{
 			} catch(Exception e){
 				System.out.println();
 			}
+		}
+	};
+	
+	private FieldChangeListener clearRosterListener = new FieldChangeListener() {
+		public void fieldChanged(Field field, int context) {
+			DeleteRosterRequest deleteRoster = new DeleteRosterRequest() {
+				public void afterSuccess(String message) {
+					//Update roster screen
+				}
+			};
 		}
 	};
 	
