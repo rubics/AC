@@ -16,28 +16,29 @@ public abstract class MyRosterRequest implements HttpRequestListener {
 	
 	public MyRosterRequest(){}
 	
-	public void get(){
-		dispatcher = new HttpRequestDispatcher(AirCrew.my_roster, method, requestListener, "");
+	public void getMyRoster(){
+		System.out.println(AirCrew.my_roster + AirCrewApp.app.getUserController().getUser().getUserId());
+		dispatcher = new HttpRequestDispatcher(AirCrew.my_roster + AirCrewApp.app.getUserController().getUser().getUserId(), method, requestListener, "");
 		dispatcher.start();
 	}
 	
 	public void httpsuccess(byte[] array, String str) {
 		final String json_response = new String(array);
+		System.out.println(json_response);
 		try{
 			JSONObject json = new JSONObject(json_response);
 
 			if(json.has("My Roster")) {
-
+			
 				JSONObject response = json.getJSONObject("My Roster");
 				String country = response.getString("country");
 				String city = response.getString("city");
-				String code = response.getString("code");
 				String from_date = response.getString("from_date");
 				String to_date = response.getString("todate");
 				String view_all = response.getString("view_all");
 				
 				Roster roster = new Roster(country, city, from_date, to_date, view_all);
-				
+				System.out.println(roster);
 				afterSuccess(roster);
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");
@@ -45,7 +46,6 @@ public abstract class MyRosterRequest implements HttpRequestListener {
 				final String message = response.getString("message");
 				System.out.println("Response Error @ MyRoster: " + message);
 			}
-			
 		}catch(Exception e){
 			System.out.println(">> Exception @ " + e.getClass().getName());
 			e.printStackTrace();

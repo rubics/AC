@@ -4,6 +4,7 @@ import app.AirCrewApp;
 import app.models.GalleryImage;
 import app.models.GalleryRequest;
 import app.models.Profile;
+import app.models.Roster;
 import app.views.managers.profile.ProfileInfoScreenManager;
 import app.views.screens.profile.GalleryScreen;
 
@@ -13,6 +14,7 @@ public class ProfileController {
 	private ProfileController profileController;
 	private GalleryImage[] galleryImages;
 	private Profile profile;
+	private Roster roster;
 	
 	public ProfileController(){
 		profileController = this;
@@ -42,5 +44,13 @@ public class ProfileController {
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+	
+	public Roster getRoster() {
+		return roster;
+	}
+	
+	public void setRoster(Roster roster){
+		this.roster = roster;
 	}
 }

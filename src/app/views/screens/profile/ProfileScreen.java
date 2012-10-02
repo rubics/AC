@@ -130,7 +130,6 @@ public class ProfileScreen extends MainScreen{
 	
 	public void updateCityChoiceField(){
 		UiApplication.getUiApplication().invokeLater(new Runnable() {
-			
 			public void run(){
 				manager.delete(cityField);
 				String city_id = profileInfo.getProfileController().getProfile().getCityId();

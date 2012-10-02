@@ -116,6 +116,9 @@ public class DashboardScreen extends MainScreen{
 			case 7:
 				app.pushScreen(new ToolboxScreen());
 				break;
+			case 9:
+				app.pushScreen(new SettingsScreen());
+				break;
 			default:
 				break;
 			}

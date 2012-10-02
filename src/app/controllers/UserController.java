@@ -150,47 +150,14 @@ public class UserController {
 	};
 	
 	public SignoutRequest signoutRequest = new SignoutRequest() {
-		
-		public void httpsuccess(byte[] array, String str) {
-			
-			final String json_response = new String(array);
-			
-			try{
-				JSONObject json = new JSONObject(json_response);
-
-				if(json.has("response") & !json.isNull("response")) {
-
-					JSONObject response = json.getJSONObject("response");
-					final String message = response.getString("message");
-					AirCrewApp.app.persistenceController.removeUser();
-					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-						
-						public void run() {
-							UiApplication.getUiApplication().popScreen(UiApplication.getUiApplication().getActiveScreen());
-							pushSignInScreen(false);
-//							Dialog.inform(message);
-						}
-					});
-
-				} else if (json.has("error") & !json.isNull("error")){
-					JSONObject response = json.getJSONObject("error");
-					final String code = response.getString("code");
-					final String message = response.getString("message");
-					
-					UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-						
-						public void run() {
-							Dialog.alert(message);
-						}		
-					});
+		public void afterSuccess(final String message){
+			UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+				public void run() {
+					UiApplication.getUiApplication().popScreen(UiApplication.getUiApplication().getActiveScreen());
+					pushSignInScreen(false);
+					Dialog.inform(message);
 				}
-				
-			}catch(Exception e){
-				System.out.println(">> Exception @ " + e.getClass().getName());
-				e.printStackTrace();
-			}
+			});
 		}
-
-		public void httpfailure(String errmsg) {}
 	};
 }

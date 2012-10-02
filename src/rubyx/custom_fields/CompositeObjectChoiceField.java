@@ -107,4 +107,9 @@ public class CompositeObjectChoiceField extends Manager implements CompositeFiel
 	public Object getSelectedObject(){
 		return choices[objectChoiceField.getSelectedIndex()];
 	}
+	
+	public void setSelection(int index){
+		if (index < choices.length)
+			objectChoiceField.setSelectedIndex(index);
+	}
 }

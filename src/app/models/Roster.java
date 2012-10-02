@@ -21,7 +21,7 @@ public class Roster {
 		return country;
 	}
 
-	public String getCity() {
+	public String getCityCode() {
 		return city;
 	}
 
@@ -35,5 +35,9 @@ public class Roster {
 
 	public String getMy_fav() {
 		return my_fav;
-	}	
+	}
+	
+	public String toString(){
+		return "Roster: ".concat(country).concat("., " + city).concat("., " + from_date).concat("., " + to_date);
+	}
 }

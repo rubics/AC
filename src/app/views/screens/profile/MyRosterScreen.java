@@ -25,17 +25,21 @@ import rubyx.custom_fields.ScreenBannar;
 import rubyx.custom_fields.SpaceField;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.controllers.ProfileController;
 import app.models.AirCrewResources;
 import app.models.City;
 import app.models.CityRequest;
 import app.models.Country;
 import app.models.DeleteRosterRequest;
 import app.models.Images;
+import app.models.MyRosterRequest;
+import app.models.Roster;
 import app.models.UpdateRosterRequest;
 import app.views.managers.profile.ProfileInfoScreenManager;
 
 public class MyRosterScreen extends MainScreen{
 	private ProfileInfoScreenManager profileInfo;
+	private ProfileController profileController;
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
 	private MainScreen currentScreen;
@@ -59,6 +63,7 @@ public class MyRosterScreen extends MainScreen{
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
 		currentScreen = this;
 		profileInfo = _profileInfo;
+		profileController = _profileInfo.getProfileController();
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
 		
@@ -144,11 +149,33 @@ public class MyRosterScreen extends MainScreen{
 		mvrm.add(new SpaceField(10));
 		
 		add(mvrm);
+		
+		MyRosterRequest rosterRequest = new MyRosterRequest() {
+			public void afterSuccess(Roster roster) {
+				profileController.setRoster(roster);
+				updateScreen();
+			}
+		};
+		rosterRequest.getMyRoster();
+	}
+	
+	private void updateScreen(){
+		UiApplication.getUiApplication().invokeAndWait(new Runnable() {
+			public void run() {
+				countryField.setSelection(AirCrewResources.getCountryIndex(profileController.getRoster().getCountry()));
+				CityRequest cityRequest = new CityRequest(){
+					public void afterSuccess(City[] _cities){
+						cities = _cities;
+						updateCityChoiceField();
+					}
+				};
+				cityRequest.getCity(profileController.getRoster().getCityCode());
+			}
+		});
 	}
 	
 	public void updateCityChoiceField(){
 		UiApplication.getUiApplication().invokeLater(new Runnable() {
-			
 			public void run() {
 				manager.delete(cityField);
 				cityField = new CompositeObjectChoiceField("City", cities, 0);
@@ -210,6 +237,15 @@ public class MyRosterScreen extends MainScreen{
 			updateProfile.updateRoster(postString.toString());
 		}
 	};
+	
+	private int getCityIndex(String city_id){
+		for(int i=0; i<cities.length; i++){
+			System.out.println(city_id + "---" + cities[i].getCity_id() + ">> " + cities[i].getCity_name());
+			if(cities[i].getCity_id().equals(city_id))
+				return i;
+		}
+		return 0;
+	}
 	
 	public boolean isDirty() {
 	    return false;

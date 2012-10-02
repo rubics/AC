@@ -58,7 +58,6 @@ public class ImageUploader implements HttpRequestListener {
 				final String message = response.getString("message");
 				
 				UiApplication.getUiApplication().invokeAndWait(new Runnable() {
-					
 					public void run() {
 						Dialog.alert(message);
 					}		
@@ -151,10 +150,9 @@ class UploadImageRequest extends Thread{
 		
 		pos.write("Content-Type: image/jpeg".getBytes());
 		pos.write(lineend.getBytes());
+		
 		pos.write(lineend.getBytes());
-		
 		pos.write(imageBytes, 0, imageBytes.length);
-		
 		pos.write(lineend.getBytes());
 		
 		pos.write(twoHyphens.getBytes());
