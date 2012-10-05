@@ -1,6 +1,6 @@
 package app.models;
 
-public class Connection {
+public class Connection implements Identity{
 	private String id;
 	private String user_id;
 	private String user_name;
@@ -59,13 +59,13 @@ public class Connection {
 	public String getAbout_me() {
 		return about_me;
 	}
-	public String getAirline() {
+	public String getAirlineId() {
 		return airline;
 	}
 	public String getGender() {
 		return gender;
 	}
-	public String getDesignation() {
+	public String getDesig() {
 		return designation;
 	}
 	public String getCountry() {
@@ -74,13 +74,13 @@ public class Connection {
 	public String getCity_id() {
 		return city_id;
 	}
-	public String getAirline_name() {
+	public String getAirline() {
 		return airline_name;
 	}
 	public String getType() {
 		return type;
 	}
-	public String getDesig() {
+	public String getDesignation() {
 		return desig;
 	}
 	public String getCity_name() {
@@ -98,5 +98,9 @@ public class Connection {
 	
 	public String toString(){
 		return "User_name: " + user_name + ">> Image_name: " + image_name;
+	}
+	
+	public String getLocation(){
+		return getCity_name() + ", " + getCountry();
 	}
 }

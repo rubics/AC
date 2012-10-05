@@ -9,17 +9,24 @@ public class FavoritesController {
 	private Connection[] connections;
 	FavoritesScreen favoritesScreen;
 	FavoritesRequest favoritesRequest;
+	private static FavoritesController favoritesController;
 	
-	public FavoritesController(){
+	private FavoritesController(){
+		favoritesController = this;
+	}
+	
+	public static FavoritesController getInstance(){
+		if(favoritesController == null)
+			favoritesController = new FavoritesController();
+		return favoritesController;
+	}
+	public void pushFavoritesScreen(){
 		favoritesRequest = new FavoritesRequest(){
 			public void afterSuccess(Connection[] _connections){
 				setConnections(_connections);
 			}
 		};
 		favoritesRequest.getFavorites();
-	}
-	
-	public void pushFavoritesScreen(){
 		favoritesScreen = new FavoritesScreen(this);
 		AirCrewApp.app.pushScreen(favoritesScreen);
 	}

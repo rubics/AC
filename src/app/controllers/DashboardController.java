@@ -42,9 +42,6 @@ public class DashboardController {
 	}
 	
 	public FavoritesController getFavoritesController(){
-		if (favoritesController == null){
-			favoritesController = new FavoritesController();
-		}
-		return favoritesController;
+		return FavoritesController.getInstance();
 	}
 }

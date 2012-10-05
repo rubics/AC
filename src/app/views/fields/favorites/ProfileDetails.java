@@ -9,7 +9,7 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Ui;
-import app.models.Connection;
+import app.models.Identity;
 
 public class ProfileDetails extends Field{
 	
@@ -18,7 +18,7 @@ public class ProfileDetails extends Field{
 	private int label_height;
 	private static final int h_offset = 5;
 	private static final int v_correction = 20;
-	private Connection connection;
+	private Identity identity;
 	
 	String name;
 	String status;
@@ -32,19 +32,19 @@ public class ProfileDetails extends Field{
 	String[] values;
 	private static final Font font = Font.getDefault().derive(Font.PLAIN, 20, Ui.UNITS_px);
 	
-	public ProfileDetails(Connection connection){
+	public ProfileDetails(Identity identity){
 		super();
 		setFont(font);
-		lines = wrap(connection.getAbout_me(), width);
+		lines = wrap(identity.getAbout_me(), width);
 		label_height = labels.length * font.getHeight();
 		height = label_height + lines.size() * font.getHeight() + v_correction;
 //		String [] values = {"Kristine Jacob", "Online", "Dubai, UAE", "Cabin Crew", "Emirates",""};		
 		values = new String[6];
-		values[0] = connection.getUser_name();
-		values[1] = connection.getVisit_status();
-		values[2] = connection.getCity_name() + ", " + connection.getCountry();
-		values[3] = connection.getType();
-		values[4] = connection.getAirline_name();
+		values[0] = identity.getUser_name();
+		values[1] = identity.getVisit_status();
+		values[2] = identity.getLocation();
+		values[3] = identity.getDesignation();
+		values[4] = identity.getAirline();
 		values[5] = "";
 	}
 
