@@ -37,10 +37,6 @@ public class HttpRequestDispatcher extends Thread{
 	}
 	
 	public void run(){
-		
-		//System.out.println("#####  " + "inside HTTPREQUESTDISPATCHER.run();"  + "  ####");
-		
-		
 		try {
 			
 	        String connectionParameters = updateConnectionSuffix();

@@ -23,7 +23,6 @@ public abstract class ClearChatHistoryRequest implements HttpRequestListener {
 	
 	public void httpsuccess(byte[] array, String str) {
 		final String json_response = new String(array);
-		System.out.println(json_response);
 		try{
 			JSONObject json = new JSONObject(json_response);
 			if(json.has("response")) {

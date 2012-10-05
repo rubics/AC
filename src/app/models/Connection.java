@@ -1,6 +1,6 @@
 package app.models;
 
-public class Connection {
+public class Connection implements Identity{
 	private String id;
 	private String user_id;
 	private String user_name;
@@ -98,5 +98,9 @@ public class Connection {
 	
 	public String toString(){
 		return "User_name: " + user_name + ">> Image_name: " + image_name;
+	}
+	
+	public String getLocation(){
+		return getCity_name() + ", " + getCountry();
 	}
 }

@@ -14,7 +14,7 @@ public class ScreenBannar extends Manager {
 	final int height;
 	final int width = Display.getWidth();
 
-	String labelname;
+	private String labelname;
 
 	Field aField;
 	Field bField;
@@ -79,6 +79,10 @@ public class ScreenBannar extends Manager {
 				DrawStyle.ELLIPSIS, this.width - 45); // 45 space to draw
 	}
 	
+	public void setLabel(String label){
+		labelname = label;
+	}
+	
 	protected void drawFocus(Graphics graphics, boolean mode){
 		
 	}
@@ -92,6 +96,4 @@ public class ScreenBannar extends Manager {
 		super.onUnfocus();
 		invalidate();
 	}
-
-
 }

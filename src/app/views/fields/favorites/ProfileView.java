@@ -26,7 +26,7 @@ public class ProfileView extends Manager{
 
 		dimensions(Images.avatar);
 		
-		this.webImage = profileScreen.p_image;
+		this.webImage = profileScreen.profileImage;
 		
 		Field prevProfile = new BitmapButton(Images.prevProfile);
 		Field nextProfile = new BitmapButton(Images.nextProfile);
