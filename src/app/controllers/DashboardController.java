@@ -35,10 +35,7 @@ public class DashboardController {
 	}
 	
 	public ProfileController getProfileController(){
-		if (profileController == null){
-			profileController = new ProfileController();
-		}
-		return profileController;
+		return ProfileController.getInstance();
 	}
 	
 	public FavoritesController getFavoritesController(){

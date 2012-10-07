@@ -16,6 +16,7 @@ import rubyx.image_selector.gallery.ImagePopup;
 import rubyx.layout_managers.TableLayoutManager;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.controllers.ProfileController;
 import app.models.DeleteImageRequest;
 import app.models.GalleryImage;
 import app.models.ImageUploader;
@@ -174,10 +175,22 @@ class CustomPopup extends UploadImagePopup{
 		UiApplication.getUiApplication().invokeAndWait(new Runnable() {
 			public void run(){
 				Bitmap image = Bitmap.createBitmapFromBytes(imageBytes, 0, imageBytes.length, 1);
-				ImagePopup imagePopup = new ImagePopup(image);
+				final ImagePopup imagePopup = new ImagePopup(image);
 				imagePopup.uploadButton.setChangeListener(new FieldChangeListener() {
 					public void fieldChanged(Field field, int context) {
-						ImageUploader imageUploader = new ImageUploader();
+						ImageUploader imageUploader = new ImageUploader(){
+							public void afterRequestCall(){
+								UiApplication.getUiApplication().invokeLater(new Runnable() {
+									public void run() {
+										UiApplication.getUiApplication().popScreen(imagePopup);
+									}
+								});
+							}
+							
+							public void afterSuccess(String response){
+								ProfileController.getInstance().updateGallery();
+							}
+						};
 						imageUploader.insertToGallery(file_name, imageBytes);
 					}
 				});

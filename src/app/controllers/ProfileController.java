@@ -11,15 +11,25 @@ import app.views.screens.profile.GalleryScreen;
 public class ProfileController {
 
 	private ProfileInfoScreenManager profileInfoScreenManager;
-	private ProfileController profileController;
+	private static ProfileController profileController;
 	private GalleryImage[] galleryImages;
 	private Profile profile;
 	private Roster roster;
 	
-	public ProfileController(){
+	public static ProfileController getInstance(){
+		if (profileController == null)
+			profileController = new ProfileController();
+		return profileController;
+	}
+	
+	private ProfileController(){
 		profileController = this;
 		profileInfoScreenManager = new ProfileInfoScreenManager(this);
 		
+		updateGallery();
+	}
+	
+	public void updateGallery(){
 		GalleryRequest galleryRequest = new GalleryRequest() {	
 			public void onSuccess(GalleryImage[] _galleryImages) {
 				galleryImages = _galleryImages;
@@ -35,7 +45,7 @@ public class ProfileController {
 	}
 	
 	public void pushScreen(){
-		profileInfoScreenManager.pushScreen(2);
+		profileInfoScreenManager.pushScreen(0);
 	}
 
 	public Profile getProfile() {

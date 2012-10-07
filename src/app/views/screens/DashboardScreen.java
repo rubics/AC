@@ -26,7 +26,7 @@ public class DashboardScreen extends MainScreen{
 	
 	private AirCrewApp app = (AirCrewApp)(UiApplication.getUiApplication());
 	private DashboardController dashboardController;
-	
+
 	public static Bitmap[] icons = {Bitmap.getBitmapResource("images/dashboard/deals.png"),
 				Bitmap.getBitmapResource("images/dashboard/chat.png"),
 				Bitmap.getBitmapResource("images/dashboard/bookmarks.png"),
@@ -36,7 +36,7 @@ public class DashboardScreen extends MainScreen{
 				Bitmap.getBitmapResource("images/dashboard/toolbox.png"),
 				Bitmap.getBitmapResource("images/dashboard/hotdeals.png"),
 				Bitmap.getBitmapResource("images/dashboard/settings.png")};
-	
+
 	Bitmap[] titles = {Bitmap.getBitmapResource("images/dashboard/deals_title.png"),
 			Bitmap.getBitmapResource("images/dashboard/chat_title.png"),
 			Bitmap.getBitmapResource("images/dashboard/bookmarks_title.png"),
@@ -46,8 +46,7 @@ public class DashboardScreen extends MainScreen{
 			Bitmap.getBitmapResource("images/dashboard/toolbox_title.png"),
 			Bitmap.getBitmapResource("images/dashboard/hotdeals_title.png"),
 			Bitmap.getBitmapResource("images/dashboard/settings_title.png")};
-	
-	
+
 	final int[] column_styles = {TableLayoutManager.FIXED_WIDTH,TableLayoutManager.FIXED_WIDTH,TableLayoutManager.FIXED_WIDTH}; 
 	final int[] column_widths = {Display.getWidth()/3,Display.getWidth()/3,Display.getWidth()/3};
 	final int horizontal_padding = 1;
@@ -95,7 +94,7 @@ public class DashboardScreen extends MainScreen{
 		
 		public void fieldChanged(Field field, int context) {
 			int index = ((DashboardItem)field).index;
-			
+
 			switch (index){
 			case 1:
 				dashboardController.getDealController().pushScreen();	

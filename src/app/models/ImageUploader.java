@@ -23,13 +23,13 @@ import net.rim.device.api.ui.component.Dialog;
 import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 
-public class ImageUploader implements HttpRequestListener {
+public abstract class ImageUploader implements HttpRequestListener {
 	
 	private HttpRequestListener requestListener = this;
 	private UploadImageRequest dispatcher;
 	
 	public ImageUploader(){}
-	
+
 	public void insertToGallery(String file_path, byte[] imageBytes){
 		String file_name = file_path.substring(file_path.lastIndexOf('/')+1, file_path.length());
 		System.out.println("File Name: " + file_name);
@@ -37,6 +37,7 @@ public class ImageUploader implements HttpRequestListener {
 		System.out.println("User ID: " + AirCrew.insert_to_gallery + AirCrewApp.app.getUserController().getUser().getUserId());
 		dispatcher = new UploadImageRequest(AirCrew.insert_to_gallery + AirCrewApp.app.getUserController().getUser().getUserId(), AirCrewApp.app.getUserController().getUser().getUserId(), file_name, imageBytes, requestListener);
 		dispatcher.start();
+		afterRequestCall();
 	}
 	
 	public void httpsuccess(byte[] array, String str) {
@@ -44,14 +45,9 @@ public class ImageUploader implements HttpRequestListener {
 		try{
 			JSONObject json = new JSONObject(json_response);
 
-			if(json.has("business")) {
-
-				JSONArray response = json.getJSONArray("business");
-				
-				for(int i=0; i<response.length(); i++){
-					JSONObject deal = (JSONObject)response.get(i);
-					String id = deal.getString("b_id");
-				}
+			if(json.has("response")) {
+				JSONObject response = json.getJSONObject("response");
+				afterSuccess(json_response);
 			} else if (json.has("error") & !json.isNull("error")){
 				JSONObject response = json.getJSONObject("error");
 				final String code = response.getString("code");
@@ -63,7 +59,6 @@ public class ImageUploader implements HttpRequestListener {
 					}		
 				});
 			}
-			
 		}catch(Exception e){
 			System.out.println(">> Exception @ " + e.getClass().getName());
 			e.printStackTrace();
@@ -71,6 +66,9 @@ public class ImageUploader implements HttpRequestListener {
 	}
 	
 	public void httpfailure(String errmsg) {}
+	
+	public abstract void afterRequestCall();
+	public abstract void afterSuccess(String response);
 	
 }
 
@@ -99,6 +97,9 @@ class UploadImageRequest extends Thread{
 	public void run(){
 
 		try {
+			
+		System.out.println(file_name);
+		System.out.println();
 			
 	    String connectionParameters = updateConnectionSuffix();
 		HttpConnection connection = (HttpConnection)Connector.open(url + connectionParameters);
@@ -143,7 +144,7 @@ class UploadImageRequest extends Thread{
 		pos.write(boundary.getBytes());
 		pos.write(lineend.getBytes());
 		
-		pos.write("Content-Disposition: form-data; name=\"image\"; filename=\"".getBytes());
+		pos.write("Content-Disposition: form-data; name=\"file\"; filename=\"".getBytes());
 		pos.write(file_name.getBytes());
 		pos.write("\"".getBytes());
 		pos.write(lineend.getBytes());
@@ -170,12 +171,11 @@ class UploadImageRequest extends Thread{
 		byte[] bytearray= new byte[2000];
 		
 		int bytenum = responsedata.read(bytearray);
-		int count =0;// just for checking 
+		int count =0;// just for checking
 		while(bytenum>0){
 			baos.write(bytearray, 0, bytenum);
 			count++;
 			bytenum = responsedata.read(bytearray);
-			
 		}
 		
 		String json_response = new String(baos.toByteArray());

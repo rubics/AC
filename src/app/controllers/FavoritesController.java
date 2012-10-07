@@ -20,6 +20,7 @@ public class FavoritesController {
 			favoritesController = new FavoritesController();
 		return favoritesController;
 	}
+
 	public void pushFavoritesScreen(){
 		favoritesRequest = new FavoritesRequest(){
 			public void afterSuccess(Connection[] _connections){
