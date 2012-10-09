@@ -20,7 +20,7 @@ import app.views.fields.DashboardItem;
 import app.views.fields.ScreenTitle;
 import app.views.managers.chat.ChatScreenManager;
 import app.views.managers.profile.ProfileInfoScreenManager;
-import app.views.screens.favorites.FavoritesScreen;
+import app.views.screens.favorites.MyConnectionsScreen;
 
 public class DashboardScreen extends MainScreen{
 	

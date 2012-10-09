@@ -14,11 +14,18 @@ import app.views.screens.SignupScreen;
 
 public class UserController {
 
+	private static UserController userController;
 	private User user;
 	private SigninScreen signinScreen;
 	private SignupScreen signupScreen;
 	
-	public UserController(){}
+	public static UserController getInstance(){
+		if (userController == null)
+			userController = new UserController();
+		return userController;
+	}
+	
+	private UserController(){}
 
 	public void pushSignInScreen(boolean remember_me){
 		

@@ -11,6 +11,7 @@ import net.rim.device.api.ui.decor.BackgroundFactory;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.models.Identity;
 import app.models.Images;
 import app.views.fields.listings.ListingField;
 import app.views.screens.profile.GalleryScreen;
@@ -19,15 +20,9 @@ public class ChatRoomScreen extends MainScreen{
 	
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
-	
 	private VerticalFieldManager vrManager;
 	
-	public FieldChangeListener listener = new FieldChangeListener() {
-		public void fieldChanged(Field field, int context) {
-			ChatScreen chatScreen = new ChatScreen();
-			UiApplication.getUiApplication().pushScreen(new ChatScreen());
-		}
-	};
+	private Identity[] identities;
 	
 	public ChatRoomScreen(){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
@@ -51,6 +46,13 @@ public class ChatRoomScreen extends MainScreen{
 		}
 		add(vrManager);
 	}
+	
+	public FieldChangeListener listener = new FieldChangeListener() {
+		public void fieldChanged(Field field, int context) {
+			ChatScreen chatScreen = new ChatScreen();
+			UiApplication.getUiApplication().pushScreen(new ChatScreen());
+		}
+	};
 	
 	public boolean isDirty() {
 	    return false;

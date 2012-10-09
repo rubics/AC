@@ -8,6 +8,7 @@ import rubyx.httpconnection.HttpRequestDispatcher;
 import rubyx.httpconnection.HttpRequestListener;
 import app.AirCrewApp;
 import app.controllers.FavoritesController;
+import app.controllers.UserController;
 
 public abstract class FavoritesRequest implements HttpRequestListener {
 	
@@ -19,8 +20,7 @@ public abstract class FavoritesRequest implements HttpRequestListener {
 	}
 	
 	public void getFavorites(){
-//		dispatcher = new HttpRequestDispatcher(AirCrew.favorites + AirCrewApp.app.getUserController().getUser().getUserId(), method, requestListener, "");
-		dispatcher = new HttpRequestDispatcher(AirCrew.favorites + "547", method, requestListener, "");
+		dispatcher = new HttpRequestDispatcher(AirCrew.favorites + AirCrewApp.app.getUserController().getUser().getUserId(), method, requestListener, "");
 		dispatcher.start();
 	}
 	

@@ -1,7 +1,5 @@
 package app.views.screens.chat;
 
-import javax.microedition.lcdui.TextBox;
-
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
@@ -15,6 +13,7 @@ import rubyx.custom_fields.CustomEditField;
 import rubyx.custom_fields.ScreenBannar;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
+import app.models.Identity;
 import app.models.Images;
 import app.views.fields.chat.ChatMessageField;
 
@@ -22,20 +21,11 @@ public class ChatScreen  extends MainScreen{
 	
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
-	
-	VerticalFieldManager vrm;
-	
-	ChatBox chatBox;
+	private VerticalFieldManager vrm;
+	private ChatBox chatBox;
 	private boolean switcher = true;
 	
-	FieldChangeListener listener = new FieldChangeListener() {
-		
-		public void fieldChanged(Field field, int context) {
-			vrm.add(new ChatMessageField(Images.avatar_a[0], chatBox.getText(),switcher));
-			vrm.invalidate();
-			chatBox.setText("");
-		}
-	};
+	private Identity identity;
 	
 	public ChatScreen(){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
@@ -60,6 +50,14 @@ public class ChatScreen  extends MainScreen{
 		chatBox = new ChatBox(listener);
 		setStatus(chatBox);
 	}
+	
+	FieldChangeListener listener = new FieldChangeListener() {
+		public void fieldChanged(Field field, int context) {
+			vrm.add(new ChatMessageField(Images.avatar_a[0], chatBox.getText(),switcher));
+			vrm.invalidate();
+			chatBox.setText("");
+		}
+	};
 	
 	public boolean isDirty() {
 	    return false;

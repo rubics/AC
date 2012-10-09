@@ -3,11 +3,11 @@ package app.controllers;
 import app.AirCrewApp;
 import app.models.Connection;
 import app.models.FavoritesRequest;
-import app.views.screens.favorites.FavoritesScreen;
+import app.views.screens.favorites.MyConnectionsScreen;
 
 public class FavoritesController {
 	private Connection[] connections;
-	FavoritesScreen favoritesScreen;
+	MyConnectionsScreen favoritesScreen;
 	FavoritesRequest favoritesRequest;
 	private static FavoritesController favoritesController;
 	
@@ -28,7 +28,7 @@ public class FavoritesController {
 			}
 		};
 		favoritesRequest.getFavorites();
-		favoritesScreen = new FavoritesScreen(this);
+		favoritesScreen = new MyConnectionsScreen(this);
 		AirCrewApp.app.pushScreen(favoritesScreen);
 	}
 	

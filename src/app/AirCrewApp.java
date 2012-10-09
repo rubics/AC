@@ -25,7 +25,7 @@ public class AirCrewApp extends UiApplication {
 		resources = new AirCrewResources();
 		
 		persistenceController = new PersistenceController();
-		userController = new UserController();
+		userController = UserController.getInstance();
 	
 //		userController.setUser(new User("pratyut", "574", "e1fc526564cd4b35637f931b8e944410", "letmein"));
 		

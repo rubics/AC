@@ -17,17 +17,17 @@ import app.models.Images;
 import app.views.fields.listings.ListingField;
 import app.views.screens.profile.GalleryScreen;
 
-public class FavoritesScreen extends MainScreen{
+public class MyConnectionsScreen extends MainScreen{
 	
 	private FavoritesController favoritesController;
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
 	private VerticalFieldManager vrManager;
-	private FavoritesScreen this_screen;
+	private MyConnectionsScreen this_screen;
 	
 	int displayed_index = 0;
 	
-	public FavoritesScreen(FavoritesController favoritesController){
+	public MyConnectionsScreen(FavoritesController favoritesController){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
 		this.favoritesController = favoritesController;
 		this_screen = this;
@@ -48,7 +48,7 @@ public class FavoritesScreen extends MainScreen{
 	public FieldChangeListener favoritesListener = new FieldChangeListener() {
 		public void fieldChanged(Field field, int context) {
 			displayed_index = field.getIndex();
-			UiApplication.getUiApplication().pushScreen(new ProfileViewScreen(favoritesController.getConnections(), field.getIndex()));
+			UiApplication.getUiApplication().pushScreen(new ConnectionViewScreen(favoritesController.getConnections(), field.getIndex()));
 		}
 	};
 	

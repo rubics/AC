@@ -8,7 +8,7 @@ import net.rim.device.api.ui.container.HorizontalFieldManager;
 import rubyx.custom_fields.BitmapButton;
 import rubyx.custom_fields.WebImageField;
 import app.models.Images;
-import app.views.screens.favorites.ProfileViewScreen;
+import app.views.screens.favorites.ConnectionViewScreen;
 
 public class ProfileView extends Manager{
 	
@@ -21,7 +21,7 @@ public class ProfileView extends Manager{
 	protected HorizontalFieldManager avatarArea;
 	WebImageField webImage;
 	
-	public ProfileView(long style, ProfileViewScreen profileScreen){
+	public ProfileView(long style, ConnectionViewScreen profileScreen){
 		super(style);
 
 		dimensions(Images.avatar);

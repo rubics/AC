@@ -10,18 +10,19 @@ import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
+import rubyx.custom_fields.CustomButton;
 import rubyx.custom_fields.ScreenBannar;
+import rubyx.custom_fields.SpaceField;
 import rubyx.custom_fields.WebImageField;
 import rubyx.tabbedUI.TabbedButton;
 import app.AirCrewApp;
 import app.models.AirCrew;
-import app.models.Connection;
 import app.models.Identity;
 import app.models.Images;
 import app.views.fields.favorites.ProfileDetails;
 import app.views.fields.favorites.ProfileView;
 
-public class ProfileViewScreen extends MainScreen{
+public class ConnectionViewScreen extends MainScreen{
 	private ScreenBannar screenBannar;
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
@@ -32,9 +33,9 @@ public class ProfileViewScreen extends MainScreen{
 	private TabbedButton addToFavorites;
 	public Identity[] identities;
 	public int current_index = 0;
-	private ProfileViewScreen this_screen;
+	private ConnectionViewScreen this_screen;
 	
-	public ProfileViewScreen(Identity[] identities, int identity_index){
+	public ConnectionViewScreen(Identity[] identities, int identity_index){
 		
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
 		this_screen = this;
@@ -46,14 +47,24 @@ public class ProfileViewScreen extends MainScreen{
 		backButton.setChangeListener(AirCrewApp.backButtonListener);
 		homeButton = new TabbedButton("Home", 6, 100, 36);
 		homeButton.setRVAlue(10);
-		
 		setTitle(screenBannar = new ScreenBannar(identities[identity_index].getUser_name(), 40, backButton, homeButton));
-		
-		
 		current_index = identity_index;
-		
+
 		vrm = new VerticalFieldManager(Manager.VERTICAL_SCROLL | Manager.VERTICAL_SCROLLBAR);
 		add(vrm);
+		
+		// tabbed button
+		CustomButton chatButton = new CustomButton(Images.chatScreenIcons[0], 160, 50);
+		chatButton.setChangeListener(chatButtonListener);
+		CustomButton infoButton = new CustomButton(Images.chatScreenIcons[1], 160, 50);
+		CustomButton galleryButton = new CustomButton(Images.chatScreenIcons[2], 160, 50);
+		
+		HorizontalFieldManager tabbedButtonManager = new HorizontalFieldManager();
+		tabbedButtonManager.add(chatButton);
+		tabbedButtonManager.add(infoButton);
+		tabbedButtonManager.add(galleryButton);
+		
+		setStatus(tabbedButtonManager);
 		
 		drawConnection();
 	}
@@ -72,15 +83,22 @@ public class ProfileViewScreen extends MainScreen{
 				
 				HorizontalFieldManager hrManager = new HorizontalFieldManager();
 				blockUser = new TabbedButton("Block User", 6, 240, 40);
-				addToFavorites = new TabbedButton("Add To Favorites", 6, 240, 40);
+				addToFavorites = new TabbedButton("Remove From Favorites", 6, 240, 40);
 				hrManager.add(blockUser);
 				hrManager.add(addToFavorites);
 				vrm.add(hrManager);
-				
+				vrm.add(new SpaceField(10));
 				add(vrm);
 			}
 		});
 	}
+	
+	public FieldChangeListener chatButtonListener = new FieldChangeListener() {
+		public void fieldChanged(Field field, int context) {
+			ConnectionGalleryScreen connectionGallery = new ConnectionGalleryScreen(identities[current_index]);
+			UiApplication.getUiApplication().pushScreen(connectionGallery);
+		}
+	};
 	
 	public FieldChangeListener nextProfileListener = new FieldChangeListener() {
 		public void fieldChanged(Field field, int context) {
