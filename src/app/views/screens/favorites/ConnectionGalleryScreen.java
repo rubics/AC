@@ -55,6 +55,7 @@ public class ConnectionGalleryScreen extends MainScreen{
 			public void onSuccess(GalleryImage[] galleryImages) {
 				showGallery(galleryImages);
 			}
+			public void onDefaultImage(String image){}
 		};
 		galleryRequest.getUserImages(identity.getUser_id());
 	}

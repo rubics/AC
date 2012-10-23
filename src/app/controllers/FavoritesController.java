@@ -41,4 +41,3 @@ public class FavoritesController {
 		return connections;
 	}
 }
-

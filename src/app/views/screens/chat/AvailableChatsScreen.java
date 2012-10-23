@@ -16,7 +16,7 @@ import app.models.Images;
 import app.views.fields.listings.ListingField;
 import app.views.screens.profile.GalleryScreen;
 
-public class ChatRoomScreen extends MainScreen{
+public class AvailableChatsScreen extends MainScreen{
 	
 	private TabbedButton backButton;
 	private TabbedButton homeButton;
@@ -24,7 +24,7 @@ public class ChatRoomScreen extends MainScreen{
 	
 	private Identity[] identities;
 	
-	public ChatRoomScreen(){
+	public AvailableChatsScreen(){
 		super(Manager.USE_ALL_HEIGHT | Manager.NO_VERTICAL_SCROLL | Manager.NO_VERTICAL_SCROLLBAR);
 		Manager mainManager = getMainManager();
 		mainManager.setBackground(BackgroundFactory.createBitmapBackground(Images.screen_background));
@@ -49,8 +49,8 @@ public class ChatRoomScreen extends MainScreen{
 	
 	public FieldChangeListener listener = new FieldChangeListener() {
 		public void fieldChanged(Field field, int context) {
-			ChatScreen chatScreen = new ChatScreen();
-			UiApplication.getUiApplication().pushScreen(new ChatScreen());
+//			ChatScreen chatScreen = new ChatScreen();
+//			UiApplication.getUiApplication().pushScreen(new ChatScreen());
 		}
 	};
 	

@@ -8,7 +8,7 @@ import net.rim.device.api.ui.container.MainScreen;
 import rubyx.custom_fields.CustomButton;
 import rubyx.tabbedUI.TabbedScreenManager;
 import app.models.Images;
-import app.views.screens.chat.ChatRoomScreen;
+import app.views.screens.chat.AvailableChatsScreen;
 import app.views.screens.chat.FilterScreen;
 import app.views.screens.chat.HistoryScreen;
 import app.views.screens.chat.NearMeScreen;
@@ -24,7 +24,7 @@ public class __FavoritesScreenGroup {
 	
 	public __FavoritesScreenGroup(){
 		
-		tabbedScreens[0]= new ChatRoomScreen();
+		tabbedScreens[0]= new AvailableChatsScreen();
 		tabbedScreens[1] = new FilterScreen(null);
 		tabbedScreens[2] = new NearMeScreen();
 		tabbedScreens[3] = new HistoryScreen();

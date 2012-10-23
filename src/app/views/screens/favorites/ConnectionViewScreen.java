@@ -21,6 +21,7 @@ import app.models.Identity;
 import app.models.Images;
 import app.views.fields.favorites.ProfileDetails;
 import app.views.fields.favorites.ProfileView;
+import app.views.screens.chat.ChatScreen;
 
 public class ConnectionViewScreen extends MainScreen{
 	private ScreenBannar screenBannar;
@@ -58,6 +59,7 @@ public class ConnectionViewScreen extends MainScreen{
 		chatButton.setChangeListener(chatButtonListener);
 		CustomButton infoButton = new CustomButton(Images.chatScreenIcons[1], 160, 50);
 		CustomButton galleryButton = new CustomButton(Images.chatScreenIcons[2], 160, 50);
+		galleryButton.setChangeListener(galleryButtonListener);
 		
 		HorizontalFieldManager tabbedButtonManager = new HorizontalFieldManager();
 		tabbedButtonManager.add(chatButton);
@@ -93,10 +95,17 @@ public class ConnectionViewScreen extends MainScreen{
 		});
 	}
 	
-	public FieldChangeListener chatButtonListener = new FieldChangeListener() {
+	public FieldChangeListener galleryButtonListener = new FieldChangeListener() {
 		public void fieldChanged(Field field, int context) {
 			ConnectionGalleryScreen connectionGallery = new ConnectionGalleryScreen(identities[current_index]);
 			UiApplication.getUiApplication().pushScreen(connectionGallery);
+		}
+	};
+	
+	public FieldChangeListener chatButtonListener = new FieldChangeListener() {
+		public void fieldChanged(Field field, int context) {
+			ChatScreen chatScreen = new ChatScreen(identities[current_index]);
+			UiApplication.getUiApplication().pushScreen(chatScreen);
 		}
 	};
 	

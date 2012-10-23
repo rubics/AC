@@ -60,8 +60,9 @@ public class ChatMessageField extends Manager{
 	
 	public ChatMessageField(Bitmap _image, Object _message, boolean _draw_direction){
 		super(0);
-		image = new Bitmap(IMAGE_DIMENSION, IMAGE_DIMENSION);
-		_image.scaleInto(image, Bitmap.FILTER_BILINEAR);
+		image = _image; // assuming _image is already scaled to IMAGE_DIMENSION
+//		image = new Bitmap(IMAGE_DIMENSION, IMAGE_DIMENSION);
+//		_image.scaleInto(image, Bitmap.FILTER_BILINEAR);
 		
 		message = _message;
 		draw_direction = _draw_direction;

@@ -12,7 +12,7 @@ import rubyx.tabbedUI.TabbedScreenManager;
 import app.models.Deal;
 import app.models.Images;
 import app.models.Visitor;
-import app.views.screens.chat.ChatRoomScreen;
+import app.views.screens.chat.AvailableChatsScreen;
 import app.views.screens.chat.FilterScreen;
 import app.views.screens.chat.HistoryScreen;
 import app.views.screens.chat.NearMeScreen;
@@ -28,7 +28,7 @@ public class VisitorScreenGroup {
 	
 	public VisitorScreenGroup(){
 		
-		tabbedScreens[0]= new ChatRoomScreen();
+		tabbedScreens[0]= new AvailableChatsScreen();
 		tabbedScreens[1] = new FilterScreen(null);
 		tabbedScreens[2] = new NearMeScreen();
 		

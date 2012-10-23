@@ -31,6 +31,9 @@ public class AirCrew {
 	public static final String set_main_image = url + "/index.php/iphone_4aircrew/set_img_default/";
 	public static final String delete_image = url + "/index.php/iphone_4aircrew/remove_gallery_img/";
 	public static final String favorites = url + "/index.php/iphone_4aircrew/my_connection/";
+	public static final String get_chat_history = url + "/index.php/iphone_4aircrew/getchathistory/";
+	public static final String get_chat = url + "/index.php/iphone_4aircrew/getchat/";
+	public static final String set_chat = url + "/index.php/iphone_4aircrew/setchat/";
 	public static final String insert_to_gallery = url + "/index.php/iphone_4aircrew/insert_gallery_img/";
 	public static final String my_visitors = url + "/index.php/iphone_4aircrew/my_visitors/";
 	public static final String remove_from_favorites = url + "/index.php/iphone_4aircrew/remove_myconnection/";

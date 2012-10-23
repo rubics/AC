@@ -57,8 +57,6 @@ public abstract class FavoritesRequest implements HttpRequestListener {
 					String visit_status = object.getString("visit_status");
 					
 					connections[i] = new Connection(id, user_id, user_name, user_email, about_me, airline, gender, designation, country, city_id, airline_name, type, desig, city_name, image_name, last_visit, visit_status);
-					System.out.println("----------------------");
-					System.out.println(connections[i]);
 				}
 				
 				afterSuccess(connections);

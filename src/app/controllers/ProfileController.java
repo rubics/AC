@@ -35,6 +35,8 @@ public class ProfileController {
 				galleryImages = _galleryImages;
 				drawGalleryScreen();
 			}
+			
+			public void onDefaultImage(String image){}
 		};
 		galleryRequest.getUserImages(AirCrewApp.app.getUserController().getUser().getUserId());
 	}

@@ -15,6 +15,7 @@ public abstract class GalleryRequest implements HttpRequestListener{
 	private HttpRequestDispatcher dispatcher;
 	
 	public void getUserImages(String _user_id){
+		System.out.println(AirCrew.gallery + _user_id);
 		dispatcher = new HttpRequestDispatcher(AirCrew.gallery + _user_id, method, requestListener, "");
 		dispatcher.start();
 	}
@@ -36,7 +37,8 @@ public abstract class GalleryRequest implements HttpRequestListener{
 					String def = object.getString("default");
 					String order = object.getString("order");
 					String user_id = object.getString("user_id");
-					
+					if(def.equals("1"))
+						onDefaultImage(image_name);
 					galleryImages[i] = new GalleryImage(id, image_name, def, order, user_id);
 					System.out.println("----> Image Name: " + image_name);
 				}
@@ -65,4 +67,5 @@ public abstract class GalleryRequest implements HttpRequestListener{
 	public void httpfailure(String errmsg) {}
 	
 	public abstract void onSuccess(GalleryImage[] galleryImages);
+	public abstract void onDefaultImage(String defaultImage);
 }
